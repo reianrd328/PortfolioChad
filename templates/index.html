@@ -704,52 +704,83 @@
 
   </div>
 
-  <!-- ================= AI VIDEO REEL MODAL ================= -->
-  <div id="videoModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 transition-opacity">
-    <div class="bg-[#0d1322] border border-white/10 rounded-2xl max-w-3xl w-full shadow-2xl overflow-hidden flex flex-col">
+  <!-- ================= AI VIDEO THEATER & ALBUMS MODAL ================= -->
+  <div id="videoModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-5 transition-opacity">
+    <div class="bg-[#0d1322] border border-white/10 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
       <!-- Modal Header -->
-      <div class="flex items-center justify-between p-4 border-b border-white/10 bg-slate-900/70">
+      <div class="flex items-center justify-between p-4 border-b border-white/10 bg-slate-900/80 shrink-0">
         <div class="flex items-center gap-2.5">
-          <span class="w-8 h-8 rounded-lg bg-pink-500/20 text-brand-pink flex items-center justify-center text-sm shadow">
+          <span class="w-8 h-8 rounded-lg bg-pink-500/20 text-brand-pink flex items-center justify-center text-sm shadow shrink-0">
             <i class="fa fa-film"></i>
           </span>
           <div>
             <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-              <span id="modalVideoTitle">AI Video Production &amp; Editing Showcase</span>
-              <span class="text-[10px] px-2 py-0.5 rounded-full bg-pink-500/20 text-brand-pink font-semibold border border-pink-500/30">Generative AI</span>
+              <span id="modalVideoTitle">AI Video Production &amp; Media Albums</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-pink-500/20 text-brand-pink font-semibold border border-pink-500/30">Video Gallery</span>
             </h3>
             <p id="modalVideoSubtitle" class="text-[11px] text-slate-400">Generative Video Workflows with Gemini, ChatGPT &amp; Google Flow</p>
           </div>
         </div>
-        <button onclick="closeVideoModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+        <button onclick="closeVideoModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition shrink-0">
           <i class="fa fa-times"></i>
         </button>
       </div>
 
-      <!-- Video Player -->
-      <div class="bg-black relative aspect-video flex items-center justify-center">
-        <video id="portfolioMainVideo" controls class="w-full h-full object-contain">
-          <source src="video/new-video-hero-hor.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+      <!-- Album Filter Bar (Tabs) -->
+      <div class="px-4 py-2.5 bg-slate-900/90 border-b border-white/10 flex items-center gap-2 overflow-x-auto scrollbar-none shrink-0" id="videoAlbumTabs">
+        <button onclick="filterVideoAlbum('all')" class="album-filter-btn active text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-pink text-white transition shrink-0" data-album="all">
+          <i class="fa fa-layer-group mr-1.5 text-[10px]"></i> All Videos
+        </button>
       </div>
 
-      <!-- Video Details & AI Tools -->
-      <div class="p-4 sm:p-5 space-y-3 bg-[#0a0e1c]">
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-            <i class="fa fa-wand-magic-sparkles text-brand-pink"></i> Tools &amp; Pipelines Used:
-          </span>
-          <div class="flex flex-wrap gap-1.5" id="modalVideoTools">
-            <span class="text-[10px] px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-medium">Google Gemini</span>
-            <span class="text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-medium">ChatGPT / GPT-4o</span>
-            <span class="text-[10px] px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-medium">Google Flow</span>
-            <span class="text-[10px] px-2.5 py-1 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 font-medium">AI Video Synthesis</span>
+      <!-- Modal Scrollable Content -->
+      <div class="overflow-y-auto p-4 sm:p-5 space-y-4">
+        <!-- Main HD Video Player Stage -->
+        <div class="bg-black relative aspect-video rounded-xl overflow-hidden shadow-2xl border border-white/10 flex items-center justify-center">
+          <video id="portfolioMainVideo" controls class="w-full h-full object-contain">
+            <source src="video/new-video-hero-hor.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <!-- Active Video Details & AI Tools -->
+        <div class="p-4 rounded-xl bg-[#0a0e1c] border border-white/5 space-y-2.5">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span id="activeVideoAlbumBadge" class="inline-block text-[10px] font-bold text-pink-400 bg-pink-500/10 border border-pink-500/20 px-2 py-0.5 rounded-full mb-1">
+                Gemini AI Workflows
+              </span>
+              <h4 id="activeVideoTitle" class="text-sm sm:text-base font-bold text-white">
+                AI Cinematic Reel &amp; Scene Synthesis
+              </h4>
+            </div>
+            <div class="flex flex-wrap gap-1.5" id="modalVideoTools">
+              <span class="text-[10px] px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-medium">Google Gemini</span>
+              <span class="text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-medium">ChatGPT / GPT-4o</span>
+              <span class="text-[10px] px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 font-medium">Premiere Pro</span>
+            </div>
+          </div>
+          <p id="modalVideoDesc" class="text-xs text-slate-300 leading-relaxed">
+            Cinematic visual synthesis reel leveraging Google Gemini prompt crafting, ChatGPT generative narrative, and multi-layered editing.
+          </p>
+        </div>
+
+        <!-- Video Playlist / Album Grid -->
+        <div class="space-y-2.5 pt-1">
+          <div class="flex items-center justify-between">
+            <h5 class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+              <i class="fa fa-play text-pink-500 text-[10px]"></i>
+              <span>Select Video to Watch:</span>
+            </h5>
+            <span id="videoPlaylistCount" class="text-[11px] text-slate-400 font-mono">3 videos</span>
+          </div>
+
+          <!-- Video Cards Grid -->
+          <div id="videoCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <!-- Dynamically populated video cards -->
           </div>
         </div>
-        <p id="modalVideoDesc" class="text-xs text-slate-300 leading-relaxed">
-          Designing and producing engaging video media by integrating Google Gemini for prompt engineering &amp; storyboards, ChatGPT for generative scripts, and Google Flow / AI generation pipelines for high-retention video content.
-        </p>
+
       </div>
     </div>
   </div>
@@ -898,17 +929,118 @@
       document.getElementById('allProjectsModal').classList.add('hidden');
     }
 
+    // Video Theater & Album Playlist Logic
+    let currentVideoList = [];
+    let currentActiveVideoId = null;
+    let currentSelectedAlbum = 'all';
+
     function openVideoModal() {
       const modal = document.getElementById('videoModal');
       const video = document.getElementById('portfolioMainVideo');
       modal.classList.remove('hidden');
       if (video) video.play().catch(() => {});
     }
+
     function closeVideoModal() {
       const modal = document.getElementById('videoModal');
       const video = document.getElementById('portfolioMainVideo');
       if (video) video.pause();
       modal.classList.add('hidden');
+    }
+
+    function filterVideoAlbum(album) {
+      currentSelectedAlbum = album;
+      document.querySelectorAll('#videoAlbumTabs .album-filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-album') === album) {
+          btn.className = 'album-filter-btn active text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-pink text-white transition shrink-0';
+        } else {
+          btn.className = 'album-filter-btn text-xs font-semibold px-3 py-1.5 rounded-full bg-slate-800 text-slate-300 hover:text-white transition shrink-0';
+        }
+      });
+      renderVideoPlaylistGrid();
+    }
+
+    function playVideoItem(videoId) {
+      const item = currentVideoList.find(v => v.id === videoId);
+      if (!item) return;
+
+      currentActiveVideoId = videoId;
+      const videoEl = document.getElementById('portfolioMainVideo');
+      if (videoEl) {
+        videoEl.src = item.videoUrl;
+        videoEl.load();
+        videoEl.play().catch(() => {});
+      }
+
+      // Update active video metadata
+      const titleEl = document.getElementById('activeVideoTitle');
+      if (titleEl) titleEl.textContent = item.title;
+
+      const albumBadgeEl = document.getElementById('activeVideoAlbumBadge');
+      if (albumBadgeEl) albumBadgeEl.textContent = item.album || 'Featured';
+
+      const descEl = document.getElementById('modalVideoDesc');
+      if (descEl) descEl.textContent = item.description || '';
+
+      const toolsContainer = document.getElementById('modalVideoTools');
+      if (toolsContainer && item.tools) {
+        const colors = [
+          'bg-cyan-500/10 border-cyan-500/30 text-cyan-300',
+          'bg-emerald-500/10 border-emerald-500/30 text-emerald-300',
+          'bg-amber-500/10 border-amber-500/30 text-amber-300',
+          'bg-purple-500/10 border-purple-500/30 text-purple-300',
+          'bg-pink-500/10 border-pink-500/30 text-pink-300'
+        ];
+        toolsContainer.innerHTML = item.tools.map((t, idx) => {
+          const col = colors[idx % colors.length];
+          return `<span class="text-[10px] px-2.5 py-1 rounded-full border ${col} font-medium">${t}</span>`;
+        }).join('');
+      }
+
+      renderVideoPlaylistGrid();
+    }
+
+    function renderVideoPlaylistGrid() {
+      const grid = document.getElementById('videoCardsGrid');
+      const countEl = document.getElementById('videoPlaylistCount');
+      if (!grid) return;
+
+      const filtered = currentSelectedAlbum === 'all'
+        ? currentVideoList
+        : currentVideoList.filter(v => v.album === currentSelectedAlbum);
+
+      if (countEl) countEl.textContent = `${filtered.length} video${filtered.length === 1 ? '' : 's'}`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<p class="text-xs text-slate-400 py-6 text-center col-span-3">No videos found in this album.</p>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(v => {
+        const isActive = v.id === currentActiveVideoId;
+        return `
+          <div onclick="playVideoItem('${v.id}')" class="cursor-pointer rounded-xl p-3 bg-slate-900/80 border ${isActive ? 'border-brand-pink shadow-lg shadow-pink-500/10 bg-slate-900' : 'border-white/5 hover:border-brand-pink/40'} transition flex flex-col justify-between group">
+            <div>
+              <div class="relative aspect-video rounded-lg overflow-hidden bg-black/60 mb-2 border border-white/5 flex items-center justify-center">
+                <i class="fa fa-circle-play text-2xl ${isActive ? 'text-brand-pink animate-pulse' : 'text-slate-400 group-hover:text-white'} transition"></i>
+                <span class="absolute top-1.5 left-1.5 text-[9px] px-1.5 py-0.5 rounded bg-black/70 text-slate-200 border border-white/10 font-semibold truncate max-w-[120px]">
+                  ${v.album || 'Video'}
+                </span>
+                ${isActive ? '<span class="absolute bottom-1.5 right-1.5 text-[9px] px-1.5 py-0.5 rounded bg-brand-pink text-white font-bold">Now Playing</span>' : ''}
+              </div>
+              <h5 class="text-xs font-bold text-white group-hover:text-brand-pink transition line-clamp-1 leading-snug">
+                ${v.title}
+              </h5>
+              <p class="text-[11px] text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                ${v.description || ''}
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1 mt-2.5 pt-2 border-t border-white/5">
+              ${(v.tools || []).slice(0, 2).map(t => `<span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">${t}</span>`).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     function openContactModal() {
@@ -1072,14 +1204,53 @@
           if (cvEl) cvEl.href = data.hireMe.cvLink;
         }
 
-        // Update Video Modal Details
+        // Update Video Modal & Albums
         if (data.aiVideo) {
           if (data.aiVideo.title) document.getElementById('modalVideoTitle').textContent = data.aiVideo.title;
           if (data.aiVideo.subtitle) document.getElementById('modalVideoSubtitle').textContent = data.aiVideo.subtitle;
-          if (data.aiVideo.description) document.getElementById('modalVideoDesc').textContent = data.aiVideo.description;
-          if (data.aiVideo.videoUrl) {
-            const vid = document.getElementById('portfolioMainVideo');
-            if (vid) vid.src = data.aiVideo.videoUrl;
+
+          let videos = data.aiVideo.videos || [];
+          if (videos.length === 0 && data.aiVideo.videoUrl) {
+            videos = [{
+              id: 'vid-default',
+              title: data.aiVideo.title || 'AI Video Showcase',
+              album: 'Generative AI',
+              videoUrl: data.aiVideo.videoUrl,
+              tools: data.aiVideo.tools || ['Google Gemini', 'ChatGPT', 'Google Flow'],
+              description: data.aiVideo.description || ''
+            }];
+          }
+          currentVideoList = videos;
+
+          // Build album list
+          const albums = (data.aiVideo.albums && data.aiVideo.albums.length > 0)
+            ? data.aiVideo.albums
+            : Array.from(new Set(videos.map(v => v.album).filter(Boolean)));
+
+          // Render Album Tabs
+          const albumTabsContainer = document.getElementById('videoAlbumTabs');
+          if (albumTabsContainer) {
+            let tabsHtml = `
+              <button onclick="filterVideoAlbum('all')" class="album-filter-btn ${currentSelectedAlbum === 'all' ? 'active bg-brand-pink text-white' : 'bg-slate-800 text-slate-300 hover:text-white'} text-xs font-semibold px-3 py-1.5 rounded-full transition shrink-0" data-album="all">
+                <i class="fa fa-layer-group mr-1.5 text-[10px]"></i> All Videos (${videos.length})
+              </button>
+            `;
+            albums.forEach(alb => {
+              const count = videos.filter(v => v.album === alb).length;
+              tabsHtml += `
+                <button onclick="filterVideoAlbum('${alb.replace(/'/g, "\\'")}')" class="album-filter-btn ${currentSelectedAlbum === alb ? 'active bg-brand-pink text-white' : 'bg-slate-800 text-slate-300 hover:text-white'} text-xs font-semibold px-3 py-1.5 rounded-full transition shrink-0" data-album="${alb.replace(/"/g, '&quot;')}">
+                  ${alb} (${count})
+                </button>
+              `;
+            });
+            albumTabsContainer.innerHTML = tabsHtml;
+          }
+
+          if (videos.length > 0) {
+            if (!currentActiveVideoId || !videos.some(v => v.id === currentActiveVideoId)) {
+              currentActiveVideoId = videos[0].id;
+            }
+            playVideoItem(currentActiveVideoId);
           }
         }
       } catch (e) {

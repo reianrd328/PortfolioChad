@@ -293,7 +293,7 @@
   "aiVideo": {
     "enabled": true,
     "badge": "AI Video & Creative Media",
-    "title": "AI Video Production & Editing Showcase",
+    "title": "AI Video Production & Media Albums",
     "subtitle": "Generative Video Workflows with Gemini, ChatGPT & Google Flow",
     "description": "Designing and producing engaging video media by integrating Google Gemini for prompt engineering & storyboards, ChatGPT for generative scripts, and Google Flow / AI generation pipelines for high-retention video content.",
     "videoUrl": "video/intro.mp4",
@@ -303,6 +303,49 @@
       "Google Flow",
       "AI Video Synthesis",
       "Premiere & CapCut"
+    ],
+    "albums": [
+      "Gemini AI Workflows",
+      "Google Flow & Motion",
+      "Creative Reels & Promos"
+    ],
+    "videos": [
+      {
+        "id": "vid-1",
+        "title": "AI Cinematic Reel & Scene Synthesis",
+        "album": "Gemini AI Workflows",
+        "videoUrl": "video/new-video-hero-hor.mp4",
+        "tools": [
+          "Google Gemini",
+          "ChatGPT / GPT-4o",
+          "Premiere Pro"
+        ],
+        "description": "Cinematic visual synthesis reel leveraging Google Gemini prompt crafting, ChatGPT generative narrative, and multi-layered editing."
+      },
+      {
+        "id": "vid-2",
+        "title": "Google Flow Generative Motion",
+        "album": "Google Flow & Motion",
+        "videoUrl": "video/new-video-hero-hor.mp4",
+        "tools": [
+          "Google Flow",
+          "CapCut",
+          "AI Motion"
+        ],
+        "description": "Seamless camera motion and AI dynamic visual flows created through generative neural video pipelines."
+      },
+      {
+        "id": "vid-3",
+        "title": "High-Retention Creative Social Reel",
+        "album": "Creative Reels & Promos",
+        "videoUrl": "video/new-video-hero-hor.mp4",
+        "tools": [
+          "Google Gemini",
+          "Google Flow",
+          "Premiere & CapCut"
+        ],
+        "description": "Paced creative media reel tailored for high audience retention, dynamic pacing, and commercial presentation."
+      }
     ]
   }
 }
