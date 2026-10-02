@@ -300,10 +300,10 @@
     ],
     "videos": [
       {
-        "id": "vid_1790946402305",
+        "id": "vid_1790946509787",
         "title": "New AI Video Creation",
         "album": "Gemini AI Workflows",
-        "videoUrl": "video/clip_3.mp4",
+        "videoUrl": "video/clip_1.mp4",
         "tools": [
           "Google Gemini",
           "Google Flow"
@@ -311,7 +311,7 @@
         "description": "Created with AI prompting and video workflow automation."
       }
     ],
-    "videoUrl": "video/clip_3.mp4",
+    "videoUrl": "video/clip_1.mp4",
     "tools": [
       "Google Gemini",
       "Google Flow"
