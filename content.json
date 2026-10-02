@@ -296,54 +296,26 @@
     "title": "AI Video Production & Media Albums",
     "subtitle": "Generative Video Workflows with Gemini, ChatGPT & Google Flow",
     "albums": [
-      "Gemini AI Workflows",
-      "Google Flow & Motion",
-      "Creative Reels & Promos"
+      "Gemini AI Workflows"
     ],
     "videos": [
       {
-        "id": "vid-1",
-        "title": "AI Cinematic Reel & Scene Synthesis",
+        "id": "vid_1790943885337",
+        "title": "New AI Video Creation",
         "album": "Gemini AI Workflows",
-        "videoUrl": "video/donating.mp4",
+        "videoUrl": "video/clip_3.mp4",
         "tools": [
           "Google Gemini",
-          "ChatGPT / GPT-4o",
-          "Premiere Pro"
+          "Google Flow"
         ],
-        "description": "Cinematic visual synthesis reel leveraging Google Gemini prompt crafting, ChatGPT generative narrative, and multi-layered editing."
-      },
-      {
-        "id": "vid-2",
-        "title": "Google Flow Generative Motion",
-        "album": "Google Flow & Motion",
-        "videoUrl": "video/Seductive_comercial_video_man.mp4",
-        "tools": [
-          "Google Flow",
-          "CapCut",
-          "AI Motion"
-        ],
-        "description": "Seamless camera motion and AI dynamic visual flows created through generative neural video pipelines."
-      },
-      {
-        "id": "vid-3",
-        "title": "High-Retention Creative Social Reel",
-        "album": "Creative Reels & Promos",
-        "videoUrl": "video/new-video-hero-hor.mp4",
-        "tools": [
-          "Google Gemini",
-          "Google Flow",
-          "Premiere & CapCut"
-        ],
-        "description": "Paced creative media reel tailored for high audience retention, dynamic pacing, and commercial presentation."
+        "description": "Created with AI prompting and video workflow automation."
       }
     ],
-    "videoUrl": "video/donating.mp4",
+    "videoUrl": "video/clip_3.mp4",
     "tools": [
       "Google Gemini",
-      "ChatGPT / GPT-4o",
-      "Premiere Pro"
+      "Google Flow"
     ],
-    "description": "Cinematic visual synthesis reel leveraging Google Gemini prompt crafting, ChatGPT generative narrative, and multi-layered editing."
+    "description": "Created with AI prompting and video workflow automation."
   }
 }
