@@ -24,6 +24,14 @@
     tailwind.config = {
       darkMode: 'class',
       theme: {
+        screens: {
+          'xs': '420px',
+          'sm': '640px',
+          'md': '768px',
+          'lg': '1024px',
+          'xl': '1280px',
+          '2xl': '1536px'
+        },
         extend: {
           colors: {
             brand: {
@@ -48,11 +56,14 @@
   </script>
 
   <style>
-    body {
+    html, body {
       background-color: #060913;
       color: #f1f5f9;
       font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
+      max-width: 100vw;
+      -webkit-tap-highlight-color: transparent;
+      scroll-padding-top: 5.5rem;
     }
 
     /* Ambient Background Glows */
@@ -111,7 +122,8 @@
 
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 6px;
+      height: 6px;
     }
     ::-webkit-scrollbar-track {
       background: #060913;
@@ -124,11 +136,26 @@
       background: #ff2a85;
     }
 
+    /* Hide scrollbars for touch swipe containers */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
     .cursive-glow {
       font-family: 'Caveat', cursive;
       color: #f472b6;
       text-shadow: 0 0 12px rgba(244, 114, 182, 0.6);
       transform: rotate(-3deg);
+    }
+
+    @media (max-width: 640px) {
+      .cursive-glow {
+        transform: rotate(-2deg);
+      }
     }
   </style>
 </head>
@@ -138,46 +165,89 @@
   <div class="bg-mesh-glow"></div>
 
   <!-- Main Container -->
-  <div class="relative z-10 max-w-7xl mx-auto px-3 sm:px-5 lg:px-8 py-4 sm:py-6">
+  <div class="relative z-10 max-w-7xl mx-auto px-3 sm:px-5 lg:px-8 py-3 sm:py-6">
 
     <!-- ================= NAVBAR ================= -->
-    <header class="flex items-center justify-between py-3 mb-5 px-4 rounded-2xl bg-[#0c111f]/90 border border-white/5 backdrop-blur-md shadow-lg">
-      <!-- Logo -->
-      <a href="#header" class="flex items-center gap-2.5 group">
-        <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-pink to-purple-600 flex items-center justify-center text-white text-sm font-black shadow-md group-hover:scale-105 transition">
-          <i class="fa fa-terminal"></i>
-        </span>
-        <span class="text-base sm:text-lg font-extrabold tracking-wider text-white">
-          LYRCH <span class="text-brand-pink font-black">DEV</span>
-        </span>
-      </a>
+    <header class="relative z-30 mb-4 sm:mb-5">
+      <div class="flex items-center justify-between py-2.5 sm:py-3 px-3.5 sm:px-4 rounded-2xl bg-[#0c111f]/90 border border-white/5 backdrop-blur-md shadow-lg">
+        <!-- Logo -->
+        <a href="#hero" class="flex items-center gap-2 sm:gap-2.5 group shrink-0">
+          <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-pink to-purple-600 flex items-center justify-center text-white text-sm font-black shadow-md group-hover:scale-105 transition">
+            <i class="fa fa-terminal"></i>
+          </span>
+          <span class="text-sm sm:text-base md:text-lg font-extrabold tracking-wider text-white">
+            LYRCH <span class="text-brand-pink font-black">DEV</span>
+          </span>
+        </a>
 
-      <!-- Desktop Nav Links -->
-      <nav class="hidden md:flex items-center space-x-7 text-xs sm:text-sm font-medium text-slate-300">
-        <a href="#hero" class="hover:text-brand-pink transition">Home</a>
-        <a href="#about" class="hover:text-brand-pink transition">About</a>
-        <a href="#projects" class="hover:text-brand-pink transition">Projects</a>
-        <a href="#skills" class="hover:text-brand-pink transition">Skills</a>
-        <a href="#services" class="hover:text-brand-pink transition">Services</a>
-        <a href="#experience" class="hover:text-brand-pink transition">Experience</a>
-        <a href="#contact" class="hover:text-brand-pink transition">Contact</a>
-      </nav>
+        <!-- Desktop & Tablet Nav Links -->
+        <nav class="hidden md:flex items-center space-x-3.5 lg:space-x-6 text-xs sm:text-sm font-medium text-slate-300">
+          <a href="#hero" class="hover:text-brand-pink transition">Home</a>
+          <a href="#about" class="hover:text-brand-pink transition">About</a>
+          <a href="#projects" class="hover:text-brand-pink transition">Projects</a>
+          <a href="#skills" class="hover:text-brand-pink transition">Skills</a>
+          <a href="#services" class="hover:text-brand-pink transition">Services</a>
+          <a href="#experience" class="hover:text-brand-pink transition">Experience</a>
+          <a href="#contact" class="hover:text-brand-pink transition">Contact</a>
+        </nav>
 
-      <!-- Right CTAs -->
-      <div class="flex items-center gap-2.5 sm:gap-3">
-        <!-- GitHub Icon -->
-        <a href="https://github.com/reianrd328" target="_blank" rel="noopener noreferrer" title="GitHub Profile" class="w-9 h-9 rounded-xl bg-slate-800/80 border border-white/10 hover:border-brand-pink/50 text-slate-200 hover:text-white flex items-center justify-center transition">
-          <i class="fab fa-github text-base"></i>
-        </a>
-        <!-- GitHub Pill Button -->
-        <a href="https://github.com/reianrd328" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full btn-pink-gradient">
-          <span>View on GitHub</span>
-          <i class="fa fa-arrow-right text-xs"></i>
-        </a>
-        <!-- Admin Link -->
-        <a href="admin/" title="Admin CMS Login" class="w-9 h-9 rounded-xl bg-slate-800/80 border border-white/10 hover:border-cyan-400 text-slate-400 hover:text-cyan-400 flex items-center justify-center transition text-xs">
-          <i class="fa fa-lock"></i>
-        </a>
+        <!-- Right CTAs -->
+        <div class="flex items-center gap-1.5 sm:gap-2.5">
+          <!-- GitHub Icon -->
+          <a href="https://github.com/reianrd328" target="_blank" rel="noopener noreferrer" title="GitHub Profile" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-800/80 border border-white/10 hover:border-brand-pink/50 text-slate-200 hover:text-white flex items-center justify-center transition">
+            <i class="fab fa-github text-sm sm:text-base"></i>
+          </a>
+          <!-- GitHub Pill Button (Desktop only) -->
+          <a href="https://github.com/reianrd328" target="_blank" rel="noopener noreferrer" class="hidden lg:inline-flex items-center gap-2 text-xs font-semibold px-3.5 py-2 rounded-full btn-pink-gradient">
+            <span>View on GitHub</span>
+            <i class="fa fa-arrow-right text-[10px]"></i>
+          </a>
+          <!-- Admin Link -->
+          <a href="admin/" title="Admin CMS Login" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-800/80 border border-white/10 hover:border-cyan-400 text-slate-400 hover:text-cyan-400 flex items-center justify-center transition text-xs">
+            <i class="fa fa-lock"></i>
+          </a>
+          <!-- Mobile Hamburger Button -->
+          <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" class="md:hidden w-8 h-8 rounded-xl bg-slate-800/90 border border-white/10 hover:border-brand-pink/50 text-slate-200 hover:text-white flex items-center justify-center transition text-sm">
+            <i id="mobileMenuIcon" class="fa fa-bars"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Navigation Menu -->
+      <div id="mobileMenu" class="hidden md:hidden mt-2 p-3 rounded-2xl bg-[#0a0f1e]/95 border border-white/10 backdrop-blur-xl shadow-2xl transition-all duration-300">
+        <div class="grid grid-cols-2 gap-1.5 text-xs font-medium text-slate-200">
+          <a href="#hero" onclick="toggleMobileMenu(false)" class="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 hover:text-brand-pink transition">
+            <i class="fa fa-home text-brand-pink w-4 text-center"></i>
+            <span>Home</span>
+          </a>
+          <a href="#about" onclick="toggleMobileMenu(false)" class="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 hover:text-brand-pink transition">
+            <i class="fa fa-user text-purple-400 w-4 text-center"></i>
+            <span>About</span>
+          </a>
+          <a href="#projects" onclick="toggleMobileMenu(false)" class="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 hover:text-brand-pink transition">
+            <i class="fa fa-layer-group text-blue-400 w-4 text-center"></i>
+            <span>Projects</span>
+          </a>
+          <a href="#skills" onclick="toggleMobileMenu(false)" class="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 hover:text-brand-pink transition">
+            <i class="fa fa-code text-cyan-400 w-4 text-center"></i>
+            <span>Skills</span>
+          </a>
+          <a href="#services" onclick="toggleMobileMenu(false)" class="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 hover:text-brand-pink transition">
+            <i class="fa fa-laptop-code text-teal-400 w-4 text-center"></i>
+            <span>Services</span>
+          </a>
+          <a href="#experience" onclick="toggleMobileMenu(false)" class="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 hover:text-brand-pink transition">
+            <i class="fa fa-briefcase text-amber-400 w-4 text-center"></i>
+            <span>Experience</span>
+          </a>
+          <a href="#contact" onclick="toggleMobileMenu(false)" class="col-span-2 flex items-center justify-between p-2.5 rounded-xl bg-pink-500/10 border border-pink-500/20 text-brand-pink font-semibold hover:bg-pink-500/20 transition">
+            <span class="flex items-center gap-2">
+              <i class="fa fa-envelope w-4 text-center"></i>
+              <span>Contact Me</span>
+            </span>
+            <i class="fa fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
       </div>
     </header>
 
@@ -188,16 +258,16 @@
       <div class="lg:col-span-7 flex flex-col gap-4 sm:gap-5">
 
         <!-- 1. HERO BENTO CARD -->
-        <section id="hero" class="bento-card p-5 sm:p-7 flex flex-col justify-between overflow-hidden">
-          <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+        <section id="hero" class="bento-card p-4 sm:p-6 lg:p-7 flex flex-col justify-between overflow-hidden">
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 sm:gap-6 items-center">
             
             <!-- Left Info -->
-            <div class="sm:col-span-7 space-y-3 sm:space-y-4">
+            <div class="sm:col-span-7 space-y-2.5 sm:space-y-4 text-left">
               <span class="text-xs sm:text-sm font-medium text-slate-300 tracking-wide">Hello, I'm</span>
-              <h1 id="heroName" class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-none">
+              <h1 id="heroName" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
                 Richard <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-pink via-pink-400 to-purple-400">Ong</span>
               </h1>
-              <h2 id="heroRole" class="text-sm sm:text-base font-semibold text-slate-200">
+              <h2 id="heroRole" class="text-xs xs:text-sm sm:text-base font-semibold text-slate-200">
                 Web Designer &amp; Technical Support Specialist
               </h2>
               <p id="heroTagline" class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-md">
@@ -205,16 +275,16 @@
               </p>
 
               <!-- Hero Actions -->
-              <div class="flex flex-wrap items-center gap-2.5 pt-1">
-                <a href="#projects" class="btn-pink-gradient px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2">
+              <div class="flex flex-wrap items-center gap-2 pt-1">
+                <a href="#projects" class="btn-pink-gradient px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 flex-1 xs:flex-none">
                   <i class="fa fa-sparkles text-xs"></i>
-                  <span>View My Projects</span>
+                  <span>View Projects</span>
                 </a>
-                <button onclick="openVideoModal()" class="bg-gradient-to-r from-purple-600/30 to-pink-600/30 hover:from-purple-600/50 hover:to-pink-600/50 text-white border border-pink-500/40 hover:border-pink-400 px-4 py-2 sm:px-4 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2 transition shadow">
+                <button onclick="openVideoModal()" class="bg-gradient-to-r from-purple-600/30 to-pink-600/30 hover:from-purple-600/50 hover:to-pink-600/50 text-white border border-pink-500/40 hover:border-pink-400 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition shadow flex-1 xs:flex-none">
                   <i class="fa fa-play text-pink-400 text-xs"></i>
-                  <span>AI Video Reel</span>
+                  <span>AI Reel</span>
                 </button>
-                <a href="https://github.com/reianrd328" target="_blank" rel="noopener noreferrer" class="bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-white/10 hover:border-white/20 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2 transition">
+                <a href="https://github.com/reianrd328" target="_blank" rel="noopener noreferrer" class="bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-white/10 hover:border-white/20 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition flex-1 xs:flex-none">
                   <i class="fab fa-github"></i>
                   <span>GitHub</span>
                 </a>
@@ -222,11 +292,11 @@
             </div>
 
             <!-- Right Artwork / Battlestation -->
-            <div class="sm:col-span-5 relative flex flex-col items-center justify-center">
-              <div class="relative w-full max-w-[220px] sm:max-w-none group">
+            <div class="sm:col-span-5 relative flex flex-col items-center justify-center pt-2 sm:pt-0">
+              <div class="relative w-full max-w-[210px] xs:max-w-[240px] sm:max-w-none group">
                 <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-brand-pink/30 to-purple-600/30 blur-lg opacity-70 group-hover:opacity-100 transition"></div>
                 <img src="images/theme/hero_desk.png" alt="Developer Battlestation" class="relative rounded-xl border border-white/10 shadow-2xl object-cover w-full h-auto">
-                <div class="absolute -top-3 right-0 cursive-glow text-lg font-bold select-none">
+                <div class="absolute -top-2.5 sm:-top-3 right-1 sm:right-0 cursive-glow text-sm sm:text-base lg:text-lg font-bold select-none text-right">
                   Build Support<br>Create Improve
                 </div>
               </div>
@@ -235,66 +305,66 @@
           </div>
 
           <!-- Hero Bottom Stats Strip -->
-          <div class="mt-6 pt-5 border-t border-white/5 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center sm:text-left">
-            <div class="flex items-center gap-2.5">
-              <span class="w-8 h-8 rounded-lg bg-pink-500/10 border border-pink-500/20 text-brand-pink flex items-center justify-center text-sm shrink-0">
+          <div class="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-white/5 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+            <div class="flex items-center gap-2 sm:gap-2.5 p-2 sm:p-0 rounded-xl bg-slate-900/40 sm:bg-transparent border border-white/5 sm:border-0">
+              <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-pink-500/10 border border-pink-500/20 text-brand-pink flex items-center justify-center text-xs sm:text-sm shrink-0">
                 <i class="fa fa-gear"></i>
               </span>
-              <div>
-                <p class="text-xs sm:text-sm font-bold text-white leading-tight">18+ Years</p>
-                <p class="text-[10px] sm:text-xs text-slate-400">Technical Support</p>
+              <div class="min-w-0">
+                <p class="text-xs sm:text-sm font-bold text-white leading-tight truncate">18+ Years</p>
+                <p class="text-[10px] sm:text-xs text-slate-400 truncate">Tech Support</p>
               </div>
             </div>
 
-            <div class="flex items-center gap-2.5">
-              <span class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-sm shrink-0">
+            <div class="flex items-center gap-2 sm:gap-2.5 p-2 sm:p-0 rounded-xl bg-slate-900/40 sm:bg-transparent border border-white/5 sm:border-0">
+              <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-xs sm:text-sm shrink-0">
                 <i class="fa fa-code"></i>
               </span>
-              <div>
-                <p class="text-xs sm:text-sm font-bold text-white leading-tight">Web</p>
-                <p class="text-[10px] sm:text-xs text-slate-400">Design &amp; Dev</p>
+              <div class="min-w-0">
+                <p class="text-xs sm:text-sm font-bold text-white leading-tight truncate">Web</p>
+                <p class="text-[10px] sm:text-xs text-slate-400 truncate">Design &amp; Dev</p>
               </div>
             </div>
 
-            <div class="flex items-center gap-2.5">
-              <span class="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-sm shrink-0">
+            <div class="flex items-center gap-2 sm:gap-2.5 p-2 sm:p-0 rounded-xl bg-slate-900/40 sm:bg-transparent border border-white/5 sm:border-0">
+              <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs sm:text-sm shrink-0">
                 <i class="fa fa-network-wired"></i>
               </span>
-              <div>
-                <p class="text-xs sm:text-sm font-bold text-white leading-tight">100+</p>
-                <p class="text-[10px] sm:text-xs text-slate-400">Branches Supported</p>
+              <div class="min-w-0">
+                <p class="text-xs sm:text-sm font-bold text-white leading-tight truncate">100+</p>
+                <p class="text-[10px] sm:text-xs text-slate-400 truncate">Branches</p>
               </div>
             </div>
 
-            <div class="flex items-center gap-2.5">
-              <span class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-sm shrink-0">
+            <div class="flex items-center gap-2 sm:gap-2.5 p-2 sm:p-0 rounded-xl bg-slate-900/40 sm:bg-transparent border border-white/5 sm:border-0">
+              <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-xs sm:text-sm shrink-0">
                 <i class="fa fa-lightbulb"></i>
               </span>
-              <div>
-                <p class="text-xs sm:text-sm font-bold text-white leading-tight">Always</p>
-                <p class="text-[10px] sm:text-xs text-slate-400">Learning &amp; Creating</p>
+              <div class="min-w-0">
+                <p class="text-xs sm:text-sm font-bold text-white leading-tight truncate">Always</p>
+                <p class="text-[10px] sm:text-xs text-slate-400 truncate">Learning</p>
               </div>
             </div>
           </div>
         </section>
 
         <!-- 2. FEATURED PROJECTS BENTO CARD -->
-        <section id="projects" class="bento-card p-5 sm:p-7">
-          <div class="flex items-center justify-between mb-4">
+        <section id="projects" class="bento-card p-4 sm:p-6 lg:p-7">
+          <div class="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2.5 mb-4">
             <div>
-              <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+              <h3 class="text-base sm:text-xl font-bold text-white flex items-center gap-2">
                 <span>Featured Projects</span>
               </h3>
-              <p class="text-xs text-slate-400">A collection of web applications, systems, and creative projects.</p>
+              <p class="text-xs text-slate-400">Web applications, systems, and creative projects.</p>
             </div>
-            <button onclick="openAllProjectsModal()" class="text-xs font-semibold text-slate-300 hover:text-brand-pink transition flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800/80 border border-white/5 hover:border-brand-pink/30">
+            <button onclick="openAllProjectsModal()" class="text-xs font-semibold text-slate-300 hover:text-brand-pink transition flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800/80 border border-white/5 hover:border-brand-pink/30 shrink-0">
               <span>View All Projects</span>
               <i class="fa fa-arrow-right text-[10px]"></i>
             </button>
           </div>
 
-          <!-- Project Cards Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+          <!-- Project Cards Grid: 1 col on mobile, 2 col on tablet (640px-768px), 3 col on md+ -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-3.5">
 
             <!-- Project 1: PAWSHOP -->
             <div class="bg-[#0a0f1d] border border-white/5 hover:border-brand-pink/40 rounded-xl p-3 flex flex-col justify-between group transition">
@@ -315,7 +385,7 @@
                   <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">MySQL</span>
                   <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">Bootstrap</span>
                 </div>
-                <a href="https://technical-preventive-hub.onrender.com/" target="_blank" rel="noopener noreferrer" title="Open Project" class="w-7 h-7 rounded-full btn-pink-gradient flex items-center justify-center text-white text-[11px] shadow hover:scale-110 transition">
+                <a href="https://technical-preventive-hub.onrender.com/" target="_blank" rel="noopener noreferrer" title="Open Project" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full btn-pink-gradient flex items-center justify-center text-white text-[11px] shadow hover:scale-110 transition shrink-0">
                   <i class="fa fa-arrow-up-right-from-square"></i>
                 </a>
               </div>
@@ -340,14 +410,14 @@
                   <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">Flask</span>
                   <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">MySQL</span>
                 </div>
-                <a href="https://github.com/reianrd328/hardware-inventory-system" target="_blank" rel="noopener noreferrer" title="Open Project" class="w-7 h-7 rounded-full btn-pink-gradient flex items-center justify-center text-white text-[11px] shadow hover:scale-110 transition">
+                <a href="https://github.com/reianrd328/hardware-inventory-system" target="_blank" rel="noopener noreferrer" title="Open Project" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full btn-pink-gradient flex items-center justify-center text-white text-[11px] shadow hover:scale-110 transition shrink-0">
                   <i class="fa fa-arrow-up-right-from-square"></i>
                 </a>
               </div>
             </div>
 
             <!-- Project 3: FoodCartManager -->
-            <div class="bg-[#0a0f1d] border border-white/5 hover:border-brand-pink/40 rounded-xl p-3 flex flex-col justify-between group transition">
+            <div class="bg-[#0a0f1d] border border-white/5 hover:border-brand-pink/40 rounded-xl p-3 flex flex-col justify-between group transition sm:col-span-2 md:col-span-1">
               <div>
                 <div class="relative overflow-hidden rounded-lg mb-2.5 aspect-video bg-slate-900 border border-white/5">
                   <img src="images/theme/foodcart_thumb.png" alt="FoodCartManager" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
@@ -365,7 +435,7 @@
                   <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">TiDB</span>
                   <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">Android</span>
                 </div>
-                <a href="https://github.com/reianrd328/FoodCartManager" target="_blank" rel="noopener noreferrer" title="Open Project" class="w-7 h-7 rounded-full btn-pink-gradient flex items-center justify-center text-white text-[11px] shadow hover:scale-110 transition">
+                <a href="https://github.com/reianrd328/FoodCartManager" target="_blank" rel="noopener noreferrer" title="Open Project" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full btn-pink-gradient flex items-center justify-center text-white text-[11px] shadow hover:scale-110 transition shrink-0">
                   <i class="fa fa-arrow-up-right-from-square"></i>
                 </a>
               </div>
@@ -375,76 +445,76 @@
         </section>
 
         <!-- 3. WORK EXPERIENCE BENTO CARD -->
-        <section id="experience" class="bento-card p-5 sm:p-7">
-          <div class="mb-5">
-            <h3 class="text-lg sm:text-xl font-bold text-white">
+        <section id="experience" class="bento-card p-4 sm:p-6 lg:p-7">
+          <div class="mb-4 sm:mb-5">
+            <h3 class="text-base sm:text-xl font-bold text-white">
               Work <span class="text-brand-pink">Experience</span>
             </h3>
             <p class="text-xs text-slate-400">A journey of continuous learning and growth.</p>
           </div>
 
-          <!-- Timeline Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 relative">
+          <!-- Timeline Grid: 1 col on mobile, 2 col on tablet/landscape, 4 col on desktop -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 relative">
             <!-- Node 1 -->
-            <div class="flex sm:flex-col items-start gap-3 sm:gap-2">
+            <div class="p-3 sm:p-3.5 rounded-xl bg-[#0a0f1d] border border-white/5 flex items-start gap-3">
               <span class="w-8 h-8 rounded-lg bg-pink-500/20 text-brand-pink border border-pink-500/40 flex items-center justify-center text-sm shrink-0 shadow">
                 <i class="fa fa-briefcase"></i>
               </span>
-              <div>
+              <div class="min-w-0">
                 <span class="inline-block text-[10px] font-bold text-pink-400 bg-pink-500/10 px-2 py-0.5 rounded-full mb-1">
                   2008 - Present
                 </span>
-                <h4 class="text-xs sm:text-sm font-bold text-white">Technical Support</h4>
+                <h4 class="text-xs sm:text-sm font-bold text-white truncate">Technical Support</h4>
                 <p class="text-[11px] text-slate-400 leading-relaxed mt-0.5">
-                  18 years of experience supporting 100+ branches.
+                  18 years supporting 100+ branches.
                 </p>
               </div>
             </div>
 
             <!-- Node 2 -->
-            <div class="flex sm:flex-col items-start gap-3 sm:gap-2">
+            <div class="p-3 sm:p-3.5 rounded-xl bg-[#0a0f1d] border border-white/5 flex items-start gap-3">
               <span class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/40 flex items-center justify-center text-sm shrink-0 shadow">
                 <i class="fa fa-code"></i>
               </span>
-              <div>
+              <div class="min-w-0">
                 <span class="inline-block text-[10px] font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full mb-1">
                   Core Passion
                 </span>
-                <h4 class="text-xs sm:text-sm font-bold text-white">Web Development</h4>
+                <h4 class="text-xs sm:text-sm font-bold text-white truncate">Web Development</h4>
                 <p class="text-[11px] text-slate-400 leading-relaxed mt-0.5">
-                  Self-taught and continuously building web applications.
+                  Self-taught building web apps.
                 </p>
               </div>
             </div>
 
             <!-- Node 3 -->
-            <div class="flex sm:flex-col items-start gap-3 sm:gap-2">
+            <div class="p-3 sm:p-3.5 rounded-xl bg-[#0a0f1d] border border-white/5 flex items-start gap-3">
               <span class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 border border-purple-500/40 flex items-center justify-center text-sm shrink-0 shadow">
                 <i class="fa fa-desktop"></i>
               </span>
-              <div>
+              <div class="min-w-0">
                 <span class="inline-block text-[10px] font-bold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full mb-1">
                   Infrastructure
                 </span>
-                <h4 class="text-xs sm:text-sm font-bold text-white">System Management</h4>
+                <h4 class="text-xs sm:text-sm font-bold text-white truncate">System Management</h4>
                 <p class="text-[11px] text-slate-400 leading-relaxed mt-0.5">
-                  Deployment, networking, and IT infrastructure.
+                  Deployment, networking, and IT.
                 </p>
               </div>
             </div>
 
             <!-- Node 4 -->
-            <div class="flex sm:flex-col items-start gap-3 sm:gap-2">
+            <div class="p-3 sm:p-3.5 rounded-xl bg-[#0a0f1d] border border-white/5 flex items-start gap-3">
               <span class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 border border-teal-500/40 flex items-center justify-center text-sm shrink-0 shadow">
                 <i class="fa fa-graduation-cap"></i>
               </span>
-              <div>
+              <div class="min-w-0">
                 <span class="inline-block text-[10px] font-bold text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded-full mb-1">
                   Future-Ready
                 </span>
-                <h4 class="text-xs sm:text-sm font-bold text-white">Always Learning</h4>
+                <h4 class="text-xs sm:text-sm font-bold text-white truncate">Always Learning</h4>
                 <p class="text-[11px] text-slate-400 leading-relaxed mt-0.5">
-                  Exploring new tools, AI, and creative projects.
+                  Exploring tools, AI, and projects.
                 </p>
               </div>
             </div>
@@ -457,18 +527,18 @@
       <div class="lg:col-span-5 flex flex-col gap-4 sm:gap-5">
 
         <!-- 4. ABOUT ME BENTO CARD -->
-        <section id="about" class="bento-card p-5 sm:p-7">
-          <div class="flex flex-col sm:flex-row items-center justify-between gap-5">
+        <section id="about" class="bento-card p-4 sm:p-6 lg:p-7">
+          <div class="flex flex-col-reverse xs:flex-row items-center justify-between gap-4 sm:gap-5">
             <!-- Left Text -->
-            <div class="space-y-3 flex-1">
-              <h3 class="text-xl sm:text-2xl font-bold text-white">
+            <div class="space-y-2.5 sm:space-y-3 flex-1 text-center xs:text-left">
+              <h3 class="text-lg sm:text-2xl font-bold text-white">
                 About <span class="text-brand-pink">Me</span>
               </h3>
               <p id="aboutBioText" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 I am an IT professional with 18 years of experience in technical support, hardware, networking, and system management. I also create web applications and explore new technologies to solve real-world problems.
               </p>
-              <div class="pt-1">
-                <a id="aboutCvLink" href="https://drive.google.com/file/d/1BCkH1FjPcFGmACDWLTnBT_PfrE7hdY1E/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn-pink-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold shadow">
+              <div class="pt-1 flex justify-center xs:justify-start">
+                <a id="aboutCvLink" href="https://drive.google.com/file/d/1BCkH1FjPcFGmACDWLTnBT_PfrE7hdY1E/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn-pink-gradient inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-xs font-semibold shadow w-full xs:w-auto">
                   <i class="fa fa-download text-xs"></i>
                   <span>Download Resume</span>
                 </a>
@@ -477,145 +547,147 @@
 
             <!-- Right Avatar & Handwritten Quote -->
             <div class="flex flex-col items-center shrink-0">
-              <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border border-brand-pink/40 shadow-xl group">
+              <div class="relative w-24 h-24 xs:w-28 xs:h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border border-brand-pink/40 shadow-xl group">
                 <img id="profileAvatarImg" src="images/theme/avatar_card.png" alt="Richard Ong Avatar" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
               </div>
-              <div class="cursive-glow text-center text-sm font-bold mt-1.5 leading-tight select-none">
-                Think Clearly<br>Create Confidently<br><span id="avatarAuthorName" class="text-white text-xs">RICHARD</span>
+              <div class="cursive-glow text-center text-xs sm:text-sm font-bold mt-1.5 leading-tight select-none">
+                Think Clearly<br>Create Confidently<br><span id="avatarAuthorName" class="text-white text-[11px] sm:text-xs">RICHARD</span>
               </div>
             </div>
           </div>
         </section>
 
         <!-- 5. SKILLS & TOOLS BENTO CARD -->
-        <section id="skills" class="bento-card p-5 sm:p-7">
-          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <section id="skills" class="bento-card p-4 sm:p-6 lg:p-7">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-4">
             <div>
-              <h3 class="text-lg sm:text-xl font-bold text-white">
+              <h3 class="text-base sm:text-xl font-bold text-white">
                 Skills &amp; <span class="text-brand-pink">Tools</span>
               </h3>
-              <p class="text-xs text-slate-400">Technologies and tools I use for web development and technical support.</p>
+              <p class="text-xs text-slate-400">Technologies and tools I use for web development and IT support.</p>
             </div>
             
-            <!-- Filter Pills -->
-            <div class="flex items-center gap-1.5 text-xs bg-slate-900/90 p-1 rounded-full border border-white/10" id="skillFilters">
-              <button onclick="filterSkills('all')" class="skill-tab active px-3 py-1 rounded-full text-white bg-brand-pink font-semibold transition" data-cat="all">All</button>
-              <button onclick="filterSkills('web')" class="skill-tab px-3 py-1 rounded-full text-slate-400 hover:text-white transition" data-cat="web">Web Development</button>
-              <button onclick="filterSkills('support')" class="skill-tab px-3 py-1 rounded-full text-slate-400 hover:text-white transition" data-cat="support">Technical Support</button>
-              <button onclick="filterSkills('ai')" class="skill-tab px-3 py-1 rounded-full text-slate-400 hover:text-white transition" data-cat="ai">AI &amp; Video</button>
+            <!-- Filter Pills with smooth horizontal touch scroll on mobile -->
+            <div class="overflow-x-auto no-scrollbar max-w-full -mx-1 px-1 py-0.5">
+              <div class="flex items-center gap-1.5 text-xs bg-slate-900/90 p-1 rounded-full border border-white/10 shrink-0 w-max" id="skillFilters">
+                <button onclick="filterSkills('all')" class="skill-tab active px-3 py-1 rounded-full text-white bg-brand-pink font-semibold transition whitespace-nowrap text-[11px] sm:text-xs" data-cat="all">All</button>
+                <button onclick="filterSkills('web')" class="skill-tab px-3 py-1 rounded-full text-slate-400 hover:text-white transition whitespace-nowrap text-[11px] sm:text-xs" data-cat="web">Web Dev</button>
+                <button onclick="filterSkills('support')" class="skill-tab px-3 py-1 rounded-full text-slate-400 hover:text-white transition whitespace-nowrap text-[11px] sm:text-xs" data-cat="support">IT Support</button>
+                <button onclick="filterSkills('ai')" class="skill-tab px-3 py-1 rounded-full text-slate-400 hover:text-white transition whitespace-nowrap text-[11px] sm:text-xs" data-cat="ai">AI &amp; Video</button>
+              </div>
             </div>
           </div>
 
-          <!-- Skills Badges Grid -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2" id="skillsContainer">
+          <!-- Skills Badges Grid: 3 cols on mobile, 4 on xs/sm, 6 on md/tablet, 4 on lg, 5 on xl -->
+          <div class="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-2.5" id="skillsContainer">
             
             <!-- Web Dev Badges -->
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="web">
-              <i class="fab fa-python text-2xl text-[#3776ab]"></i>
-              <span class="text-[11px] font-semibold text-slate-200">Python</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="web">
+              <i class="fab fa-python text-xl sm:text-2xl text-[#3776ab]"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">Python</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="web">
-              <i class="fab fa-html5 text-2xl text-[#e34f26]"></i>
-              <span class="text-[11px] font-semibold text-slate-200">HTML5</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="web">
+              <i class="fab fa-html5 text-xl sm:text-2xl text-[#e34f26]"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">HTML5</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="web">
-              <i class="fab fa-css3-alt text-2xl text-[#1572b6]"></i>
-              <span class="text-[11px] font-semibold text-slate-200">CSS3</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="web">
+              <i class="fab fa-css3-alt text-xl sm:text-2xl text-[#1572b6]"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">CSS3</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="web">
-              <i class="fab fa-js-square text-2xl text-[#f7df1e]"></i>
-              <span class="text-[11px] font-semibold text-slate-200">JavaScript</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="web">
+              <i class="fab fa-js-square text-xl sm:text-2xl text-[#f7df1e]"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">JavaScript</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="web">
-              <i class="fa fa-pepper-hot text-2xl text-pink-400"></i>
-              <span class="text-[11px] font-semibold text-slate-200">Flask</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="web">
+              <i class="fa fa-pepper-hot text-xl sm:text-2xl text-pink-400"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">Flask</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="web">
-              <i class="fa fa-database text-2xl text-[#00758f]"></i>
-              <span class="text-[11px] font-semibold text-slate-200">MySQL</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="web">
+              <i class="fa fa-database text-xl sm:text-2xl text-[#00758f]"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">MySQL</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="web">
-              <i class="fab fa-github text-2xl text-white"></i>
-              <span class="text-[11px] font-semibold text-slate-200">Git / GitHub</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="web">
+              <i class="fab fa-github text-xl sm:text-2xl text-white"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">Git/GitHub</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="web">
-              <i class="fab fa-wordpress text-2xl text-[#21759b]"></i>
-              <span class="text-[11px] font-semibold text-slate-200">WordPress</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="web">
+              <i class="fab fa-wordpress text-xl sm:text-2xl text-[#21759b]"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">WordPress</span>
             </div>
 
             <!-- Tech Support Badges -->
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="support">
-              <i class="fa fa-network-wired text-2xl text-cyan-400"></i>
-              <span class="text-[11px] font-semibold text-slate-200">Networking</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="support">
+              <i class="fa fa-network-wired text-xl sm:text-2xl text-cyan-400"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">Networking</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="support">
-              <i class="fab fa-windows text-2xl text-[#0078d4]"></i>
-              <span class="text-[11px] font-semibold text-slate-200">Windows</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="support">
+              <i class="fab fa-windows text-xl sm:text-2xl text-[#0078d4]"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">Windows</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="support">
-              <i class="fa fa-screwdriver-wrench text-2xl text-slate-300"></i>
-              <span class="text-[11px] font-semibold text-slate-200">Hardware</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="support">
+              <i class="fa fa-screwdriver-wrench text-xl sm:text-2xl text-slate-300"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">Hardware</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="support">
-              <i class="fa fa-arrows-spin text-2xl text-[#0e80e5]"></i>
-              <span class="text-[11px] font-semibold text-slate-200">TeamViewer</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="support">
+              <i class="fa fa-arrows-spin text-xl sm:text-2xl text-[#0e80e5]"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">TeamViewer</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="support">
-              <i class="fa fa-gem text-2xl text-[#ef4444]"></i>
-              <span class="text-[11px] font-semibold text-slate-200">AnyDesk</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="support">
+              <i class="fa fa-gem text-xl sm:text-2xl text-[#ef4444]"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">AnyDesk</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="support">
-              <i class="fa fa-display text-2xl text-[#3b82f6]"></i>
-              <span class="text-[11px] font-semibold text-slate-200">UltraViewer</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="support">
+              <i class="fa fa-display text-xl sm:text-2xl text-[#3b82f6]"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">UltraViewer</span>
             </div>
 
             <!-- AI & Video Badges -->
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="ai">
-              <i class="fa fa-wand-magic-sparkles text-2xl text-cyan-400"></i>
-              <span class="text-[11px] font-semibold text-slate-200">Google Gemini</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="ai">
+              <i class="fa fa-wand-magic-sparkles text-xl sm:text-2xl text-cyan-400"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">Gemini AI</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="ai">
-              <i class="fa fa-robot text-2xl text-emerald-400"></i>
-              <span class="text-[11px] font-semibold text-slate-200">ChatGPT / GPT</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="ai">
+              <i class="fa fa-robot text-xl sm:text-2xl text-emerald-400"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">ChatGPT</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="ai">
-              <i class="fa fa-diagram-project text-2xl text-amber-400"></i>
-              <span class="text-[11px] font-semibold text-slate-200">Google Flow</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="ai">
+              <i class="fa fa-diagram-project text-xl sm:text-2xl text-amber-400"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">Google Flow</span>
             </div>
 
-            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="ai">
-              <i class="fa fa-film text-2xl text-pink-400"></i>
-              <span class="text-[11px] font-semibold text-slate-200">AI Video Editing</span>
+            <div class="skill-badge rounded-xl p-2 sm:p-2.5 flex flex-col items-center justify-center text-center gap-1 sm:gap-1.5" data-category="ai">
+              <i class="fa fa-film text-xl sm:text-2xl text-pink-400"></i>
+              <span class="text-[10px] sm:text-[11px] font-semibold text-slate-200 truncate max-w-full px-0.5">AI Video</span>
             </div>
 
           </div>
         </section>
 
         <!-- 6. SERVICES BENTO CARD -->
-        <section id="services" class="bento-card p-5 sm:p-7">
-          <div class="mb-4">
-            <h3 class="text-lg sm:text-xl font-bold text-white">Services</h3>
+        <section id="services" class="bento-card p-4 sm:p-6 lg:p-7">
+          <div class="mb-3 sm:mb-4">
+            <h3 class="text-base sm:text-xl font-bold text-white">Services</h3>
             <p class="text-xs text-slate-400">What I can help you with.</p>
           </div>
 
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-2.5 sm:gap-3">
             <!-- Service 1 -->
             <div class="bg-[#0a0f1d] border border-white/5 rounded-xl p-3 flex flex-col justify-between hover:border-cyan-400/40 transition">
-              <span class="text-cyan-400 text-lg mb-2"><i class="fa fa-laptop-code"></i></span>
+              <span class="text-cyan-400 text-lg mb-1.5"><i class="fa fa-laptop-code"></i></span>
               <div>
                 <h4 class="text-xs font-bold text-white leading-tight">Web Design &amp; Dev</h4>
                 <p class="text-[10px] text-slate-400 mt-1 leading-snug">Modern and responsive web applications.</p>
@@ -624,7 +696,7 @@
 
             <!-- Service 2 -->
             <div class="bg-[#0a0f1d] border border-white/5 rounded-xl p-3 flex flex-col justify-between hover:border-purple-400/40 transition">
-              <span class="text-purple-400 text-lg mb-2"><i class="fa fa-headset"></i></span>
+              <span class="text-purple-400 text-lg mb-1.5"><i class="fa fa-headset"></i></span>
               <div>
                 <h4 class="text-xs font-bold text-white leading-tight">Technical Support</h4>
                 <p class="text-[10px] text-slate-400 mt-1 leading-snug">Hardware, software, networking, and remote support.</p>
@@ -633,7 +705,7 @@
 
             <!-- Service 3 -->
             <div class="bg-[#0a0f1d] border border-white/5 rounded-xl p-3 flex flex-col justify-between hover:border-blue-400/40 transition">
-              <span class="text-blue-400 text-lg mb-2"><i class="fa fa-server"></i></span>
+              <span class="text-blue-400 text-lg mb-1.5"><i class="fa fa-server"></i></span>
               <div>
                 <h4 class="text-xs font-bold text-white leading-tight">System Setup</h4>
                 <p class="text-[10px] text-slate-400 mt-1 leading-snug">Server, database, and application deployment.</p>
@@ -642,44 +714,44 @@
 
             <!-- Service 4 -->
             <div class="bg-[#0a0f1d] border border-white/5 rounded-xl p-3 flex flex-col justify-between hover:border-teal-400/40 transition">
-              <span class="text-teal-400 text-lg mb-2"><i class="fa fa-gears"></i></span>
+              <span class="text-teal-400 text-lg mb-1.5"><i class="fa fa-gears"></i></span>
               <div>
                 <h4 class="text-xs font-bold text-white leading-tight">IT Consultation</h4>
-                <p class="text-[10px] text-slate-400 mt-1 leading-snug">Process improvement and custom system solutions.</p>
+                <p class="text-[10px] text-slate-400 mt-1 leading-snug">Process improvement and custom solutions.</p>
               </div>
             </div>
           </div>
         </section>
 
         <!-- 7. LET'S WORK TOGETHER BENTO CARD -->
-        <section id="contact" class="bento-card p-5 sm:p-7 flex flex-col justify-between">
+        <section id="contact" class="bento-card p-4 sm:p-6 lg:p-7 flex flex-col justify-between">
           <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
             
             <!-- Left Content -->
-            <div class="space-y-2.5 flex-1">
-              <h3 class="text-xl sm:text-2xl font-bold text-white">
+            <div class="space-y-2.5 flex-1 text-center sm:text-left">
+              <h3 class="text-lg sm:text-2xl font-bold text-white">
                 Let's Work <span class="text-brand-pink">Together</span>
               </h3>
-              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm">
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm mx-auto sm:mx-0">
                 Have a project idea or need IT support? Feel free to reach out or check my projects on GitHub.
               </p>
 
-              <div class="flex flex-wrap items-center gap-2.5 pt-1">
-                <button onclick="openContactModal()" class="btn-pink-gradient px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2">
+              <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-2.5 pt-1">
+                <button onclick="openContactModal()" class="btn-pink-gradient px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 flex-1 xs:flex-none">
                   <i class="fa fa-envelope text-xs"></i>
                   <span>Contact Me</span>
                 </button>
-                <a href="https://github.com/reianrd328" target="_blank" rel="noopener noreferrer" class="bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-white/10 hover:border-white/20 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2 transition">
+                <a href="https://github.com/reianrd328" target="_blank" rel="noopener noreferrer" class="bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-white/10 hover:border-white/20 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition flex-1 xs:flex-none">
                   <i class="fab fa-github"></i>
-                  <span>View on GitHub</span>
+                  <span>GitHub</span>
                 </a>
               </div>
             </div>
 
             <!-- Right Laptop Neon Graphic -->
-            <div class="relative w-36 sm:w-44 flex flex-col items-center justify-center shrink-0">
+            <div class="relative w-32 xs:w-36 sm:w-44 flex flex-col items-center justify-center shrink-0">
               <img src="images/theme/laptop_desk.png" alt="Neon Workspace Laptop" class="w-full h-auto drop-shadow-[0_10px_20px_rgba(168,85,247,0.3)]">
-              <div class="cursive-glow text-right w-full text-sm font-bold mt-1 select-none pr-1">
+              <div class="cursive-glow text-center sm:text-right w-full text-xs sm:text-sm font-bold mt-1 select-none pr-1">
                 Good Ideas<br>Better Solutions
               </div>
             </div>
@@ -708,78 +780,85 @@
   </div>
 
   <!-- ================= AI VIDEO THEATER & ALBUMS MODAL ================= -->
-  <div id="videoModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-5 transition-opacity">
-    <div class="bg-[#0d1322] border border-white/10 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+  <div id="videoModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-2.5 sm:p-5 transition-opacity">
+    <div class="bg-[#0d1322] border border-white/10 rounded-2xl max-w-4xl w-full max-h-[94vh] sm:max-h-[92vh] flex flex-col shadow-2xl overflow-hidden m-1 sm:m-0">
       <!-- Modal Header -->
-      <div class="flex items-center justify-between p-4 border-b border-white/10 bg-slate-900/80 shrink-0">
-        <div class="flex items-center gap-2.5">
+      <div class="flex items-center justify-between p-3.5 sm:p-4 border-b border-white/10 bg-slate-900/80 shrink-0 gap-2">
+        <div class="flex items-center gap-2 sm:gap-2.5 min-w-0">
           <span class="w-8 h-8 rounded-lg bg-pink-500/20 text-brand-pink flex items-center justify-center text-sm shadow shrink-0">
             <i class="fa fa-film"></i>
           </span>
-          <div>
-            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-              <span id="modalVideoTitle">AI Video Production &amp; Media Albums</span>
-              <span class="text-[10px] px-2 py-0.5 rounded-full bg-pink-500/20 text-brand-pink font-semibold border border-pink-500/30">Video Gallery</span>
+          <div class="min-w-0">
+            <h3 class="text-xs sm:text-base font-bold text-white flex items-center gap-1.5 sm:gap-2 truncate">
+              <span id="modalVideoTitle" class="truncate">AI Video Production</span>
+              <span class="text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-pink-500/20 text-brand-pink font-semibold border border-pink-500/30 shrink-0">Gallery</span>
             </h3>
-            <p id="modalVideoSubtitle" class="text-[11px] text-slate-400">Generative Video Workflows with Gemini, ChatGPT &amp; Google Flow</p>
+            <p id="modalVideoSubtitle" class="text-[10px] sm:text-[11px] text-slate-400 truncate">Generative Video Workflows with Gemini, ChatGPT &amp; Google Flow</p>
           </div>
         </div>
-        <button onclick="closeVideoModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition shrink-0">
-          <i class="fa fa-times"></i>
+        <button onclick="closeVideoModal()" aria-label="Close video modal" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition shrink-0">
+          <i class="fa fa-times text-xs sm:text-sm"></i>
         </button>
       </div>
 
       <!-- Album Filter Bar (Tabs) -->
-      <div class="px-4 py-2.5 bg-slate-900/90 border-b border-white/10 flex items-center gap-2 overflow-x-auto scrollbar-none shrink-0" id="videoAlbumTabs">
-        <button onclick="filterVideoAlbum('all')" class="album-filter-btn active text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-pink text-white transition shrink-0" data-album="all">
+      <div class="px-3 sm:px-4 py-2 bg-slate-900/90 border-b border-white/10 flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0" id="videoAlbumTabs">
+        <button onclick="filterVideoAlbum('all')" class="album-filter-btn active text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-pink text-white transition shrink-0 whitespace-nowrap" data-album="all">
           <i class="fa fa-layer-group mr-1.5 text-[10px]"></i> All Videos
         </button>
       </div>
 
       <!-- Modal Scrollable Content -->
-      <div class="overflow-y-auto p-4 sm:p-5 space-y-4">
+      <div class="overflow-y-auto p-3.5 sm:p-5 space-y-3.5 sm:space-y-4">
         <!-- Main HD Video Player Stage -->
         <div class="bg-black relative aspect-video rounded-xl overflow-hidden shadow-2xl border border-white/10 flex items-center justify-center">
           <video id="portfolioMainVideo" controls class="w-full h-full object-contain">
-            <source src="video/new-video-hero-hor.mp4" type="video/mp4">
+            <source src="video/Creat_me_comercial_eating_fili.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
         </div>
 
         <!-- Active Video Details & AI Tools -->
-        <div class="p-4 rounded-xl bg-[#0a0e1c] border border-white/5 space-y-2.5">
-          <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="p-3.5 sm:p-4 rounded-xl bg-[#0a0e1c] border border-white/5 space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-2.5">
             <div>
               <span id="activeVideoAlbumBadge" class="inline-block text-[10px] font-bold text-pink-400 bg-pink-500/10 border border-pink-500/20 px-2 py-0.5 rounded-full mb-1">
-                Gemini AI Workflows
+                AI Commercials &amp; Ads
               </span>
-              <h4 id="activeVideoTitle" class="text-sm sm:text-base font-bold text-white">
-                AI Cinematic Reel &amp; Scene Synthesis
+              <h4 id="activeVideoTitle" class="text-xs sm:text-base font-bold text-white">
+                Filipino Street Food Commercial
               </h4>
             </div>
-            <div class="flex flex-wrap gap-1.5" id="modalVideoTools">
-              <span class="text-[10px] px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-medium">Google Gemini</span>
-              <span class="text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-medium">ChatGPT / GPT-4o</span>
-              <span class="text-[10px] px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 font-medium">Premiere Pro</span>
+            <!-- Download & Tools -->
+            <div class="flex items-center gap-2">
+              <a id="downloadActiveVideoBtn" href="video/Creat_me_comercial_eating_fili.mp4" download="Creat_me_comercial_eating_fili.mp4" class="btn-pink-gradient text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow hover:scale-105 transition cursor-pointer" title="Download this video to your computer or phone">
+                <i class="fa fa-download text-xs"></i>
+                <span>Download Video</span>
+              </a>
+            </div>
+            <div class="flex flex-wrap gap-1.5 w-full sm:w-auto" id="modalVideoTools">
+              <span class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-medium">Google Gemini</span>
+              <span class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-medium">ChatGPT</span>
+              <span class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 font-medium">CapCut</span>
             </div>
           </div>
           <p id="modalVideoDesc" class="text-xs text-slate-300 leading-relaxed">
-            Cinematic visual synthesis reel leveraging Google Gemini prompt crafting, ChatGPT generative narrative, and multi-layered editing.
+            Vibrant AI food commercial showcasing Filipino cuisine, dynamic camera zooms, and sound-synced appetizing visual flows.
           </p>
         </div>
 
         <!-- Video Playlist / Album Grid -->
-        <div class="space-y-2.5 pt-1">
+        <div class="space-y-2 pt-1">
           <div class="flex items-center justify-between">
             <h5 class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
               <i class="fa fa-play text-pink-500 text-[10px]"></i>
               <span>Select Video to Watch:</span>
             </h5>
-            <span id="videoPlaylistCount" class="text-[11px] text-slate-400 font-mono">3 videos</span>
+            <span id="videoPlaylistCount" class="text-[11px] text-slate-400 font-mono">Loading videos...</span>
           </div>
 
           <!-- Video Cards Grid -->
-          <div id="videoCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <div id="videoCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
             <!-- Dynamically populated video cards -->
           </div>
         </div>
@@ -789,31 +868,31 @@
   </div>
 
   <!-- ================= ALL PROJECTS MODAL / DRAWER ================= -->
-  <div id="allProjectsModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 transition-opacity">
-    <div class="bg-[#0d1322] border border-white/10 rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+  <div id="allProjectsModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-2.5 sm:p-6 transition-opacity">
+    <div class="bg-[#0d1322] border border-white/10 rounded-2xl max-w-4xl w-full max-h-[94vh] sm:max-h-[90vh] flex flex-col shadow-2xl overflow-hidden m-1 sm:m-0">
       <!-- Modal Header -->
-      <div class="flex items-center justify-between p-4 sm:p-5 border-b border-white/10 bg-slate-900/60">
+      <div class="flex items-center justify-between p-3.5 sm:p-5 border-b border-white/10 bg-slate-900/60">
         <div>
-          <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+          <h3 class="text-base sm:text-xl font-bold text-white flex items-center gap-2">
             <i class="fa fa-layer-group text-brand-pink"></i>
             <span>All Projects &amp; Repositories</span>
           </h3>
           <p class="text-xs text-slate-400">Explore complete applications, systems, and GitHub repositories.</p>
         </div>
-        <button onclick="closeAllProjectsModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
-          <i class="fa fa-times"></i>
+        <button onclick="closeAllProjectsModal()" aria-label="Close projects modal" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition shrink-0">
+          <i class="fa fa-times text-xs sm:text-sm"></i>
         </button>
       </div>
 
       <!-- Modal Body -->
-      <div class="p-4 sm:p-6 overflow-y-auto space-y-6">
+      <div class="p-3.5 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6">
         <!-- Live GitHub Repos Section -->
         <div>
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5 sm:mb-3 flex items-center gap-2">
             <i class="fab fa-github text-white"></i> Live Repositories from GitHub (@reianrd328)
           </h4>
-          <div id="githubReposList" class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div class="text-xs text-slate-400 py-4 text-center col-span-2">
+          <div id="githubReposList" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+            <div class="text-xs text-slate-400 py-4 text-center sm:col-span-2">
               <i class="fa fa-spinner fa-spin mr-2"></i> Loading GitHub repositories...
             </div>
           </div>
@@ -821,10 +900,10 @@
 
         <!-- Classic & Deployed Sites Section -->
         <div>
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5 sm:mb-3 flex items-center gap-2">
             <i class="fa fa-globe text-cyan-400"></i> Deployed Web Systems &amp; Client Projects
           </h4>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
             <a href="https://www.paunoonoo.art/" target="_blank" rel="noopener noreferrer" class="bg-slate-900/80 border border-white/5 hover:border-brand-pink/40 p-3 rounded-xl block group transition">
               <p class="text-xs font-bold text-white group-hover:text-brand-pink transition">paunoonoo.art</p>
               <p class="text-[11px] text-slate-400 mt-1">Creative art & portfolio showcase website.</p>
@@ -852,34 +931,34 @@
 
   <!-- ================= CONTACT MODAL ================= -->
   <div id="contactModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 transition-opacity">
-    <div class="bg-[#0d1322] border border-white/10 rounded-2xl max-w-md w-full shadow-2xl overflow-hidden">
+    <div class="bg-[#0d1322] border border-white/10 rounded-2xl max-w-md w-full shadow-2xl overflow-hidden m-1 sm:m-0">
       <!-- Modal Header -->
       <div class="flex items-center justify-between p-4 sm:p-5 border-b border-white/10 bg-slate-900/60">
         <div>
-          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
             <i class="fa fa-envelope text-brand-pink"></i>
             <span>Send a Message</span>
           </h3>
           <p class="text-xs text-slate-400">I will get back to you as soon as possible.</p>
         </div>
-        <button onclick="closeContactModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
-          <i class="fa fa-times"></i>
+        <button onclick="closeContactModal()" aria-label="Close contact modal" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="fa fa-times text-xs sm:text-sm"></i>
         </button>
       </div>
 
       <!-- Form -->
-      <form id="contactForm" class="p-5 space-y-3.5">
+      <form id="contactForm" class="p-4 sm:p-5 space-y-3.5">
         <div class="space-y-1">
           <label class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Your Name</label>
-          <input type="text" id="contactName" required placeholder="John Doe" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-brand-pink transition">
+          <input type="text" id="contactName" required placeholder="John Doe" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm sm:text-xs text-white focus:outline-none focus:border-brand-pink transition">
         </div>
         <div class="space-y-1">
           <label class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Your Email</label>
-          <input type="email" id="contactEmail" required placeholder="john@example.com" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-brand-pink transition">
+          <input type="email" id="contactEmail" required placeholder="john@example.com" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm sm:text-xs text-white focus:outline-none focus:border-brand-pink transition">
         </div>
         <div class="space-y-1">
           <label class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Message</label>
-          <textarea id="contactMessage" required rows="4" placeholder="Hi Lyrch, I have a project / support inquiry..." class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-brand-pink transition resize-none"></textarea>
+          <textarea id="contactMessage" required rows="4" placeholder="Hi Richard, I have a project / support inquiry..." class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm sm:text-xs text-white focus:outline-none focus:border-brand-pink transition resize-none"></textarea>
         </div>
 
         <div id="contactStatus" class="hidden text-xs p-2.5 rounded-lg"></div>
@@ -898,6 +977,38 @@
 
   <!-- Client-side Interactive Logic -->
   <script>
+    // Mobile Navigation Toggle
+    function toggleMobileMenu(forceClose) {
+      const menu = document.getElementById('mobileMenu');
+      const icon = document.getElementById('mobileMenuIcon');
+      if (!menu) return;
+      
+      const shouldOpen = forceClose !== undefined ? !forceClose : menu.classList.contains('hidden');
+      if (shouldOpen) {
+        menu.classList.remove('hidden');
+        if (icon) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+        }
+      } else {
+        menu.classList.add('hidden');
+        if (icon) {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      }
+    }
+
+    // Close modals on Escape key
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeVideoModal();
+        closeAllProjectsModal();
+        closeContactModal();
+        toggleMobileMenu(true);
+      }
+    });
+
     // Skill Filtering
     function filterSkills(category) {
       // Update tab styles
@@ -955,9 +1066,9 @@
       currentSelectedAlbum = album;
       document.querySelectorAll('#videoAlbumTabs .album-filter-btn').forEach(btn => {
         if (btn.getAttribute('data-album') === album) {
-          btn.className = 'album-filter-btn active text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-pink text-white transition shrink-0';
+          btn.className = 'album-filter-btn active text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-pink text-white transition shrink-0 whitespace-nowrap';
         } else {
-          btn.className = 'album-filter-btn text-xs font-semibold px-3 py-1.5 rounded-full bg-slate-800 text-slate-300 hover:text-white transition shrink-0';
+          btn.className = 'album-filter-btn text-xs font-semibold px-3 py-1.5 rounded-full bg-slate-800 text-slate-300 hover:text-white transition shrink-0 whitespace-nowrap';
         }
       });
       renderVideoPlaylistGrid();
@@ -991,6 +1102,17 @@
 
       const descEl = document.getElementById('modalVideoDesc');
       if (descEl) descEl.textContent = item.description || '';
+
+      // Update Download Button
+      const downloadBtn = document.getElementById('downloadActiveVideoBtn');
+      if (downloadBtn && item.videoUrl) {
+        const rawUrl = item.videoUrl;
+        const filename = rawUrl.split('/').pop() || 'video.mp4';
+        const dlUrl = rawUrl.includes('?') ? rawUrl + '&download=1' : rawUrl + '?download=1';
+        downloadBtn.href = dlUrl;
+        downloadBtn.download = filename;
+        downloadBtn.setAttribute('title', `Download ${item.title} (${filename})`);
+      }
 
       const toolsContainer = document.getElementById('modalVideoTools');
       if (toolsContainer && item.tools) {
@@ -1028,6 +1150,8 @@
 
       grid.innerHTML = filtered.map(v => {
         const isActive = v.id === currentActiveVideoId;
+        const filename = (v.videoUrl || '').split('/').pop() || 'video.mp4';
+        const dlUrl = (v.videoUrl || '').includes('?') ? v.videoUrl + '&download=1' : (v.videoUrl || '') + '?download=1';
         return `
           <div onclick="playVideoItem('${v.id}')" class="cursor-pointer rounded-xl p-3 bg-slate-900/80 border ${isActive ? 'border-brand-pink shadow-lg shadow-pink-500/10 bg-slate-900' : 'border-white/5 hover:border-brand-pink/40'} transition flex flex-col justify-between group">
             <div>
@@ -1045,8 +1169,13 @@
                 ${v.description || ''}
               </p>
             </div>
-            <div class="flex flex-wrap gap-1 mt-2.5 pt-2 border-t border-white/5">
-              ${(v.tools || []).slice(0, 2).map(t => `<span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">${t}</span>`).join('')}
+            <div class="flex items-center justify-between gap-1 mt-2.5 pt-2 border-t border-white/5">
+              <div class="flex flex-wrap gap-1">
+                ${(v.tools || []).slice(0, 2).map(t => `<span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">${t}</span>`).join('')}
+              </div>
+              <a href="${dlUrl}" download="${filename}" onclick="event.stopPropagation()" title="Download ${filename}" class="text-[10px] text-slate-400 hover:text-brand-pink p-1 rounded hover:bg-slate-800 transition flex items-center gap-1 shrink-0">
+                <i class="fa fa-download text-[9px]"></i> Download
+              </a>
             </div>
           </div>
         `;
@@ -1241,14 +1370,14 @@
           const albumTabsContainer = document.getElementById('videoAlbumTabs');
           if (albumTabsContainer) {
             let tabsHtml = `
-              <button onclick="filterVideoAlbum('all')" class="album-filter-btn ${currentSelectedAlbum === 'all' ? 'active bg-brand-pink text-white' : 'bg-slate-800 text-slate-300 hover:text-white'} text-xs font-semibold px-3 py-1.5 rounded-full transition shrink-0" data-album="all">
+              <button onclick="filterVideoAlbum('all')" class="album-filter-btn ${currentSelectedAlbum === 'all' ? 'active bg-brand-pink text-white' : 'bg-slate-800 text-slate-300 hover:text-white'} text-xs font-semibold px-3 py-1.5 rounded-full transition shrink-0 whitespace-nowrap" data-album="all">
                 <i class="fa fa-layer-group mr-1.5 text-[10px]"></i> All Videos (${videos.length})
               </button>
             `;
             albums.forEach(alb => {
               const count = videos.filter(v => v.album === alb).length;
               tabsHtml += `
-                <button onclick="filterVideoAlbum('${alb.replace(/'/g, "\\'")}')" class="album-filter-btn ${currentSelectedAlbum === alb ? 'active bg-brand-pink text-white' : 'bg-slate-800 text-slate-300 hover:text-white'} text-xs font-semibold px-3 py-1.5 rounded-full transition shrink-0" data-album="${alb.replace(/"/g, '&quot;')}">
+                <button onclick="filterVideoAlbum('${alb.replace(/'/g, "\\'")}')" class="album-filter-btn ${currentSelectedAlbum === alb ? 'active bg-brand-pink text-white' : 'bg-slate-800 text-slate-300 hover:text-white'} text-xs font-semibold px-3 py-1.5 rounded-full transition shrink-0 whitespace-nowrap" data-album="${alb.replace(/"/g, '&quot;')}">
                   ${alb} (${count})
                 </button>
               `;

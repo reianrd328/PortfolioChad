@@ -50,6 +50,10 @@
           <i class="fa fa-external-link-alt"></i>
           <span>View Site</span>
         </a>
+        <button id="saveLocalBtn" title="Save directly to local content.json (for live Python Flask server)" class="hidden px-3.5 py-2 text-xs md:text-sm font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa fa-floppy-disk"></i>
+          <span>Save Local</span>
+        </button>
         <button id="saveBtn" class="hidden px-4 py-2 text-xs md:text-sm font-semibold rounded-lg bg-red-600 hover:bg-red-500 text-white shadow-lg transition flex items-center gap-2">
           <i class="fa fa-cloud-arrow-up"></i>
           <span>Save &amp; Publish</span>
@@ -475,14 +479,22 @@
       <div id="tab-video" class="tab-panel hidden bg-slate-800/90 border border-slate-700/80 rounded-2xl p-6 shadow-xl space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-700/70 pb-5">
           <div>
-            <h2 class="text-xl font-bold text-white flex items-center gap-2">
-              <i class="fa fa-film text-pink-500"></i> AI Video Albums &amp; Creative Showcase
-            </h2>
-            <p class="text-sm text-slate-400 mt-1">Upload multiple videos and organize them into categorized albums (e.g. Gemini AI, Google Flow, Reels).</p>
+            <div class="flex items-center gap-2.5">
+              <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                <i class="fa fa-film text-pink-500"></i> AI Video Albums &amp; Creative Showcase
+              </h2>
+              <span id="totalVideosCountDisplay" class="text-xs px-2.5 py-0.5 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30 font-semibold font-mono">0 videos</span>
+            </div>
+            <p class="text-sm text-slate-400 mt-1">Upload multiple videos and organize them into categorized albums (e.g. AI Commercials &amp; Ads, Gemini AI Workflows, Creative Reels &amp; Promos).</p>
           </div>
-          <button id="addVideoBtn" type="button" class="text-xs px-4 py-2.5 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white rounded-xl transition font-semibold flex items-center gap-2 shadow-lg shadow-pink-600/20 self-start sm:self-auto cursor-pointer">
-            <i class="fa fa-plus"></i> Add Video to Album
-          </button>
+          <div class="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+            <button id="importAllVideosBtn" type="button" title="Load all 9 video files available in repository" class="text-xs px-3.5 py-2.5 bg-slate-700/80 hover:bg-slate-700 text-pink-200 border border-pink-500/30 rounded-xl transition font-medium flex items-center gap-1.5 cursor-pointer">
+              <i class="fa fa-folder-open text-pink-400"></i> Import All 9 Videos
+            </button>
+            <button id="addVideoBtn" type="button" class="text-xs px-4 py-2.5 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white rounded-xl transition font-semibold flex items-center gap-2 shadow-lg shadow-pink-600/20 cursor-pointer">
+              <i class="fa fa-plus"></i> Add Video to Album
+            </button>
+          </div>
         </div>
 
         <!-- Showcase Global Titles -->
@@ -602,6 +614,7 @@
       const tabBtns = document.querySelectorAll('.tab-btn');
       const tabPanels = document.querySelectorAll('.tab-panel');
       const saveBtn = document.getElementById('saveBtn');
+      const saveLocalBtn = document.getElementById('saveLocalBtn');
       const downloadJsonBtn = document.getElementById('downloadJsonBtn');
       const alertBanner = document.getElementById('alertBanner');
       const alertContent = document.getElementById('alertContent');
@@ -632,6 +645,7 @@
         loginGate.classList.add('hidden');
         dashboardMain.classList.remove('hidden');
         saveBtn.classList.remove('hidden');
+        if (saveLocalBtn) saveLocalBtn.classList.remove('hidden');
         downloadJsonBtn.classList.remove('hidden');
         logoutBtn.classList.remove('hidden');
       }
@@ -640,6 +654,7 @@
         loginGate.classList.remove('hidden');
         dashboardMain.classList.add('hidden');
         saveBtn.classList.add('hidden');
+        if (saveLocalBtn) saveLocalBtn.classList.add('hidden');
         downloadJsonBtn.classList.add('hidden');
         logoutBtn.classList.add('hidden');
       }
@@ -980,14 +995,67 @@
       }
 
       // --- Setup Multi-Video Albums & Playlist Handlers ---
+      const DEFAULT_SERVER_VIDEOS = [
+        { path: 'video/clip_1.mp4', title: 'New AI Video Creation', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow'], desc: 'Created with AI prompting and video workflow automation.' },
+        { path: 'video/Creat_me_comercial_eating_fili.mp4', title: 'Filipino Street Food Commercial', album: 'AI Commercials & Ads', tools: ['Google Gemini', 'ChatGPT', 'Runway Gen-3', 'CapCut'], desc: 'Vibrant AI food commercial showcasing Filipino cuisine, dynamic camera zooms, and sound-synced appetizing visual flows.' },
+        { path: 'video/Seductive_comercial_video_man.mp4', title: 'Luxury Fragrance & Fashion Commercial', album: 'AI Commercials & Ads', tools: ['Google Flow', 'Gemini AI', 'Premiere Pro'], desc: 'High-end aesthetic commercial with dramatic studio lighting, slow-motion camera movement, and luxury brand pacing.' },
+        { path: 'video/iphone.mp4', title: 'Next-Gen Smartphone Product Promo', album: 'AI Commercials & Ads', tools: ['Google Gemini', 'AI Motion', 'After Effects'], desc: 'Sleek 3D product showcase animation highlighting hardware curves, dynamic reflections, and tech commercial styling.' },
+        { path: 'video/Create_me_prompt_ah_filipino_c.mp4', title: 'Filipino Cultural Heritage AI Story', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'ChatGPT Prompting', 'Midjourney AI'], desc: 'Cultural visual narrative generated through iterative Gemini prompting, capturing traditional Filipino warmth and scenery.' },
+        { path: 'video/Create_me_video_clip_magical_t.mp4', title: 'Magical Fantasy World Clip', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow', 'AI Synthesis'], desc: 'Surreal magical landscape with mystical particle effects, glowing foliage, and atmospheric lighting crafted via generative prompt pipelines.' },
+        { path: 'video/donating.mp4', title: 'Community Giving & Empathy Reel', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'ChatGPT / GPT-4o', 'Premiere Pro'], desc: 'Heartfelt social message visual reel emphasizing community sharing, empathy, and emotional storytelling.' },
+        { path: 'video/intro.mp4', title: 'Portfolio Brand Opener & Intro', album: 'Creative Reels & Promos', tools: ['Google Flow', 'Premiere Pro', 'CapCut'], desc: 'Punchy, fast-paced brand opener with cybernetic transitions, neon lighting, and high-impact sound design.' },
+        { path: 'video/clip_3.mp4', title: 'AI Dynamic Scene Generation', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow', 'AI Motion'], desc: 'Dynamic AI visual clip created with generative prompt pipelines and neural styling.' },
+        { path: 'video/6.mp4', title: 'Generative AI Motion Clip', album: 'Creative Reels & Promos', tools: ['Google Gemini', 'CapCut AI', 'Google Flow'], desc: 'Creative generative AI motion clip showcasing multi-model transitions and high visual pacing.' },
+        { path: 'video/new-video-hero-hor.mp4', title: 'AI Production Showcase Reel (Widescreen)', album: 'Creative Reels & Promos', tools: ['Google Gemini', 'Google Flow', 'Premiere Pro'], desc: 'Comprehensive 16:9 cinematic showcase reel combining multi-model generative visuals, color grading, and commercial editing.' },
+        { path: 'video/new-video-hero-ver.mp4', title: 'Social Media Vertical Reel (TikTok/Shorts)', album: 'Creative Reels & Promos', tools: ['CapCut AI', 'Google Gemini', 'Mobile Motion'], desc: '9:16 vertical motion reel engineered for high engagement on mobile platforms, social shorts, and Instagram Reels.' }
+      ];
+
+      let availableServerVideos = [...DEFAULT_SERVER_VIDEOS];
+
+      // Refresh list of video files from Flask server if available
+      async function refreshServerVideosList() {
+        try {
+          const resp = await fetch('/api/videos-list');
+          if (resp.ok) {
+            const data = await resp.json();
+            if (data.videos && Array.isArray(data.videos)) {
+              data.videos.forEach(fileName => {
+                const fullPath = 'video/' + fileName;
+                if (!availableServerVideos.some(v => v.path === fullPath)) {
+                  availableServerVideos.push({
+                    path: fullPath,
+                    title: fileName.replace(/\.[^/.]+$/, '').replace(/[_-]/g, ' '),
+                    album: 'Gemini AI Workflows',
+                    tools: ['Google Gemini', 'Google Flow'],
+                    desc: 'AI generated video from local server.'
+                  });
+                }
+              });
+            }
+          }
+        } catch (e) {
+          // Statically hosted fallback
+        }
+      }
+      refreshServerVideosList();
+
       function updateVideoTrackNumbers() {
         const container = document.getElementById('videosContainer');
         if (!container) return;
         const cards = container.querySelectorAll('.video-card');
+        const albumsSet = new Set();
         cards.forEach((c, i) => {
           const badge = c.querySelector('.vid-track-num');
           if (badge) badge.textContent = `Track #${i + 1}`;
+          const albInput = c.querySelector('.vid-album');
+          if (albInput && albInput.value.trim()) albumsSet.add(albInput.value.trim());
         });
+        const countDisplay = document.getElementById('totalVideosCountDisplay');
+        if (countDisplay) {
+          const total = cards.length;
+          const numAlbums = albumsSet.size;
+          countDisplay.textContent = `${total} video${total === 1 ? '' : 's'} in ${numAlbums} album${numAlbums === 1 ? '' : 's'}`;
+        }
       }
 
       function createVideoCard(vid, idx) {
@@ -1001,6 +1069,15 @@
         const toolsVal = Array.isArray(vid.tools) ? vid.tools.join(', ') : (vid.tools || '');
         const descVal = vid.description || '';
         const previewSrc = urlVal ? (urlVal.startsWith('http') ? urlVal : '../' + urlVal) : '';
+        const downloadFilename = (urlVal || '').split('/').pop() || 'video.mp4';
+        const downloadHref = urlVal ? (previewSrc.includes('?') ? previewSrc + '&download=1' : previewSrc + '?download=1') : '#';
+
+        // Build options for existing videos
+        let existingOpts = '<option value="">-- Or pick from existing videos in repository --</option>';
+        availableServerVideos.forEach(item => {
+          const isSel = (urlVal === item.path || urlVal.endsWith(item.path.replace('video/', '')));
+          existingOpts += `<option value="${item.path}" ${isSel ? 'selected' : ''}>${item.path.replace('video/', '')} (${item.title})</option>`;
+        });
 
         card.innerHTML = `
           <div class="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -1013,9 +1090,23 @@
                 ${albumVal}
               </span>
             </div>
-            <button type="button" class="remove-video-btn text-xs text-rose-400 hover:text-rose-300 transition flex items-center gap-1.5 px-2.5 py-1 rounded hover:bg-rose-500/10 cursor-pointer">
-              <i class="fa fa-trash"></i> Remove
-            </button>
+            <div class="flex items-center gap-1.5">
+              <a href="${downloadHref}" download="${downloadFilename}" title="Download Video File to Computer" class="vid-card-download-btn text-xs text-emerald-400 hover:text-emerald-300 p-1.5 rounded hover:bg-emerald-500/10 cursor-pointer flex items-center gap-1 transition ${urlVal ? '' : 'hidden'}">
+                <i class="fa fa-download"></i> <span class="hidden sm:inline">Download</span>
+              </a>
+              <button type="button" title="Move Up" class="move-up-video-btn text-xs text-slate-400 hover:text-white p-1.5 rounded hover:bg-slate-700/50 cursor-pointer">
+                <i class="fa fa-arrow-up"></i>
+              </button>
+              <button type="button" title="Move Down" class="move-down-video-btn text-xs text-slate-400 hover:text-white p-1.5 rounded hover:bg-slate-700/50 cursor-pointer">
+                <i class="fa fa-arrow-down"></i>
+              </button>
+              <button type="button" title="Duplicate Video Card" class="duplicate-video-btn text-xs text-cyan-400 hover:text-cyan-300 p-1.5 rounded hover:bg-cyan-500/10 cursor-pointer flex items-center gap-1">
+                <i class="fa fa-copy"></i>
+              </button>
+              <button type="button" class="remove-video-btn text-xs text-rose-400 hover:text-rose-300 transition flex items-center gap-1.5 px-2.5 py-1 rounded hover:bg-rose-500/10 cursor-pointer">
+                <i class="fa fa-trash"></i> Remove
+              </button>
+            </div>
           </div>
 
           <!-- Album Selector / Category -->
@@ -1024,15 +1115,15 @@
               <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-300">
                 Album / Collection Category
               </label>
-              <span class="text-[10px] text-slate-400">Groups videos into tabs on live page</span>
+              <span class="text-[10px] text-slate-400">Groups videos into filterable tabs on live page</span>
             </div>
-            <input type="text" value="${albumVal}" class="vid-album w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-pink-500 font-semibold transition" placeholder="e.g. Gemini AI Workflows, Google Flow & Motion, Creative Reels">
+            <input type="text" value="${albumVal}" class="vid-album w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-pink-500 font-semibold transition" placeholder="e.g. AI Commercials & Ads, Gemini AI Workflows, Creative Reels & Promos">
             <div class="flex flex-wrap items-center gap-1.5 pt-1 text-[11px] text-slate-400">
               <span class="text-[10px] text-slate-500 font-medium">Quick Presets:</span>
+              <button type="button" class="preset-album-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-pink-600/20 text-slate-300 hover:text-pink-300 border border-slate-700 text-[10px] transition cursor-pointer" data-album="AI Commercials &amp; Ads">+ AI Commercials &amp; Ads</button>
               <button type="button" class="preset-album-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-pink-600/20 text-slate-300 hover:text-pink-300 border border-slate-700 text-[10px] transition cursor-pointer" data-album="Gemini AI Workflows">+ Gemini AI Workflows</button>
-              <button type="button" class="preset-album-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-pink-600/20 text-slate-300 hover:text-pink-300 border border-slate-700 text-[10px] transition cursor-pointer" data-album="Google Flow &amp; Motion">+ Google Flow &amp; Motion</button>
               <button type="button" class="preset-album-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-pink-600/20 text-slate-300 hover:text-pink-300 border border-slate-700 text-[10px] transition cursor-pointer" data-album="Creative Reels &amp; Promos">+ Creative Reels &amp; Promos</button>
-              <button type="button" class="preset-album-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-pink-600/20 text-slate-300 hover:text-pink-300 border border-slate-700 text-[10px] transition cursor-pointer" data-album="Commercial Ads">+ Commercial Ads</button>
+              <button type="button" class="preset-album-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-pink-600/20 text-slate-300 hover:text-pink-300 border border-slate-700 text-[10px] transition cursor-pointer" data-album="Social &amp; Mobile Shorts">+ Social &amp; Mobile Shorts</button>
             </div>
           </div>
 
@@ -1045,19 +1136,27 @@
               </div>
 
               <!-- Upload or Video Path -->
-              <div class="space-y-1.5 p-3 rounded-xl bg-slate-950/50 border border-slate-800">
+              <div class="space-y-2 p-3 rounded-xl bg-slate-950/50 border border-slate-800">
                 <div class="flex items-center justify-between">
                   <label class="text-[11px] font-semibold text-slate-300">Video Source / File</label>
                   <span class="vid-status text-[10px] text-pink-400 font-mono">Ready</span>
                 </div>
-                <div class="flex items-center gap-2">
+
+                <!-- Fast Dropdown from existing server videos -->
+                <div>
+                  <select class="vid-select-existing w-full bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-pink-500">
+                    ${existingOpts}
+                  </select>
+                </div>
+
+                <div class="flex items-center gap-2 pt-0.5">
                   <input type="file" accept="video/mp4,video/webm" class="vid-file-input hidden" id="file_vid_${idx}">
                   <button type="button" onclick="document.getElementById('file_vid_${idx}').click()" class="px-3 py-1.5 bg-pink-600/30 hover:bg-pink-600 text-pink-200 hover:text-white rounded-lg text-xs font-medium transition flex items-center gap-1.5 shrink-0 cursor-pointer">
-                    <i class="fa fa-upload text-[11px]"></i> Upload Video
+                    <i class="fa fa-upload text-[11px]"></i> Upload New Video
                   </button>
                   <input type="text" value="${urlVal}" class="vid-url w-full bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-pink-500 font-mono" placeholder="video/sample.mp4 or https://...">
                 </div>
-                <p class="text-[10px] text-slate-400">Choose MP4 file from computer (saved &amp; uploaded to GitHub), or paste direct video URL.</p>
+                <p class="text-[10px] text-slate-400">Pick from existing repository videos above, or upload a new MP4/WebM file.</p>
               </div>
 
               <div class="space-y-1">
@@ -1080,9 +1179,9 @@
                 <video controls class="vid-preview w-full h-full object-contain" src="${previewSrc}"></video>
                 <div class="vid-deploying-notice hidden absolute inset-0 bg-slate-950/90 flex flex-col items-center justify-center p-3 text-center">
                   <i class="fa fa-cloud-arrow-up text-amber-400 text-2xl mb-1.5 animate-pulse"></i>
-                  <p class="text-xs text-amber-300 font-semibold">Video not found on server</p>
+                  <p class="text-xs text-amber-300 font-semibold">Video preview loading...</p>
                   <p class="text-[10px] text-slate-400 mt-1 max-w-[240px]">
-                    Click <strong>Upload Video</strong> to select your file, then click <strong>Save &amp; Publish</strong> to push it to GitHub!
+                    Select a video file or upload an MP4 to view playback preview.
                   </p>
                 </div>
               </div>
@@ -1098,6 +1197,7 @@
         const albumBadge = card.querySelector('.vid-album-badge');
         albumInput.addEventListener('input', () => {
           albumBadge.textContent = albumInput.value.trim() || 'General';
+          updateVideoTrackNumbers();
         });
 
         // Preset album buttons
@@ -1106,6 +1206,7 @@
             const chosen = btn.getAttribute('data-album');
             albumInput.value = chosen;
             albumBadge.textContent = chosen;
+            updateVideoTrackNumbers();
           });
         });
 
@@ -1115,10 +1216,62 @@
         const previewEl = card.querySelector('.vid-preview');
         const noticeEl = card.querySelector('.vid-deploying-notice');
         const statusEl = card.querySelector('.vid-status');
+        const existingSelect = card.querySelector('.vid-select-existing');
+        const titleInput = card.querySelector('.vid-title');
+        const toolsInput = card.querySelector('.vid-tools');
+        const descInput = card.querySelector('.vid-desc');
+
+        const cardDlBtn = card.querySelector('.vid-card-download-btn');
+        function syncCardDownload(path) {
+          if (!cardDlBtn) return;
+          const cleanP = (path || '').trim();
+          if (cleanP) {
+            cardDlBtn.classList.remove('hidden');
+            const href = cleanP.startsWith('http') ? cleanP : '../' + cleanP;
+            cardDlBtn.href = href.includes('?') ? href + '&download=1' : href + '?download=1';
+            cardDlBtn.download = cleanP.split('/').pop() || 'video.mp4';
+          } else {
+            cardDlBtn.classList.add('hidden');
+          }
+        }
+
+        // Existing video dropdown change
+        if (existingSelect) {
+          existingSelect.addEventListener('change', () => {
+            const selectedPath = existingSelect.value;
+            if (selectedPath) {
+              urlInput.value = selectedPath;
+              previewEl.src = selectedPath.startsWith('http') ? selectedPath : '../' + selectedPath;
+              if (noticeEl) noticeEl.classList.add('hidden');
+              statusEl.innerHTML = '<span class="text-emerald-400 font-semibold"><i class="fa fa-check"></i> Selected from server</span>';
+              syncCardDownload(selectedPath);
+
+              // Pre-fill metadata if matched with known catalog
+              const match = availableServerVideos.find(v => v.path === selectedPath);
+              if (match) {
+                if (!titleInput.value || titleInput.value === 'Untitled Video' || titleInput.value === 'New AI Video Creation') {
+                  titleInput.value = match.title;
+                }
+                if (match.album && (!albumInput.value || albumInput.value === 'Gemini AI Workflows')) {
+                  albumInput.value = match.album;
+                  albumBadge.textContent = match.album;
+                }
+                if (match.tools && (!toolsInput.value || toolsInput.value.includes('Google Gemini, Google Flow'))) {
+                  toolsInput.value = match.tools.join(', ');
+                }
+                if (match.desc && (!descInput.value || descInput.value.includes('Created with AI prompting'))) {
+                  descInput.value = match.desc;
+                }
+              }
+              updateVideoTrackNumbers();
+            }
+          });
+        }
 
         // Check local IndexedDB cache on card creation
         (async () => {
           if (urlVal) {
+            syncCardDownload(urlVal);
             const cachedBlob = await getVideoFromCache(urlVal);
             if (cachedBlob) {
               previewEl.src = URL.createObjectURL(cachedBlob);
@@ -1130,7 +1283,7 @@
 
         // Video Preview Error & Load Handlers
         previewEl.addEventListener('error', async () => {
-          const currentPath = card.querySelector('.vid-url')?.value.trim();
+          const currentPath = urlInput.value.trim();
           if (currentPath) {
             const cachedBlob = await getVideoFromCache(currentPath);
             if (cachedBlob) {
@@ -1140,7 +1293,7 @@
             }
           }
           if (noticeEl) noticeEl.classList.remove('hidden');
-          if (statusEl) statusEl.innerHTML = '<span class="text-amber-400 font-semibold"><i class="fa fa-triangle-exclamation"></i> File not yet on server</span>';
+          if (statusEl) statusEl.innerHTML = '<span class="text-amber-400 font-semibold"><i class="fa fa-triangle-exclamation"></i> File loading/pending</span>';
         });
 
         previewEl.addEventListener('loadeddata', () => {
@@ -1150,35 +1303,66 @@
           }
         });
 
-        // File upload listener
+        // File upload listener (Supports direct Python Flask server upload OR Base64 GitHub commit)
         fileInput.addEventListener('change', async () => {
           const file = fileInput.files[0];
           if (!file) return;
 
           const sizeMB = file.size / (1024 * 1024);
-          if (sizeMB > 45) {
-            showAlert('warning', `Video file is <strong>${sizeMB.toFixed(1)} MB</strong>. GitHub restricts web API file uploads above 45MB. Please compress your video or paste a direct external link.`);
-            statusEl.innerHTML = `<span class="text-amber-400">File too large (${sizeMB.toFixed(1)} MB)</span>`;
-            return;
-          }
-
-          // Immediate local preview via Blob URL
           previewEl.src = URL.createObjectURL(file);
           if (noticeEl) noticeEl.classList.add('hidden');
-          statusEl.innerHTML = `<span class="text-cyan-400 animate-pulse"><i class="fa fa-spinner fa-spin"></i> Preparing video (${sizeMB.toFixed(1)} MB)...</span>`;
+          statusEl.innerHTML = `<span class="text-cyan-400 animate-pulse"><i class="fa fa-spinner fa-spin"></i> Processing video (${sizeMB.toFixed(1)} MB)...</span>`;
 
           const cleanPath = 'video/' + file.name.replace(/[^a-zA-Z0-9_.-]/g, '_');
           urlInput.value = cleanPath;
+          syncCardDownload(cleanPath);
 
-          // Save to local IndexedDB cache immediately so page refresh won't turn into black screen!
+          // If title is default, set to friendly filename
+          if (!titleInput.value || titleInput.value === 'Untitled Video' || titleInput.value === 'New AI Video Creation') {
+            titleInput.value = file.name.replace(/\.[^/.]+$/, '').replace(/[_-]/g, ' ');
+          }
+
+          // If running on local Python Flask server, upload directly!
+          const isLocal = window.location.protocol === 'http:' && (window.location.port === '5000' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+          if (isLocal) {
+            try {
+              const formData = new FormData();
+              formData.append('video', file);
+              formData.append('id', vidId);
+              formData.append('title', titleInput.value);
+              formData.append('album', albumInput.value);
+              formData.append('tools', toolsInput.value);
+              formData.append('description', descInput.value);
+
+              const upResp = await fetch('/api/upload-video', {
+                method: 'POST',
+                body: formData
+              });
+              const upResult = await upResp.json();
+              if (upResult.success) {
+                statusEl.innerHTML = `<span class="text-emerald-400 font-semibold"><i class="fa fa-circle-check"></i> Uploaded locally to video/ (${sizeMB.toFixed(1)} MB)</span>`;
+                showAlert('success', `Video <strong>${file.name}</strong> uploaded directly to server and saved!`);
+                return;
+              }
+            } catch (localErr) {
+              console.warn('Direct upload error, falling back to client staging:', localErr);
+            }
+          }
+
+          // GitHub Pages staging
+          if (sizeMB > 45) {
+            showAlert('warning', `Video file is <strong>${sizeMB.toFixed(1)} MB</strong>. GitHub limits browser uploads over 45MB. Save locally or use an external URL.`);
+            statusEl.innerHTML = `<span class="text-amber-400">File too large for GitHub API (${sizeMB.toFixed(1)} MB)</span>`;
+            return;
+          }
+
           await saveVideoToCache(cleanPath, file);
-
-          // Convert to Base64 so Save & Publish can push it to GitHub!
           try {
             const b64 = await readVideoAsBase64(file);
             uploadedFiles[cleanPath] = b64;
             statusEl.innerHTML = `<span class="text-emerald-400 font-semibold"><i class="fa fa-check-circle"></i> Ready to publish (${sizeMB.toFixed(1)} MB)</span>`;
-            showAlert('success', `Video <strong>${file.name}</strong> prepared! Click <strong>"Save &amp; Publish"</strong> to upload it to your GitHub repository.`);
+            showAlert('success', `Video <strong>${file.name}</strong> staged! Click <strong>"Save Local"</strong> or <strong>"Save &amp; Publish"</strong> to keep it.`);
           } catch (err) {
             statusEl.innerHTML = `<span class="text-rose-400">Error reading video file</span>`;
             showAlert('error', 'Error reading video: ' + err.message);
@@ -1188,6 +1372,7 @@
         // URL input listener
         urlInput.addEventListener('input', async () => {
           const val = urlInput.value.trim();
+          syncCardDownload(val);
           if (val) {
             if (noticeEl) noticeEl.classList.add('hidden');
             const cachedBlob = await getVideoFromCache(val);
@@ -1198,6 +1383,51 @@
             }
           }
         });
+
+        // Move Up / Move Down Handlers
+        const moveUpBtn = card.querySelector('.move-up-video-btn');
+        if (moveUpBtn) {
+          moveUpBtn.addEventListener('click', () => {
+            const prev = card.previousElementSibling;
+            if (prev) {
+              card.parentNode.insertBefore(card, prev);
+              updateVideoTrackNumbers();
+              card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          });
+        }
+
+        const moveDownBtn = card.querySelector('.move-down-video-btn');
+        if (moveDownBtn) {
+          moveDownBtn.addEventListener('click', () => {
+            const next = card.nextElementSibling;
+            if (next) {
+              card.parentNode.insertBefore(next, card);
+              updateVideoTrackNumbers();
+              card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          });
+        }
+
+        // Duplicate Video Card Handler
+        const duplicateBtn = card.querySelector('.duplicate-video-btn');
+        if (duplicateBtn) {
+          duplicateBtn.addEventListener('click', () => {
+            const currentVidData = {
+              id: 'vid_' + Date.now(),
+              title: titleInput.value ? titleInput.value + ' (Copy)' : 'Untitled Video',
+              album: albumInput.value || 'Gemini AI Workflows',
+              videoUrl: urlInput.value || '',
+              tools: toolsInput.value ? toolsInput.value.split(',').map(s => s.trim()) : [],
+              description: descInput.value || ''
+            };
+            const newCard = createVideoCard(currentVidData, 0);
+            card.parentNode.insertBefore(newCard, card.nextSibling);
+            updateVideoTrackNumbers();
+            newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            showAlert('info', `Duplicated "${currentVidData.title}". Edit details and click Save.`);
+          });
+        }
 
         // Remove listener
         card.querySelector('.remove-video-btn').addEventListener('click', () => {
@@ -1217,9 +1447,10 @@
           container.innerHTML = `
             <div class="p-8 text-center bg-slate-900/50 border border-slate-800 rounded-xl text-slate-400">
               <i class="fa fa-film text-3xl text-slate-600 mb-2"></i>
-              <p class="text-sm">No videos in your showcase yet. Click <strong>Add Video to Album</strong> above to start!</p>
+              <p class="text-sm">No videos in your showcase yet. Click <strong>Add Video to Album</strong> or <strong>Import All 9 Videos</strong> above to start!</p>
             </div>
           `;
+          updateVideoTrackNumbers();
           return;
         }
 
@@ -1227,6 +1458,8 @@
           const card = createVideoCard(vid, idx);
           container.appendChild(card);
         });
+
+        updateVideoTrackNumbers();
       }
 
       // Add Video Button Event Listener
@@ -1235,7 +1468,6 @@
         addVideoBtn.addEventListener('click', () => {
           const container = document.getElementById('videosContainer');
           if (!container) return;
-          // Clear empty placeholder if present
           if (container.querySelector('.text-center')) {
             container.innerHTML = '';
           }
@@ -1252,7 +1484,70 @@
           container.prepend(card);
           updateVideoTrackNumbers();
           card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          showAlert('info', 'New video added! Set its album, upload file or paste URL, and click Save.');
+          showAlert('info', 'New video added! Pick an existing video or upload a file, set its album, and click Save.');
+        });
+      }
+
+      // Import All 9 Repository Videos Button
+      const importAllVideosBtn = document.getElementById('importAllVideosBtn');
+      if (importAllVideosBtn) {
+        importAllVideosBtn.addEventListener('click', () => {
+          const container = document.getElementById('videosContainer');
+          if (!container) return;
+          container.innerHTML = '';
+          DEFAULT_SERVER_VIDEOS.forEach((item, i) => {
+            const card = createVideoCard({
+              id: 'vid-' + (i + 1),
+              title: item.title,
+              album: item.album,
+              videoUrl: item.path,
+              tools: item.tools,
+              description: item.desc
+            }, i);
+            container.appendChild(card);
+          });
+          updateVideoTrackNumbers();
+          showAlert('success', `Imported all ${DEFAULT_SERVER_VIDEOS.length} videos from repository into albums! Click "Save Local" or "Save &amp; Publish" to keep them.`);
+        });
+      }
+
+      // --- Save Locally to Python Flask Backend (/api/content) ---
+      if (saveLocalBtn) {
+        saveLocalBtn.addEventListener('click', async () => {
+          const activeAdminPw = (document.getElementById('admin_password') ? document.getElementById('admin_password').value.trim() : (document.getElementById('admin_password_alt') ? document.getElementById('admin_password_alt').value.trim() : '')) || localStorage.getItem('portfolio_admin_pw') || 'admin';
+          localStorage.setItem('portfolio_admin_pw', activeAdminPw);
+
+          const dataToSave = collectFormData();
+          loadingOverlay.classList.remove('hidden');
+          loadingText.textContent = 'Saving directly to local content.json...';
+
+          try {
+            const resp = await fetch('/api/content', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Admin-Password': activeAdminPw
+              },
+              body: JSON.stringify({
+                ...dataToSave,
+                _admin_password: activeAdminPw
+              })
+            });
+
+            const res = await resp.json();
+            loadingOverlay.classList.add('hidden');
+
+            if (res.success) {
+              currentData = dataToSave;
+              const numVids = (dataToSave.aiVideo && dataToSave.aiVideo.videos) ? dataToSave.aiVideo.videos.length : 0;
+              showAlert('success', `🎉 <strong>Successfully saved locally to content.json!</strong><br>All <strong>${numVids} videos</strong> and albums are saved and live on your portfolio!`);
+            } else {
+              throw new Error(res.message || 'Failed to save content locally');
+            }
+          } catch (err) {
+            loadingOverlay.classList.add('hidden');
+            showAlert('error', 'Error saving locally: ' + err.message);
+          }
         });
       }
 
@@ -1261,7 +1556,27 @@
         const token = getToken();
         updateConnBadge();
 
+        const isLocal = window.location.protocol === 'http:' && (window.location.port === '5000' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
         try {
+          // If on local server, prioritize local content.json so disk content is never lost!
+          if (isLocal) {
+            try {
+              const localResp = await fetch('../content.json?v=' + Date.now());
+              if (localResp.ok) {
+                currentData = await localResp.json();
+                populateForm(currentData);
+                checkAuth();
+                if (token) {
+                  getGitHubFileSha('content.json', token).then(sha => { if (sha) contentSha = sha; }).catch(() => {});
+                }
+                return;
+              }
+            } catch (locErr) {
+              console.warn('Local load failed, falling back to GitHub:', locErr);
+            }
+          }
+
           if (token) {
             const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json?ref=${BRANCH}&cb=${Date.now()}`, {
               headers: getAuthHeaders(token)
@@ -1788,17 +2103,48 @@
       saveBtn.addEventListener('click', async () => {
         const token = getToken();
 
-        if (!token) {
-          authModal.classList.remove('hidden');
-          showAlert('error', 'Please configure your GitHub Token first to publish online.');
-          return;
-        }
-
         const newPassword = (document.getElementById('admin_password') ? document.getElementById('admin_password').value.trim() : (document.getElementById('admin_password_alt') ? document.getElementById('admin_password_alt').value.trim() : '')) || 'admin';
         localStorage.setItem('portfolio_admin_pw', newPassword);
 
         const dataToSave = collectFormData();
         loadingOverlay.classList.remove('hidden');
+
+        // Check if running on local Python Flask server
+        const isLocal = window.location.protocol === 'http:' && (window.location.port === '5000' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+        if (isLocal) {
+          // ALWAYS save to local /api/content so changes take effect IMMEDIATELY on the local dashboard!
+          try {
+            loadingText.textContent = 'Saving directly to local content.json...';
+            await fetch('/api/content', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Admin-Password': newPassword
+              },
+              body: JSON.stringify({
+                ...dataToSave,
+                _admin_password: newPassword
+              })
+            });
+            currentData = dataToSave;
+          } catch (localErr) {
+            console.warn('Local save warning:', localErr);
+          }
+        }
+
+        if (!token) {
+          loadingOverlay.classList.add('hidden');
+          if (isLocal) {
+            const numVids = (dataToSave.aiVideo && dataToSave.aiVideo.videos) ? dataToSave.aiVideo.videos.length : 0;
+            showAlert('success', `🎉 <strong>Successfully saved locally to content.json!</strong><br>All <strong>${numVids} videos</strong> and albums are saved and live on your portfolio!<br><a href="../index.html?cb=${Date.now()}" target="_blank" class="inline-flex items-center gap-1.5 mt-1 font-bold underline text-white hover:text-pink-300"><i class="fa fa-arrow-up-right-from-square text-xs"></i> View Live Dashboard</a>`);
+            return;
+          } else {
+            authModal.classList.remove('hidden');
+            showAlert('error', 'Please configure your GitHub Token first to publish online.');
+            return;
+          }
+        }
 
         try {
           // Step 1: Upload any newly selected images and video files first
@@ -1927,7 +2273,8 @@
           }
 
           loadingOverlay.classList.add('hidden');
-          showAlert('success', `🎉 <strong>Successfully saved and published!</strong><br>Admin password is updated to: <strong class="text-amber-300 font-mono">${newPassword}</strong>.<br>Profile photo and all updates are deploying to GitHub Pages.`);
+          const numVids = (dataToSave.aiVideo && dataToSave.aiVideo.videos) ? dataToSave.aiVideo.videos.length : 0;
+          showAlert('success', `🎉 <strong>Successfully saved and published!</strong><br>Admin password: <strong class="text-amber-300 font-mono">${newPassword}</strong>. (${numVids} videos active across albums).<br>Saved to local server &amp; deploying to GitHub Pages.<br><a href="../index.html?cb=${Date.now()}" target="_blank" class="inline-flex items-center gap-1.5 mt-1.5 font-bold underline text-white hover:text-pink-300"><i class="fa fa-arrow-up-right-from-square text-xs"></i> Open Live Dashboard to See Changes</a>`);
         } catch (err) {
           loadingOverlay.classList.add('hidden');
           console.error(err);
