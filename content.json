@@ -1,6 +1,7 @@
 {
+  "brand": "LYRCH DEV",
   "sidebar": {
-    "brand": "Navigation",
+    "brand": "LYRCH DEV",
     "facebook": "https://www.facebook.com/richard.ong.969/",
     "linkedin": "#",
     "github": "https://github.com/reianrd328",
@@ -10,40 +11,198 @@
     "email": "songzism@yahoo.com",
     "cvLink": "https://drive.google.com/file/d/1BCkH1FjPcFGmACDWLTnBT_PfrE7hdY1E/view?usp=drive_link"
   },
+  "profile": {
+    "name": "Lyrch Ong",
+    "firstName": "Lyrch",
+    "lastName": "Ong",
+    "role": "Web Designer & Technical Support Specialist",
+    "tagline": "Turning ideas into useful, beautiful, and reliable solutions — from web applications to IT support in real world environments.",
+    "heroQuote": "Build Support Create Improve",
+    "heroImage": "images/theme/hero_desk.png",
+    "stats": [
+      {
+        "icon": "fa-cog",
+        "value": "18+ Years",
+        "label": "Technical Support"
+      },
+      {
+        "icon": "fa-code",
+        "value": "Web",
+        "label": "Design & Development"
+      },
+      {
+        "icon": "fa-network-wired",
+        "value": "100+",
+        "label": "Branches Supported"
+      },
+      {
+        "icon": "fa-lightbulb",
+        "value": "Always",
+        "label": "Learning & Creating"
+      }
+    ]
+  },
   "about": {
-    "heading": "Professional, Standards Compliant Website Development & Design",
-    "bio": "Hello! I'm Richard, a freelance WordPress developer and designer based in the Philippines. I specialize in creating visually appealing and functional websites. I pride myself on doing things the right way, ensuring happy clients every time. Let's work together to bring your ideas to life!",
-    "subText": "After a website? I can take care of everything for you. From eye-catching design to make your website unique, to standards compliant code using the latest web technologies, to ensure your site looks beautiful in today's browsers.\n\nI can also sort out your domain name and web hosting, and provide a content management system to allow you to easily keep your website content up-to-date.",
-    "profileImage": "images/profile.png",
+    "heading": "About Me",
+    "bio": "I am an IT professional with 18 years of experience in technical support, hardware, networking, and system management. I also create web applications and explore new technologies to solve real-world problems.",
+    "subText": "After a website or custom IT system? I specialize in Python, Flask, responsive modern web design, server setup, and 24/7 technical support infrastructure.",
+    "quote": "Think Clearly Create Confidently LYRCH",
+    "resumeLink": "https://drive.google.com/file/d/1BCkH1FjPcFGmACDWLTnBT_PfrE7hdY1E/view?usp=drive_link",
+    "profileImage": "images/theme/avatar_card.png",
+    "avatarImage": "images/theme/avatar_card.png",
     "techSkillsImage": "images/tech-skills.png"
   },
   "skills": [
     {
-      "name": "Design",
-      "percent": 85
+      "name": "Python",
+      "percent": 95,
+      "category": "web",
+      "icon": "fab fa-python",
+      "color": "#3776ab"
     },
     {
-      "name": "SEO",
-      "percent": 78
+      "name": "HTML5",
+      "percent": 92,
+      "category": "web",
+      "icon": "fab fa-html5",
+      "color": "#e34f26"
     },
     {
-      "name": "Video Editing",
-      "percent": 85
+      "name": "CSS3",
+      "percent": 90,
+      "category": "web",
+      "icon": "fab fa-css3-alt",
+      "color": "#1572b6"
     },
     {
-      "name": "Development",
-      "percent": 88
+      "name": "JavaScript",
+      "percent": 88,
+      "category": "web",
+      "icon": "fab fa-js-square",
+      "color": "#f7df1e"
     },
     {
-      "name": "Virtual Assistant",
-      "percent": 80
+      "name": "Flask",
+      "percent": 92,
+      "category": "web",
+      "icon": "fa fa-pepper-hot",
+      "color": "#ff2a85"
     },
     {
-      "name": "Photo Editing",
-      "percent": 86
+      "name": "MySQL",
+      "percent": 88,
+      "category": "web",
+      "icon": "fa fa-database",
+      "color": "#00758f"
+    },
+    {
+      "name": "Git / GitHub",
+      "percent": 90,
+      "category": "web",
+      "icon": "fab fa-github",
+      "color": "#ffffff"
+    },
+    {
+      "name": "WordPress",
+      "percent": 85,
+      "category": "web",
+      "icon": "fab fa-wordpress",
+      "color": "#21759b"
+    },
+    {
+      "name": "Networking",
+      "percent": 94,
+      "category": "support",
+      "icon": "fa fa-network-wired",
+      "color": "#38bdf8"
+    },
+    {
+      "name": "Windows",
+      "percent": 96,
+      "category": "support",
+      "icon": "fab fa-windows",
+      "color": "#0078d4"
+    },
+    {
+      "name": "Hardware",
+      "percent": 95,
+      "category": "support",
+      "icon": "fa fa-screwdriver-wrench",
+      "color": "#94a3b8"
+    },
+    {
+      "name": "TeamViewer",
+      "percent": 92,
+      "category": "support",
+      "icon": "fa fa-arrows-spin",
+      "color": "#0e80e5"
+    },
+    {
+      "name": "AnyDesk",
+      "percent": 90,
+      "category": "support",
+      "icon": "fa fa-gem",
+      "color": "#ef4444"
+    },
+    {
+      "name": "UltraViewer",
+      "percent": 88,
+      "category": "support",
+      "icon": "fa fa-display",
+      "color": "#3b82f6"
+    }
+  ],
+  "featuredProjects": [
+    {
+      "id": "pawshop",
+      "title": "PAWSHOP IT Command Center",
+      "description": "Ticketing system for IT department with branch management, user roles, and equipment monitoring.",
+      "image": "images/theme/pawshop_thumb.png",
+      "tags": ["Flask", "MySQL", "Bootstrap"],
+      "github": "https://github.com/reianrd328",
+      "url": "https://technical-preventive-hub.onrender.com/"
+    },
+    {
+      "id": "warehouse-inventory",
+      "title": "Warehouse Inventory System",
+      "description": "Monitor inventory across 100+ branches with approvals, tracking, and live reports.",
+      "image": "images/theme/warehouse_thumb.png",
+      "tags": ["Python", "Flask", "MySQL"],
+      "github": "https://github.com/reianrd328/hardware-inventory-system",
+      "url": "https://technical-preventive-hub.onrender.com/"
+    },
+    {
+      "id": "foodcart-manager",
+      "title": "FoodCartManager",
+      "description": "Rental and vendor management system with admin panel and mobile support (Sunmi V2 Pro).",
+      "image": "images/theme/foodcart_thumb.png",
+      "tags": ["Flask", "TiDB", "Android"],
+      "github": "https://github.com/reianrd328/FoodCartManager",
+      "url": "https://github.com/reianrd328/FoodCartManager"
     }
   ],
   "portfolio": [
+    {
+      "title": "PAWSHOP IT Command Center",
+      "category": "web-dev",
+      "categoryLabel": "Web & IT System",
+      "image": "images/theme/pawshop_thumb.png",
+      "url": "https://technical-preventive-hub.onrender.com/"
+    },
+    {
+      "title": "Warehouse Inventory System",
+      "category": "web-dev",
+      "categoryLabel": "Python & Flask System",
+      "image": "images/theme/warehouse_thumb.png",
+      "url": "https://github.com/reianrd328/hardware-inventory-system"
+    },
+    {
+      "title": "FoodCartManager",
+      "category": "web-dev",
+      "categoryLabel": "Admin & POS System",
+      "image": "images/theme/foodcart_thumb.png",
+      "url": "https://github.com/reianrd328/FoodCartManager"
+    },
     {
       "title": "paunoonoo.art",
       "category": "web-dev",
@@ -59,91 +218,90 @@
       "url": "https://www.johnnolandercomedy.com/"
     },
     {
-      "title": "erinstblaine.com",
-      "category": "web-dev",
-      "categoryLabel": "Web Development",
-      "image": "images/portfolio/erins-res.png",
-      "url": "http://erinstblaine.com/"
-    },
-    {
-      "title": "mrabrams.com",
-      "category": "web-dev",
-      "categoryLabel": "Web Development",
-      "image": "images/portfolio/mrabrams-res.png",
-      "url": "https://www.mrabrams.com/"
-    },
-    {
-      "title": "schoolofastonishment.com",
-      "category": "web-dev",
-      "categoryLabel": "Web Development",
-      "image": "images/portfolio/amazing-res.png",
-      "url": "https://schoolofastonishment.com/"
-    },
-    {
-      "title": "segalmagic.com",
-      "category": "web-dev",
-      "categoryLabel": "Web Development",
-      "image": "images/portfolio/nathaniel-res.png",
-      "url": "https://segalmagic.com/"
-    },
-    {
       "title": "Hardware Log Deployment",
       "category": "web-dev",
       "categoryLabel": "Web Development",
       "image": "images/portfolio/invetory.png",
       "url": "https://technical-preventive-hub.onrender.com/"
-    },
-    {
-      "title": "utilizerhythm.s3-tastewp",
-      "category": "web-dev",
-      "categoryLabel": "Web Development",
-      "image": "images/portfolio/ss-.png",
-      "url": "https://utilizerhythm.s3-tastewp.com/home/"
     }
   ],
   "services": [
     {
-      "icon": "fa-paint-roller",
-      "title": "Web Design",
-      "description": "Crafting visually appealing and user-friendly websites using HTML, CSS, and JavaScript, with a strong focus on responsive design and seamless user experience."
+      "title": "Web Design & Development",
+      "description": "Modern and responsive web applications.",
+      "icon": "fa-laptop-code"
     },
     {
-      "icon": "fa-laptop",
-      "title": "Web Development",
-      "description": "Developing robust and dynamic web applications using WordPress, MySQL, PHP, JavaScript, HTML, and CSS, ensuring functionality, performance, and scalability."
+      "title": "Technical Support",
+      "description": "Hardware, software, networking, and remote support.",
+      "icon": "fa-headset"
     },
     {
-      "icon": "fa-globe",
-      "title": "Domain Registration",
-      "description": "I offer quick and hassle-free domain registration services to help you secure the perfect web address for your business."
+      "title": "System Setup",
+      "description": "Server, database, and application deployment.",
+      "icon": "fa-server"
     },
     {
-      "icon": "fa-server",
-      "title": "Web Hosting",
-      "description": "I provide comprehensive web hosting setup and configuration services, ensuring your website is securely installed, optimized for performance, and ready to deliver a seamless user experience."
-    },
-    {
-      "icon": "fa-search",
-      "title": "SEO",
-      "description": "Enhancing website visibility and search engine rankings through keyword optimization, content strategy, and technical SEO best practices."
-    },
-    {
-      "icon": "fa-user-tie",
-      "title": "Virtual Assistant",
-      "description": "Providing efficient administrative support, managing tasks, scheduling, and assisting with projects remotely, ensuring smooth operations and client satisfaction."
+      "title": "IT Consultation",
+      "description": "Process improvement and custom system solutions.",
+      "icon": "fa-gears"
     }
   ],
+  "experience": [
+    {
+      "period": "2008 - Present",
+      "title": "Technical Support",
+      "description": "18 years of experience supporting 100+ branches.",
+      "icon": "fa-briefcase",
+      "color": "pink"
+    },
+    {
+      "period": "Specialization",
+      "title": "Web Development",
+      "description": "Self-taught and continuously building web applications.",
+      "icon": "fa-code",
+      "color": "blue"
+    },
+    {
+      "period": "Infrastructure",
+      "title": "System Management",
+      "description": "Deployment, networking, and IT infrastructure.",
+      "icon": "fa-desktop",
+      "color": "purple"
+    },
+    {
+      "period": "Continuous Growth",
+      "title": "Always Learning",
+      "description": "Exploring new tools, AI, and creative projects.",
+      "icon": "fa-graduation-cap",
+      "color": "teal"
+    }
+  ],
+  "cta": {
+    "title": "Let's Work Together",
+    "description": "Have a project idea or need IT support? Feel free to reach out or check my projects on GitHub.",
+    "quote": "Good Ideas Better Solutions",
+    "laptopImage": "images/theme/laptop_desk.png"
+  },
   "contact": {
-    "name": "Richard Ong",
-    "role": "Web Designer",
+    "name": "Lyrch Ong",
+    "role": "Web Designer & Technical Support Specialist",
     "email": "songzism@yahoo.com",
     "phone": "+63 915 193 4601",
     "location": "Philippines",
     "facebook": "https://www.facebook.com/richard.ong.969/",
+    "github": "https://github.com/reianrd328",
     "linkedin": "#"
   },
+  "social": {
+    "github": "https://github.com/reianrd328",
+    "email": "songzism@yahoo.com",
+    "facebook": "https://www.facebook.com/richard.ong.969/",
+    "phone": "+63 915 193 4601",
+    "location": "Philippines"
+  },
   "footer": {
-    "copyright": "© Copyright Ribong. All Rights Reserved"
+    "copyright": "© 2026 LYRCH DEV (Richard Ong). All Rights Reserved."
   },
   "admin": {
     "password": "admin"

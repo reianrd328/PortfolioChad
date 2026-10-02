@@ -490,7 +490,9 @@
       'use strict';
 
       const REPO_OWNER = 'reianrd328';
-      const REPO_NAME = 'myprofile';
+      const pathSegments = window.location.pathname.split('/').filter(Boolean);
+      const autoRepo = (pathSegments.length > 0 && pathSegments[0] !== 'admin') ? pathSegments[0] : 'PortfolioChad';
+      const REPO_NAME = localStorage.getItem('portfolio_repo_name') || autoRepo || 'PortfolioChad';
       const BRANCH = 'main';
 
       let currentData = null;
@@ -630,6 +632,8 @@
 
       function updateConnBadge() {
         const token = getToken();
+        const repoEl = document.getElementById('connRepo');
+        if (repoEl) repoEl.textContent = `${REPO_OWNER}/${REPO_NAME}`;
         if (token) {
           connBadge.className = 'text-xs font-medium px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center gap-1';
           connBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Connected';
@@ -1117,6 +1121,7 @@
       // --- Collect Current Form Data ---
       function collectFormData() {
         const data = {
+          ...(currentData || {}),
           sidebar: {
             brand: document.getElementById('sb_brand').value.trim(),
             facebook: document.getElementById('sb_facebook').value.trim(),
