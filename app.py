@@ -1,8 +1,16 @@
 import os
+import sys
 import json
 import time
 import urllib.request
 from flask import Flask, render_template, jsonify, request, send_from_directory
+
+if sys.platform == 'win32':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
 
 app = Flask(__name__, static_folder='.', template_folder='templates')
 
