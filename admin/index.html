@@ -891,6 +891,74 @@
       setupImageUpload('file_profile', 'preview_profile', 'images/profile.png');
       setupImageUpload('file_tech', 'preview_tech', 'images/tech-skills.png');
 
+      // --- IndexedDB Local Video Cache ---
+      // Allows immediate playback of uploaded video files in the browser even before GitHub Pages finishes deploying
+      function openVideoDB() {
+        return new Promise((resolve) => {
+          if (!window.indexedDB) return resolve(null);
+          try {
+            const request = indexedDB.open('PortfolioVideoCache', 1);
+            request.onupgradeneeded = (e) => {
+              const db = e.target.result;
+              if (!db.objectStoreNames.contains('videos')) {
+                db.createObjectStore('videos', { keyPath: 'path' });
+              }
+            };
+            request.onsuccess = (e) => resolve(e.target.result);
+            request.onerror = () => resolve(null);
+          } catch (e) {
+            resolve(null);
+          }
+        });
+      }
+
+      async function saveVideoToCache(path, fileBlob) {
+        try {
+          const db = await openVideoDB();
+          if (!db) return;
+          const tx = db.transaction('videos', 'readwrite');
+          const store = tx.objectStore('videos');
+          store.put({ path, blob: fileBlob, updated: Date.now() });
+        } catch (e) {
+          console.warn('Could not cache video locally', e);
+        }
+      }
+
+      async function getVideoFromCache(path) {
+        try {
+          const db = await openVideoDB();
+          if (!db) return null;
+          return new Promise((resolve) => {
+            const tx = db.transaction('videos', 'readonly');
+            const store = tx.objectStore('videos');
+            const req = store.get(path);
+            req.onsuccess = () => {
+              if (req.result && req.result.blob) {
+                resolve(req.result.blob);
+              } else {
+                resolve(null);
+              }
+            };
+            req.onerror = () => resolve(null);
+          });
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function readVideoAsBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const res = reader.result;
+            const b64 = res.split(',')[1];
+            resolve(b64);
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      }
+
       // --- Setup Multi-Video Albums & Playlist Handlers ---
       function updateVideoTrackNumbers() {
         const container = document.getElementById('videosContainer');
@@ -969,7 +1037,7 @@
                   </button>
                   <input type="text" value="${urlVal}" class="vid-url w-full bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-pink-500 font-mono" placeholder="video/sample.mp4 or https://...">
                 </div>
-                <p class="text-[10px] text-slate-400">Upload MP4 file to server, or paste any direct video URL (e.g. cloud host, YouTube raw, etc.).</p>
+                <p class="text-[10px] text-slate-400">Choose MP4 file from computer (saved &amp; uploaded to GitHub), or paste direct video URL.</p>
               </div>
 
               <div class="space-y-1">
@@ -988,8 +1056,15 @@
               <label class="text-[11px] font-semibold text-slate-300 flex items-center gap-1">
                 <i class="fa fa-play text-pink-400"></i> Video Preview
               </label>
-              <div class="bg-black/90 border border-slate-700/80 rounded-xl overflow-hidden aspect-video flex items-center justify-center relative shadow-inner">
+              <div class="bg-black/90 border border-slate-700/80 rounded-xl overflow-hidden aspect-video flex items-center justify-center relative shadow-inner group">
                 <video controls class="vid-preview w-full h-full object-contain" src="${previewSrc}"></video>
+                <div class="vid-deploying-notice hidden absolute inset-0 bg-slate-950/90 flex flex-col items-center justify-center p-3 text-center">
+                  <i class="fa fa-cloud-arrow-up text-amber-400 text-2xl mb-1.5 animate-pulse"></i>
+                  <p class="text-xs text-amber-300 font-semibold">Video not found on server</p>
+                  <p class="text-[10px] text-slate-400 mt-1 max-w-[240px]">
+                    Click <strong>Upload Video</strong> to select your file, then click <strong>Save &amp; Publish</strong> to push it to GitHub!
+                  </p>
+                </div>
               </div>
               <div class="text-[10px] text-slate-400 text-right">
                 ID: <span class="vid-id font-mono text-slate-500">${vidId}</span>
@@ -1014,49 +1089,93 @@
           });
         });
 
-        // File upload listener
+        // Elements
         const fileInput = card.querySelector('.vid-file-input');
         const urlInput = card.querySelector('.vid-url');
         const previewEl = card.querySelector('.vid-preview');
+        const noticeEl = card.querySelector('.vid-deploying-notice');
         const statusEl = card.querySelector('.vid-status');
 
+        // Check local IndexedDB cache on card creation
+        (async () => {
+          if (urlVal) {
+            const cachedBlob = await getVideoFromCache(urlVal);
+            if (cachedBlob) {
+              previewEl.src = URL.createObjectURL(cachedBlob);
+              if (noticeEl) noticeEl.classList.add('hidden');
+              if (statusEl) statusEl.innerHTML = '<span class="text-emerald-400 font-medium"><i class="fa fa-circle-check"></i> Playing local video</span>';
+            }
+          }
+        })();
+
+        // Video Preview Error & Load Handlers
+        previewEl.addEventListener('error', async () => {
+          const currentPath = card.querySelector('.vid-url')?.value.trim();
+          if (currentPath) {
+            const cachedBlob = await getVideoFromCache(currentPath);
+            if (cachedBlob) {
+              previewEl.src = URL.createObjectURL(cachedBlob);
+              if (noticeEl) noticeEl.classList.add('hidden');
+              return;
+            }
+          }
+          if (noticeEl) noticeEl.classList.remove('hidden');
+          if (statusEl) statusEl.innerHTML = '<span class="text-amber-400 font-semibold"><i class="fa fa-triangle-exclamation"></i> File not yet on server</span>';
+        });
+
+        previewEl.addEventListener('loadeddata', () => {
+          if (noticeEl) noticeEl.classList.add('hidden');
+          if (statusEl && !statusEl.textContent.includes('Ready to publish')) {
+            statusEl.innerHTML = '<span class="text-emerald-400 font-semibold"><i class="fa fa-check"></i> Loaded</span>';
+          }
+        });
+
+        // File upload listener
         fileInput.addEventListener('change', async () => {
           const file = fileInput.files[0];
           if (!file) return;
-          previewEl.src = URL.createObjectURL(file);
-          statusEl.textContent = 'Selected (' + (file.size / (1024 * 1024)).toFixed(1) + ' MB)';
 
-          // Attempt local python server upload
-          try {
-            const formData = new FormData();
-            formData.append('video', file);
-            statusEl.textContent = 'Uploading...';
-            const resp = await fetch('/api/upload-video', {
-              method: 'POST',
-              body: formData
-            });
-            if (resp.ok) {
-              const res = await resp.json();
-              urlInput.value = res.videoUrl;
-              statusEl.textContent = 'Uploaded to ' + res.videoUrl;
-              showAlert('success', `Video "${file.name}" uploaded to server!`);
-              return;
-            }
-          } catch (e) {
-            // Local fallback
+          const sizeMB = file.size / (1024 * 1024);
+          if (sizeMB > 45) {
+            showAlert('warning', `Video file is <strong>${sizeMB.toFixed(1)} MB</strong>. GitHub restricts web API file uploads above 45MB. Please compress your video or paste a direct external link.`);
+            statusEl.innerHTML = `<span class="text-amber-400">File too large (${sizeMB.toFixed(1)} MB)</span>`;
+            return;
           }
+
+          // Immediate local preview via Blob URL
+          previewEl.src = URL.createObjectURL(file);
+          if (noticeEl) noticeEl.classList.add('hidden');
+          statusEl.innerHTML = `<span class="text-cyan-400 animate-pulse"><i class="fa fa-spinner fa-spin"></i> Preparing video (${sizeMB.toFixed(1)} MB)...</span>`;
 
           const cleanPath = 'video/' + file.name.replace(/[^a-zA-Z0-9_.-]/g, '_');
           urlInput.value = cleanPath;
-          statusEl.textContent = 'Ready to save';
-          showAlert('info', `Video "${file.name}" selected. Click "Save &amp; Publish" to apply.`);
+
+          // Save to local IndexedDB cache immediately so page refresh won't turn into black screen!
+          await saveVideoToCache(cleanPath, file);
+
+          // Convert to Base64 so Save & Publish can push it to GitHub!
+          try {
+            const b64 = await readVideoAsBase64(file);
+            uploadedFiles[cleanPath] = b64;
+            statusEl.innerHTML = `<span class="text-emerald-400 font-semibold"><i class="fa fa-check-circle"></i> Ready to publish (${sizeMB.toFixed(1)} MB)</span>`;
+            showAlert('success', `Video <strong>${file.name}</strong> prepared! Click <strong>"Save &amp; Publish"</strong> to upload it to your GitHub repository.`);
+          } catch (err) {
+            statusEl.innerHTML = `<span class="text-rose-400">Error reading video file</span>`;
+            showAlert('error', 'Error reading video: ' + err.message);
+          }
         });
 
         // URL input listener
-        urlInput.addEventListener('input', () => {
+        urlInput.addEventListener('input', async () => {
           const val = urlInput.value.trim();
           if (val) {
-            previewEl.src = val.startsWith('http') ? val : '../' + val;
+            if (noticeEl) noticeEl.classList.add('hidden');
+            const cachedBlob = await getVideoFromCache(val);
+            if (cachedBlob) {
+              previewEl.src = URL.createObjectURL(cachedBlob);
+            } else {
+              previewEl.src = val.startsWith('http') ? val : '../' + val;
+            }
           }
         });
 
@@ -1662,9 +1781,13 @@
         loadingOverlay.classList.remove('hidden');
 
         try {
-          // Step 1: Upload any newly selected images first
+          // Step 1: Upload any newly selected images and video files first
           for (const [filePath, base64Content] of Object.entries(uploadedFiles)) {
-            loadingText.textContent = `Uploading ${filePath}...`;
+            const isVideo = filePath.startsWith('video/');
+            const sizeMB = (base64Content.length * 0.75 / (1024 * 1024)).toFixed(1);
+            loadingText.textContent = isVideo 
+              ? `Uploading video "${filePath}" (${sizeMB} MB) to GitHub... Please wait...`
+              : `Uploading ${filePath}...`;
 
             // Check if file exists to get SHA
             let fileSha = null;
@@ -1680,7 +1803,7 @@
 
             // Put file
             const putBody = {
-              message: `Update image: ${filePath}`,
+              message: isVideo ? `Upload video: ${filePath}` : `Update image: ${filePath}`,
               content: base64Content,
               branch: BRANCH
             };
@@ -1702,6 +1825,9 @@
               }
               throw new Error(`Failed to upload ${filePath}: ${errData.message || putResp.statusText}`);
             }
+
+            // Successfully uploaded to GitHub, remove from pending queue
+            delete uploadedFiles[filePath];
           }
 
           // Step 2: Fetch latest content.json SHA if not known
