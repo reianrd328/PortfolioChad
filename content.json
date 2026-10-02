@@ -1,189 +1,52 @@
 {
   "about": {
-    "avatarImage": "images/profile.png",
-    "bio": "I am an IT professional with 18 years of experience in technical support, hardware, networking, and system management. I also create web applications and explore new technologies to solve real-world problems.",
     "heading": "About Me",
-    "profileImage": "images/profile.png",
+    "bio": "I am an IT professional with 18 years of experience in technical support, hardware, networking, and system management. I also create web applications and explore new technologies to solve real-world problems.",
     "subText": "After a website or custom IT system? I specialize in Python, Flask, responsive modern web design, server setup, and 24/7 technical support infrastructure.",
+    "profileImage": "images/profile.png",
+    "avatarImage": "images/profile.png",
     "techSkillsImage": "images/tech-skills.png"
   },
   "admin": {
     "password": "112086"
   },
   "aiVideo": {
-    "albums": [
-      "AI Commercials & Ads",
-      "Gemini AI Workflows",
-      "Creative Reels & Promos"
-    ],
-    "badge": "AI Video & Creative Media",
-    "description": "Comprehensive AI video production showcase featuring generative prompt crafting, neural motion workflows, and multi-layered editing across multiple albums.",
     "enabled": true,
-    "subtitle": "Generative Video Workflows with Gemini, ChatGPT & Google Flow",
+    "badge": "AI Video & Creative Media",
     "title": "AI Video Production & Media Albums",
-    "tools": [
-      "Google Gemini",
-      "ChatGPT / GPT-4o",
-      "Google Flow",
-      "Premiere Pro"
+    "subtitle": "Generative Video Workflows with Gemini, ChatGPT & Google Flow",
+    "albums": [
+      "Gemini AI Workflows"
     ],
-    "videoUrl": "video/new-video-hero-hor.mp4",
     "videos": [
       {
-        "album": "AI Commercials & Ads",
-        "description": "Vibrant AI food commercial showcasing Filipino cuisine, dynamic camera zooms, and sound-synced appetizing visual flows.",
-        "id": "vid-1",
-        "title": "Filipino Street Food Commercial",
-        "tools": [
-          "Google Gemini",
-          "ChatGPT",
-          "Runway Gen-3",
-          "CapCut"
-        ],
-        "videoUrl": "video/Creat_me_comercial_eating_fili.mp4"
-      },
-      {
-        "album": "Gemini AI Workflows",
-        "description": "Created with AI prompting and video workflow automation.",
-        "id": "vid_1790946509787",
+        "id": "vid_1790948237773",
         "title": "New AI Video Creation",
+        "album": "Gemini AI Workflows",
+        "videoUrl": "video/Man_watching_clock_inside_house_20260919130641.mp4",
         "tools": [
           "Google Gemini",
           "Google Flow"
         ],
-        "videoUrl": "video/clip_1.mp4"
-      },
-      {
-        "album": "AI Commercials & Ads",
-        "description": "High-end aesthetic commercial with dramatic studio lighting, slow-motion camera movement, and luxury brand pacing.",
-        "id": "vid-2",
-        "title": "Luxury Fragrance & Fashion Commercial",
-        "tools": [
-          "Google Flow",
-          "Gemini AI",
-          "Premiere Pro"
-        ],
-        "videoUrl": "video/Seductive_comercial_video_man.mp4"
-      },
-      {
-        "album": "AI Commercials & Ads",
-        "description": "Sleek 3D product showcase animation highlighting hardware curves, dynamic reflections, and tech commercial styling.",
-        "id": "vid-3",
-        "title": "Next-Gen Smartphone Product Promo",
-        "tools": [
-          "Google Gemini",
-          "AI Motion",
-          "After Effects"
-        ],
-        "videoUrl": "video/iphone.mp4"
-      },
-      {
-        "album": "Gemini AI Workflows",
-        "description": "Cultural visual narrative generated through iterative Gemini prompting, capturing traditional Filipino warmth and scenery.",
-        "id": "vid-4",
-        "title": "Filipino Cultural Heritage AI Story",
-        "tools": [
-          "Google Gemini",
-          "ChatGPT Prompting",
-          "Midjourney AI"
-        ],
-        "videoUrl": "video/Create_me_prompt_ah_filipino_c.mp4"
-      },
-      {
-        "album": "Gemini AI Workflows",
-        "description": "Surreal magical landscape with mystical particle effects, glowing foliage, and atmospheric lighting crafted via generative prompt pipelines.",
-        "id": "vid-5",
-        "title": "Magical Fantasy World Clip",
-        "tools": [
-          "Google Gemini",
-          "Google Flow",
-          "AI Synthesis"
-        ],
-        "videoUrl": "video/Create_me_video_clip_magical_t.mp4"
-      },
-      {
-        "album": "Gemini AI Workflows",
-        "description": "Heartfelt social message visual reel emphasizing community sharing, empathy, and emotional storytelling.",
-        "id": "vid-6",
-        "title": "Community Giving & Empathy Reel",
-        "tools": [
-          "Google Gemini",
-          "ChatGPT / GPT-4o",
-          "Premiere Pro"
-        ],
-        "videoUrl": "video/donating.mp4"
-      },
-      {
-        "album": "Gemini AI Workflows",
-        "description": "Dynamic AI visual clip created with generative prompt pipelines and neural styling.",
-        "id": "vid-clip3",
-        "title": "AI Dynamic Scene Generation",
-        "tools": [
-          "Google Gemini",
-          "Google Flow",
-          "AI Motion"
-        ],
-        "videoUrl": "video/clip_3.mp4"
-      },
-      {
-        "album": "Creative Reels & Promos",
-        "description": "Punchy, fast-paced brand opener with cybernetic transitions, neon lighting, and high-impact sound design.",
-        "id": "vid-7",
-        "title": "Portfolio Brand Opener & Intro",
-        "tools": [
-          "Google Flow",
-          "Premiere Pro",
-          "CapCut"
-        ],
-        "videoUrl": "video/intro.mp4"
-      },
-      {
-        "album": "Creative Reels & Promos",
-        "description": "Creative generative AI motion clip showcasing multi-model transitions and high visual pacing.",
-        "id": "vid-clip6",
-        "title": "Generative AI Motion Clip",
-        "tools": [
-          "Google Gemini",
-          "CapCut AI",
-          "Google Flow"
-        ],
-        "videoUrl": "video/6.mp4"
-      },
-      {
-        "album": "Creative Reels & Promos",
-        "description": "Comprehensive 16:9 cinematic showcase reel combining multi-model generative visuals, color grading, and commercial editing.",
-        "id": "vid-8",
-        "title": "AI Production Showcase Reel (Widescreen)",
-        "tools": [
-          "Google Gemini",
-          "Google Flow",
-          "Premiere Pro"
-        ],
-        "videoUrl": "video/new-video-hero-hor.mp4"
-      },
-      {
-        "album": "Creative Reels & Promos",
-        "description": "9:16 vertical motion reel engineered for high engagement on mobile platforms, social shorts, and Instagram Reels.",
-        "id": "vid-9",
-        "title": "Social Media Vertical Reel (TikTok/Shorts)",
-        "tools": [
-          "CapCut AI",
-          "Google Gemini",
-          "Mobile Motion"
-        ],
-        "videoUrl": "video/new-video-hero-ver.mp4"
+        "description": "Created with AI prompting and video workflow automation."
       }
-    ]
+    ],
+    "videoUrl": "video/Man_watching_clock_inside_house_20260919130641.mp4",
+    "tools": [
+      "Google Gemini",
+      "Google Flow"
+    ],
+    "description": "Created with AI prompting and video workflow automation."
   },
   "brand": "LYRCH DEV",
   "contact": {
-    "email": "songzism@yahoo.com",
-    "facebook": "https://www.facebook.com/richard.ong.969/",
-    "linkedin": "#",
-    "location": "Philippines",
     "name": "Lyrch Ong",
+    "role": "Web Designer & Technical Support Specialist",
+    "email": "songzism@yahoo.com",
     "phone": "+63 915 193 4601",
-    "role": "Web Designer & Technical Support Specialist"
+    "location": "Philippines",
+    "facebook": "https://www.facebook.com/richard.ong.969/",
+    "linkedin": "#"
   },
   "cta": {
     "description": "Have a project idea or need IT support? Feel free to reach out or check my projects on GitHub.",
@@ -266,50 +129,50 @@
     "copyright": "© 2026 LYRCH DEV (Richard Ong). All Rights Reserved."
   },
   "hireMe": {
-    "cvLink": "https://drive.google.com/file/d/1BCkH1FjPcFGmACDWLTnBT_PfrE7hdY1E/view?usp=drive_link",
-    "email": "songzism@yahoo.com"
+    "email": "songzism@yahoo.com",
+    "cvLink": "https://drive.google.com/file/d/1BCkH1FjPcFGmACDWLTnBT_PfrE7hdY1E/view?usp=drive_link"
   },
   "portfolio": [
     {
+      "title": "PAWSHOP IT Command Center",
       "category": "web-dev",
       "categoryLabel": "Web & IT System",
       "image": "images/theme/pawshop_thumb.png",
-      "title": "PAWSHOP IT Command Center",
       "url": "https://technical-preventive-hub.onrender.com/"
     },
     {
+      "title": "Warehouse Inventory System",
       "category": "web-dev",
       "categoryLabel": "Python & Flask System",
       "image": "images/theme/warehouse_thumb.png",
-      "title": "Warehouse Inventory System",
       "url": "https://github.com/reianrd328/hardware-inventory-system"
     },
     {
+      "title": "FoodCartManager",
       "category": "web-dev",
       "categoryLabel": "Admin & POS System",
       "image": "images/theme/foodcart_thumb.png",
-      "title": "FoodCartManager",
       "url": "https://github.com/reianrd328/FoodCartManager"
     },
     {
+      "title": "paunoonoo.art",
       "category": "web-dev",
       "categoryLabel": "Web Design",
       "image": "images/portfolio/paunoonoo-res.png",
-      "title": "paunoonoo.art",
       "url": "https://www.paunoonoo.art/"
     },
     {
+      "title": "johnnolandercomedy.com",
       "category": "web-dev",
       "categoryLabel": "Web Development",
       "image": "images/portfolio/johnnolander-res.png",
-      "title": "johnnolandercomedy.com",
       "url": "https://www.johnnolandercomedy.com/"
     },
     {
+      "title": "Hardware Log Deployment",
       "category": "web-dev",
       "categoryLabel": "Web Development",
       "image": "images/portfolio/invetory.png",
-      "title": "Hardware Log Deployment",
       "url": "https://technical-preventive-hub.onrender.com/"
     }
   ],
@@ -347,32 +210,32 @@
   },
   "services": [
     {
-      "description": "Modern and responsive web applications.",
       "icon": "fa-laptop-code",
-      "title": "Web Design & Development"
+      "title": "Web Design & Development",
+      "description": "Modern and responsive web applications."
     },
     {
-      "description": "Hardware, software, networking, and remote support.",
       "icon": "fa-headset",
-      "title": "Technical Support"
+      "title": "Technical Support",
+      "description": "Hardware, software, networking, and remote support."
     },
     {
-      "description": "Server, database, and application deployment.",
       "icon": "fa-server",
-      "title": "System Setup"
+      "title": "System Setup",
+      "description": "Server, database, and application deployment."
     },
     {
-      "description": "Process improvement and custom system solutions.",
       "icon": "fa-gears",
-      "title": "IT Consultation"
+      "title": "IT Consultation",
+      "description": "Process improvement and custom system solutions."
     }
   ],
   "sidebar": {
     "brand": "LYRCH DEV",
     "facebook": "https://www.facebook.com/richard.ong.969/",
+    "linkedin": "#",
     "github": "https://github.com/reianrd328",
-    "instagram": "",
-    "linkedin": "#"
+    "instagram": ""
   },
   "skills": [
     {
