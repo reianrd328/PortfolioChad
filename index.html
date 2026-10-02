@@ -812,7 +812,7 @@
       <div class="overflow-y-auto p-3.5 sm:p-5 space-y-3.5 sm:space-y-4">
         <!-- Main HD Video Player Stage -->
         <div class="bg-black relative aspect-video rounded-xl overflow-hidden shadow-2xl border border-white/10 flex items-center justify-center">
-          <video id="portfolioMainVideo" controls class="w-full h-full object-contain">
+          <video id="portfolioMainVideo" controls class="w-full h-full object-contain" poster="images/thumbnails/thumb_Creat_me_comercial_eating_fili.jpg">
             <source src="video/Creat_me_comercial_eating_fili.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -1081,9 +1081,12 @@
       currentActiveVideoId = videoId;
       const videoEl = document.getElementById('portfolioMainVideo');
       if (videoEl) {
+        const thumbUrl = item.thumbnail || ('images/thumbnails/thumb_' + (item.videoUrl ? item.videoUrl.split('/').pop().replace(/\.[^/.]+$/, '') : 'default') + '.jpg');
+        videoEl.poster = thumbUrl;
         videoEl.onerror = function() {
           if (videoEl.src && !videoEl.src.includes('new-video-hero-hor.mp4')) {
             videoEl.src = 'video/new-video-hero-hor.mp4';
+            videoEl.poster = 'images/thumbnails/thumb_new-video-hero-hor.jpg';
             videoEl.load();
             videoEl.play().catch(() => {});
           }
@@ -1152,15 +1155,22 @@
         const isActive = v.id === currentActiveVideoId;
         const filename = (v.videoUrl || '').split('/').pop() || 'video.mp4';
         const dlUrl = (v.videoUrl || '').includes('?') ? v.videoUrl + '&download=1' : (v.videoUrl || '') + '?download=1';
+        const stem = filename.replace(/\.[^/.]+$/, '');
+        const thumb = v.thumbnail || `images/thumbnails/thumb_${stem}.jpg`;
         return `
           <div onclick="playVideoItem('${v.id}')" class="cursor-pointer rounded-xl p-3 bg-slate-900/80 border ${isActive ? 'border-brand-pink shadow-lg shadow-pink-500/10 bg-slate-900' : 'border-white/5 hover:border-brand-pink/40'} transition flex flex-col justify-between group">
             <div>
-              <div class="relative aspect-video rounded-lg overflow-hidden bg-black/60 mb-2 border border-white/5 flex items-center justify-center">
-                <i class="fa fa-circle-play text-2xl ${isActive ? 'text-brand-pink animate-pulse' : 'text-slate-400 group-hover:text-white'} transition"></i>
-                <span class="absolute top-1.5 left-1.5 text-[9px] px-1.5 py-0.5 rounded bg-black/70 text-slate-200 border border-white/10 font-semibold truncate max-w-[120px]">
+              <div class="relative aspect-video rounded-lg overflow-hidden bg-black/80 mb-2 border border-white/5 group-hover:border-brand-pink/40 transition flex items-center justify-center">
+                <img src="${thumb}" alt="${v.title}" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='images/thumbnails/thumb_new-video-hero-hor.jpg';">
+                <div class="absolute inset-0 bg-black/35 group-hover:bg-black/15 transition flex items-center justify-center">
+                  <div class="w-10 h-10 rounded-full ${isActive ? 'bg-brand-pink text-white shadow-lg shadow-pink-500/50 scale-110' : 'bg-black/75 backdrop-blur-xs text-white group-hover:bg-brand-pink group-hover:scale-110'} transition duration-300 flex items-center justify-center">
+                    <i class="fa fa-play text-xs ${isActive ? '' : 'ml-0.5'}"></i>
+                  </div>
+                </div>
+                <span class="absolute top-1.5 left-1.5 text-[9px] px-2 py-0.5 rounded-full bg-slate-950/85 backdrop-blur-sm text-slate-200 border border-white/15 font-semibold truncate max-w-[125px] shadow-sm">
                   ${v.album || 'Video'}
                 </span>
-                ${isActive ? '<span class="absolute bottom-1.5 right-1.5 text-[9px] px-1.5 py-0.5 rounded bg-brand-pink text-white font-bold">Now Playing</span>' : ''}
+                ${isActive ? '<span class="absolute bottom-1.5 right-1.5 text-[9px] px-2 py-0.5 rounded-full bg-brand-pink text-white font-bold shadow-md shadow-pink-500/30 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span> Now Playing</span>' : ''}
               </div>
               <h5 class="text-xs font-bold text-white group-hover:text-brand-pink transition line-clamp-1 leading-snug">
                 ${v.title}

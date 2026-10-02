@@ -488,8 +488,8 @@
             <p class="text-sm text-slate-400 mt-1">Upload multiple videos and organize them into categorized albums (e.g. AI Commercials &amp; Ads, Gemini AI Workflows, Creative Reels &amp; Promos).</p>
           </div>
           <div class="flex flex-wrap items-center gap-2 self-start sm:self-auto">
-            <button id="importAllVideosBtn" type="button" title="Load all 9 video files available in repository" class="text-xs px-3.5 py-2.5 bg-slate-700/80 hover:bg-slate-700 text-pink-200 border border-pink-500/30 rounded-xl transition font-medium flex items-center gap-1.5 cursor-pointer">
-              <i class="fa fa-folder-open text-pink-400"></i> Import All 9 Videos
+            <button id="importAllVideosBtn" type="button" title="Load all 12 video files available in repository" class="text-xs px-3.5 py-2.5 bg-slate-700/80 hover:bg-slate-700 text-pink-200 border border-pink-500/30 rounded-xl transition font-medium flex items-center gap-1.5 cursor-pointer">
+              <i class="fa fa-folder-open text-pink-400"></i> Import All 12 Videos
             </button>
             <button id="addVideoBtn" type="button" class="text-xs px-4 py-2.5 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white rounded-xl transition font-semibold flex items-center gap-2 shadow-lg shadow-pink-600/20 cursor-pointer">
               <i class="fa fa-plus"></i> Add Video to Album
@@ -996,18 +996,18 @@
 
       // --- Setup Multi-Video Albums & Playlist Handlers ---
       const DEFAULT_SERVER_VIDEOS = [
-        { path: 'video/clip_1.mp4', title: 'New AI Video Creation', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow'], desc: 'Created with AI prompting and video workflow automation.' },
-        { path: 'video/Creat_me_comercial_eating_fili.mp4', title: 'Filipino Street Food Commercial', album: 'AI Commercials & Ads', tools: ['Google Gemini', 'ChatGPT', 'Runway Gen-3', 'CapCut'], desc: 'Vibrant AI food commercial showcasing Filipino cuisine, dynamic camera zooms, and sound-synced appetizing visual flows.' },
-        { path: 'video/Seductive_comercial_video_man.mp4', title: 'Luxury Fragrance & Fashion Commercial', album: 'AI Commercials & Ads', tools: ['Google Flow', 'Gemini AI', 'Premiere Pro'], desc: 'High-end aesthetic commercial with dramatic studio lighting, slow-motion camera movement, and luxury brand pacing.' },
-        { path: 'video/iphone.mp4', title: 'Next-Gen Smartphone Product Promo', album: 'AI Commercials & Ads', tools: ['Google Gemini', 'AI Motion', 'After Effects'], desc: 'Sleek 3D product showcase animation highlighting hardware curves, dynamic reflections, and tech commercial styling.' },
-        { path: 'video/Create_me_prompt_ah_filipino_c.mp4', title: 'Filipino Cultural Heritage AI Story', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'ChatGPT Prompting', 'Midjourney AI'], desc: 'Cultural visual narrative generated through iterative Gemini prompting, capturing traditional Filipino warmth and scenery.' },
-        { path: 'video/Create_me_video_clip_magical_t.mp4', title: 'Magical Fantasy World Clip', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow', 'AI Synthesis'], desc: 'Surreal magical landscape with mystical particle effects, glowing foliage, and atmospheric lighting crafted via generative prompt pipelines.' },
-        { path: 'video/donating.mp4', title: 'Community Giving & Empathy Reel', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'ChatGPT / GPT-4o', 'Premiere Pro'], desc: 'Heartfelt social message visual reel emphasizing community sharing, empathy, and emotional storytelling.' },
-        { path: 'video/intro.mp4', title: 'Portfolio Brand Opener & Intro', album: 'Creative Reels & Promos', tools: ['Google Flow', 'Premiere Pro', 'CapCut'], desc: 'Punchy, fast-paced brand opener with cybernetic transitions, neon lighting, and high-impact sound design.' },
-        { path: 'video/clip_3.mp4', title: 'AI Dynamic Scene Generation', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow', 'AI Motion'], desc: 'Dynamic AI visual clip created with generative prompt pipelines and neural styling.' },
-        { path: 'video/6.mp4', title: 'Generative AI Motion Clip', album: 'Creative Reels & Promos', tools: ['Google Gemini', 'CapCut AI', 'Google Flow'], desc: 'Creative generative AI motion clip showcasing multi-model transitions and high visual pacing.' },
-        { path: 'video/new-video-hero-hor.mp4', title: 'AI Production Showcase Reel (Widescreen)', album: 'Creative Reels & Promos', tools: ['Google Gemini', 'Google Flow', 'Premiere Pro'], desc: 'Comprehensive 16:9 cinematic showcase reel combining multi-model generative visuals, color grading, and commercial editing.' },
-        { path: 'video/new-video-hero-ver.mp4', title: 'Social Media Vertical Reel (TikTok/Shorts)', album: 'Creative Reels & Promos', tools: ['CapCut AI', 'Google Gemini', 'Mobile Motion'], desc: '9:16 vertical motion reel engineered for high engagement on mobile platforms, social shorts, and Instagram Reels.' }
+        { path: 'video/clip_1.mp4', thumbnail: 'images/thumbnails/thumb_clip_1.jpg', title: 'New AI Video Creation', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow'], desc: 'Created with AI prompting and video workflow automation.' },
+        { path: 'video/Creat_me_comercial_eating_fili.mp4', thumbnail: 'images/thumbnails/thumb_Creat_me_comercial_eating_fili.jpg', title: 'Filipino Street Food Commercial', album: 'AI Commercials & Ads', tools: ['Google Gemini', 'ChatGPT', 'Runway Gen-3', 'CapCut'], desc: 'Vibrant AI food commercial showcasing Filipino cuisine, dynamic camera zooms, and sound-synced appetizing visual flows.' },
+        { path: 'video/Seductive_comercial_video_man.mp4', thumbnail: 'images/thumbnails/thumb_Seductive_comercial_video_man.jpg', title: 'Luxury Fragrance & Fashion Commercial', album: 'AI Commercials & Ads', tools: ['Google Flow', 'Gemini AI', 'Premiere Pro'], desc: 'High-end aesthetic commercial with dramatic studio lighting, slow-motion camera movement, and luxury brand pacing.' },
+        { path: 'video/iphone.mp4', thumbnail: 'images/thumbnails/thumb_iphone.jpg', title: 'Next-Gen Smartphone Product Promo', album: 'AI Commercials & Ads', tools: ['Google Gemini', 'AI Motion', 'After Effects'], desc: 'Sleek 3D product showcase animation highlighting hardware curves, dynamic reflections, and tech commercial styling.' },
+        { path: 'video/Create_me_prompt_ah_filipino_c.mp4', thumbnail: 'images/thumbnails/thumb_Create_me_prompt_ah_filipino_c.jpg', title: 'Filipino Cultural Heritage AI Story', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'ChatGPT Prompting', 'Midjourney AI'], desc: 'Cultural visual narrative generated through iterative Gemini prompting, capturing traditional Filipino warmth and scenery.' },
+        { path: 'video/Create_me_video_clip_magical_t.mp4', thumbnail: 'images/thumbnails/thumb_Create_me_video_clip_magical_t.jpg', title: 'Magical Fantasy World Clip', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow', 'AI Synthesis'], desc: 'Surreal magical landscape with mystical particle effects, glowing foliage, and atmospheric lighting crafted via generative prompt pipelines.' },
+        { path: 'video/donating.mp4', thumbnail: 'images/thumbnails/thumb_donating.jpg', title: 'Community Giving & Empathy Reel', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'ChatGPT / GPT-4o', 'Premiere Pro'], desc: 'Heartfelt social message visual reel emphasizing community sharing, empathy, and emotional storytelling.' },
+        { path: 'video/intro.mp4', thumbnail: 'images/thumbnails/thumb_intro.jpg', title: 'Portfolio Brand Opener & Intro', album: 'Creative Reels & Promos', tools: ['Google Flow', 'Premiere Pro', 'CapCut'], desc: 'Punchy, fast-paced brand opener with cybernetic transitions, neon lighting, and high-impact sound design.' },
+        { path: 'video/clip_3.mp4', thumbnail: 'images/thumbnails/thumb_clip_3.jpg', title: 'AI Dynamic Scene Generation', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow', 'AI Motion'], desc: 'Dynamic AI visual clip created with generative prompt pipelines and neural styling.' },
+        { path: 'video/6.mp4', thumbnail: 'images/thumbnails/thumb_6.jpg', title: 'Generative AI Motion Clip', album: 'Creative Reels & Promos', tools: ['Google Gemini', 'CapCut AI', 'Google Flow'], desc: 'Creative generative AI motion clip showcasing multi-model transitions and high visual pacing.' },
+        { path: 'video/new-video-hero-hor.mp4', thumbnail: 'images/thumbnails/thumb_new-video-hero-hor.jpg', title: 'AI Production Showcase Reel (Widescreen)', album: 'Creative Reels & Promos', tools: ['Google Gemini', 'Google Flow', 'Premiere Pro'], desc: 'Comprehensive 16:9 cinematic showcase reel combining multi-model generative visuals, color grading, and commercial editing.' },
+        { path: 'video/new-video-hero-ver.mp4', thumbnail: 'images/thumbnails/thumb_new-video-hero-ver.jpg', title: 'Social Media Vertical Reel (TikTok/Shorts)', album: 'Creative Reels & Promos', tools: ['CapCut AI', 'Google Gemini', 'Mobile Motion'], desc: '9:16 vertical motion reel engineered for high engagement on mobile platforms, social shorts, and Instagram Reels.' }
       ];
 
       let availableServerVideos = [...DEFAULT_SERVER_VIDEOS];
@@ -1021,9 +1021,11 @@
             if (data.videos && Array.isArray(data.videos)) {
               data.videos.forEach(fileName => {
                 const fullPath = 'video/' + fileName;
+                const stem = fileName.replace(/\.[^/.]+$/, '');
                 if (!availableServerVideos.some(v => v.path === fullPath)) {
                   availableServerVideos.push({
                     path: fullPath,
+                    thumbnail: `images/thumbnails/thumb_${stem}.jpg`,
                     title: fileName.replace(/\.[^/.]+$/, '').replace(/[_-]/g, ' '),
                     album: 'Gemini AI Workflows',
                     tools: ['Google Gemini', 'Google Flow'],
@@ -1071,6 +1073,10 @@
         const previewSrc = urlVal ? (urlVal.startsWith('http') ? urlVal : '../' + urlVal) : '';
         const downloadFilename = (urlVal || '').split('/').pop() || 'video.mp4';
         const downloadHref = urlVal ? (previewSrc.includes('?') ? previewSrc + '&download=1' : previewSrc + '?download=1') : '#';
+
+        const stem = (urlVal || '').split('/').pop().replace(/\.[^/.]+$/, '') || ('video_' + idx);
+        const thumbVal = vid.thumbnail || (`images/thumbnails/thumb_${stem}.jpg`);
+        const thumbPreviewSrc = thumbVal.startsWith('http') || thumbVal.startsWith('data:') ? thumbVal : ('../' + thumbVal);
 
         // Build options for existing videos
         let existingOpts = '<option value="">-- Or pick from existing videos in repository --</option>';
@@ -1170,23 +1176,59 @@
               </div>
             </div>
 
-            <!-- Right: Preview Player -->
-            <div class="flex flex-col justify-between space-y-2">
-              <label class="text-[11px] font-semibold text-slate-300 flex items-center gap-1">
-                <i class="fa fa-play text-pink-400"></i> Video Preview
-              </label>
-              <div class="bg-black/90 border border-slate-700/80 rounded-xl overflow-hidden aspect-video flex items-center justify-center relative shadow-inner group">
-                <video controls class="vid-preview w-full h-full object-contain" src="${previewSrc}"></video>
-                <div class="vid-deploying-notice hidden absolute inset-0 bg-slate-950/90 flex flex-col items-center justify-center p-3 text-center">
-                  <i class="fa fa-cloud-arrow-up text-amber-400 text-2xl mb-1.5 animate-pulse"></i>
-                  <p class="text-xs text-amber-300 font-semibold">Video preview loading...</p>
-                  <p class="text-[10px] text-slate-400 mt-1 max-w-[240px]">
-                    Select a video file or upload an MP4 to view playback preview.
-                  </p>
+            <!-- Right: Preview Player & Thumbnail Management -->
+            <div class="flex flex-col justify-between space-y-3">
+              <div>
+                <label class="text-[11px] font-semibold text-slate-300 flex items-center justify-between mb-1">
+                  <span class="flex items-center gap-1"><i class="fa fa-play text-pink-400"></i> Video Preview</span>
+                  <span class="text-[10px] text-slate-400 font-mono">ID: <span class="vid-id text-slate-400">${vidId}</span></span>
+                </label>
+                <div class="bg-black/90 border border-slate-700/80 rounded-xl overflow-hidden aspect-video flex items-center justify-center relative shadow-inner group">
+                  <video controls crossorigin="anonymous" class="vid-preview w-full h-full object-contain" src="${previewSrc}"></video>
+                  <div class="vid-deploying-notice hidden absolute inset-0 bg-slate-950/90 flex flex-col items-center justify-center p-3 text-center">
+                    <i class="fa fa-cloud-arrow-up text-amber-400 text-2xl mb-1.5 animate-pulse"></i>
+                    <p class="text-xs text-amber-300 font-semibold">Video preview loading...</p>
+                    <p class="text-[10px] text-slate-400 mt-1 max-w-[240px]">
+                      Select a video file or upload an MP4 to view playback preview.
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div class="text-[10px] text-slate-400 text-right">
-                ID: <span class="vid-id font-mono text-slate-500">${vidId}</span>
+
+              <!-- Thumbnail Management Box -->
+              <div class="p-3 bg-slate-950/70 border border-slate-800 rounded-xl space-y-2">
+                <div class="flex items-center justify-between">
+                  <label class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                    <i class="fa fa-image text-pink-400"></i> Video Thumbnail
+                  </label>
+                  <span class="vid-thumb-status text-[10px] text-slate-400 font-mono">Ready</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                  <!-- Thumbnail Image Preview Box -->
+                  <div class="w-28 sm:w-32 aspect-video rounded-lg overflow-hidden bg-slate-900 border border-slate-700/80 shrink-0 relative flex items-center justify-center shadow-inner group">
+                    <img src="${thumbPreviewSrc}" class="vid-thumb-preview w-full h-full object-cover" onerror="this.onerror=null; this.src='../images/thumbnails/thumb_new-video-hero-hor.jpg';">
+                  </div>
+
+                  <!-- Thumbnail Controls & Path -->
+                  <div class="flex-1 min-w-0 space-y-1.5">
+                    <div class="flex flex-wrap items-center gap-1.5">
+                      <!-- 1. Capture Current Frame -->
+                      <button type="button" class="vid-capture-frame-btn px-2.5 py-1 bg-cyan-600/30 hover:bg-cyan-600 text-cyan-200 hover:text-white rounded-lg text-[11px] font-medium transition flex items-center gap-1.5 cursor-pointer shadow-sm" title="Capture current frame from video player above as thumbnail">
+                        <i class="fa fa-camera text-[10px]"></i> <span>Capture Frame</span>
+                      </button>
+
+                      <!-- 2. Custom Image Upload -->
+                      <input type="file" accept="image/jpeg,image/png,image/webp" class="vid-thumb-file-input hidden" id="file_thumb_${idx}_${Date.now()}">
+                      <button type="button" class="vid-upload-thumb-btn px-2.5 py-1 bg-pink-600/30 hover:bg-pink-600 text-pink-200 hover:text-white rounded-lg text-[11px] font-medium transition flex items-center gap-1.5 cursor-pointer shadow-sm" title="Upload a custom JPG/PNG image">
+                        <i class="fa fa-upload text-[10px]"></i> <span>Upload Image</span>
+                      </button>
+                    </div>
+
+                    <input type="text" value="${thumbVal}" class="vid-thumbnail w-full bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1 text-[11px] text-white focus:outline-none focus:border-pink-500 font-mono truncate" placeholder="images/thumbnails/thumb_video.jpg">
+                    <p class="text-[9px] text-slate-400 leading-tight">Scrub video &amp; click <strong>Capture Frame</strong>, or upload a custom image.</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1220,6 +1262,126 @@
         const titleInput = card.querySelector('.vid-title');
         const toolsInput = card.querySelector('.vid-tools');
         const descInput = card.querySelector('.vid-desc');
+
+        const thumbInput = card.querySelector('.vid-thumbnail');
+        const thumbPreview = card.querySelector('.vid-thumb-preview');
+        const thumbStatus = card.querySelector('.vid-thumb-status');
+        const captureFrameBtn = card.querySelector('.vid-capture-frame-btn');
+        const uploadThumbBtn = card.querySelector('.vid-upload-thumb-btn');
+        const thumbFileInput = card.querySelector('.vid-thumb-file-input');
+
+        function setThumbnailImage(pathOrB64) {
+          thumbInput.value = pathOrB64;
+          if (pathOrB64.startsWith('data:') || pathOrB64.startsWith('blob:') || pathOrB64.startsWith('http')) {
+            thumbPreview.src = pathOrB64;
+          } else {
+            thumbPreview.src = '../' + pathOrB64 + (pathOrB64.includes('?') ? '&' : '?') + 'v=' + Date.now();
+          }
+        }
+
+        thumbInput.addEventListener('input', () => {
+          const val = thumbInput.value.trim();
+          if (val) setThumbnailImage(val);
+        });
+
+        captureFrameBtn.addEventListener('click', async () => {
+          if (!previewEl || previewEl.readyState < 2) {
+            showAlert('warning', 'Please play or scrub the video preview to the frame you want to capture first!');
+            return;
+          }
+
+          try {
+            captureFrameBtn.disabled = true;
+            captureFrameBtn.innerHTML = '<i class="fa fa-spinner fa-spin text-[10px]"></i> Capturing...';
+            thumbStatus.innerHTML = '<span class="text-cyan-400"><i class="fa fa-spinner fa-spin"></i> Processing...</span>';
+
+            const canvas = document.createElement('canvas');
+            canvas.width = previewEl.videoWidth || 1280;
+            canvas.height = previewEl.videoHeight || 720;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(previewEl, 0, 0, canvas.width, canvas.height);
+            const b64 = canvas.toDataURL('image/jpeg', 0.88);
+
+            const vName = (urlInput.value || '').split('/').pop().replace(/\.[^/.]+$/, '') || ('video_' + Date.now());
+            const thumbName = `thumb_${vName}.jpg`;
+
+            const isLocal = window.location.protocol === 'http:' && (window.location.port === '5000' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+            if (isLocal) {
+              const resp = await fetch('/api/upload-thumbnail-base64', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ image: b64, filename: thumbName })
+              });
+              const res = await resp.json();
+              if (res.success) {
+                setThumbnailImage(res.imageUrl);
+                thumbStatus.innerHTML = '<span class="text-emerald-400 font-semibold"><i class="fa fa-check"></i> Captured &amp; Saved</span>';
+                showAlert('success', `📸 Captured video frame as thumbnail for <strong>${titleInput.value}</strong>!`);
+                return;
+              }
+            }
+
+            // Fallback for GitHub Pages staging
+            const relPath = `images/thumbnails/${thumbName}`;
+            uploadedFiles[relPath] = b64.split(',')[1];
+            setThumbnailImage(relPath);
+            thumbPreview.src = b64;
+            thumbStatus.innerHTML = '<span class="text-emerald-400 font-semibold"><i class="fa fa-check"></i> Frame Staged</span>';
+            showAlert('success', `📸 Frame captured! Click <strong>"Save Local"</strong> or <strong>"Save &amp; Publish"</strong> to persist.`);
+          } catch (err) {
+            thumbStatus.innerHTML = '<span class="text-rose-400">Capture failed</span>';
+            showAlert('error', 'Could not capture frame: ' + err.message);
+          } finally {
+            captureFrameBtn.disabled = false;
+            captureFrameBtn.innerHTML = '<i class="fa fa-camera text-[10px]"></i> <span>Capture Frame</span>';
+          }
+        });
+
+        uploadThumbBtn.addEventListener('click', () => thumbFileInput.click());
+
+        thumbFileInput.addEventListener('change', async () => {
+          const file = thumbFileInput.files[0];
+          if (!file) return;
+
+          thumbStatus.innerHTML = '<span class="text-cyan-400"><i class="fa fa-spinner fa-spin"></i> Uploading...</span>';
+          thumbPreview.src = URL.createObjectURL(file);
+
+          const isLocal = window.location.protocol === 'http:' && (window.location.port === '5000' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+          if (isLocal) {
+            try {
+              const formData = new FormData();
+              formData.append('image', file);
+              formData.append('type', 'thumbnail');
+              const upResp = await fetch('/api/upload-image', { method: 'POST', body: formData });
+              const upRes = await upResp.json();
+              if (upRes.success) {
+                setThumbnailImage(upRes.imageUrl);
+                thumbStatus.innerHTML = '<span class="text-emerald-400 font-semibold"><i class="fa fa-check"></i> Uploaded</span>';
+                showAlert('success', `Thumbnail uploaded successfully for <strong>${titleInput.value}</strong>!`);
+                return;
+              }
+            } catch (err) {
+              console.warn('Direct upload error, falling back:', err);
+            }
+          }
+
+          // Fallback for GitHub Pages staging
+          try {
+            const b64 = await readVideoAsBase64(file);
+            const safeName = 'thumb_' + file.name.replace(/[^a-zA-Z0-9_.-]/g, '_');
+            const targetRel = 'images/thumbnails/' + safeName;
+            uploadedFiles[targetRel] = b64.split(',')[1];
+            setThumbnailImage(targetRel);
+            thumbPreview.src = b64;
+            thumbStatus.innerHTML = '<span class="text-emerald-400 font-semibold"><i class="fa fa-check"></i> Staged</span>';
+            showAlert('success', `Thumbnail staged! Click <strong>"Save Local"</strong> or <strong>"Save &amp; Publish"</strong> to persist.`);
+          } catch (err) {
+            thumbStatus.innerHTML = '<span class="text-rose-400">Upload error</span>';
+            showAlert('error', 'Error reading image: ' + err.message);
+          }
+        });
 
         const cardDlBtn = card.querySelector('.vid-card-download-btn');
         function syncCardDownload(path) {
@@ -1261,6 +1423,9 @@
                 }
                 if (match.desc && (!descInput.value || descInput.value.includes('Created with AI prompting'))) {
                   descInput.value = match.desc;
+                }
+                if (match.thumbnail) {
+                  setThumbnailImage(match.thumbnail);
                 }
               }
               updateVideoTrackNumbers();
@@ -1314,6 +1479,9 @@
           statusEl.innerHTML = `<span class="text-cyan-400 animate-pulse"><i class="fa fa-spinner fa-spin"></i> Processing video (${sizeMB.toFixed(1)} MB)...</span>`;
 
           const cleanPath = 'video/' + file.name.replace(/[^a-zA-Z0-9_.-]/g, '_');
+          const cleanStem = file.name.replace(/\.[^/.]+$/, '').replace(/[^a-zA-Z0-9_.-]/g, '_');
+          const autoThumb = 'images/thumbnails/thumb_' + cleanStem + '.jpg';
+          setThumbnailImage(autoThumb);
           urlInput.value = cleanPath;
           syncCardDownload(cleanPath);
 
@@ -1332,6 +1500,7 @@
               formData.append('id', vidId);
               formData.append('title', titleInput.value);
               formData.append('album', albumInput.value);
+              formData.append('thumbnail', autoThumb);
               formData.append('tools', toolsInput.value);
               formData.append('description', descInput.value);
 
@@ -1341,6 +1510,9 @@
               });
               const upResult = await upResp.json();
               if (upResult.success) {
+                if (upResult.video && upResult.video.thumbnail) {
+                  setThumbnailImage(upResult.video.thumbnail);
+                }
                 statusEl.innerHTML = `<span class="text-emerald-400 font-semibold"><i class="fa fa-circle-check"></i> Uploaded locally to video/ (${sizeMB.toFixed(1)} MB)</span>`;
                 showAlert('success', `Video <strong>${file.name}</strong> uploaded directly to server and saved!`);
                 return;
@@ -1418,6 +1590,7 @@
               title: titleInput.value ? titleInput.value + ' (Copy)' : 'Untitled Video',
               album: albumInput.value || 'Gemini AI Workflows',
               videoUrl: urlInput.value || '',
+              thumbnail: thumbInput.value || '',
               tools: toolsInput.value ? toolsInput.value.split(',').map(s => s.trim()) : [],
               description: descInput.value || ''
             };
@@ -1477,6 +1650,7 @@
             title: 'New AI Video Creation',
             album: 'Gemini AI Workflows',
             videoUrl: 'video/new-video-hero-hor.mp4',
+            thumbnail: 'images/thumbnails/thumb_new-video-hero-hor.jpg',
             tools: ['Google Gemini', 'Google Flow'],
             description: 'Created with AI prompting and video workflow automation.'
           };
@@ -1488,7 +1662,7 @@
         });
       }
 
-      // Import All 9 Repository Videos Button
+      // Import All 12 Repository Videos Button
       const importAllVideosBtn = document.getElementById('importAllVideosBtn');
       if (importAllVideosBtn) {
         importAllVideosBtn.addEventListener('click', () => {
@@ -1501,6 +1675,7 @@
               title: item.title,
               album: item.album,
               videoUrl: item.path,
+              thumbnail: item.thumbnail,
               tools: item.tools,
               description: item.desc
             }, i);
@@ -1692,6 +1867,7 @@
                 title: data.aiVideo.title || 'AI Video Production Showcase',
                 album: (data.aiVideo.albums && data.aiVideo.albums[0]) || 'Gemini AI Workflows',
                 videoUrl: data.aiVideo.videoUrl,
+                thumbnail: data.aiVideo.thumbnail || 'images/thumbnails/thumb_new-video-hero-hor.jpg',
                 tools: data.aiVideo.tools || ['Google Gemini', 'ChatGPT', 'Google Flow'],
                 description: data.aiVideo.description || ''
               }] : []);
@@ -2022,6 +2198,8 @@
               const title = (c.querySelector('.vid-title')?.value || '').trim() || `Video #${i + 1}`;
               const album = (c.querySelector('.vid-album')?.value || '').trim() || 'Gemini AI Workflows';
               const videoUrl = (c.querySelector('.vid-url')?.value || '').trim() || 'video/new-video-hero-hor.mp4';
+              const stem = videoUrl.split('/').pop().replace(/\.[^/.]+$/, '') || ('video_' + i);
+              const thumbnail = (c.querySelector('.vid-thumbnail')?.value || '').trim() || (`images/thumbnails/thumb_${stem}.jpg`);
               const toolsStr = c.querySelector('.vid-tools')?.value || '';
               const tools = toolsStr.split(',').map(s => s.trim()).filter(Boolean);
               const description = (c.querySelector('.vid-desc')?.value || '').trim();
@@ -2032,6 +2210,7 @@
                 title,
                 album,
                 videoUrl,
+                thumbnail,
                 tools,
                 description
               });
@@ -2051,6 +2230,7 @@
               albums: albumList,
               videos: collectedVideos,
               videoUrl: primaryVideo.videoUrl || 'video/new-video-hero-hor.mp4',
+              thumbnail: primaryVideo.thumbnail || 'images/thumbnails/thumb_new-video-hero-hor.jpg',
               tools: primaryVideo.tools || ['Google Gemini', 'ChatGPT', 'Google Flow'],
               description: primaryVideo.description || ''
             };

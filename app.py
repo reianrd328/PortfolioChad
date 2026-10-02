@@ -173,6 +173,79 @@ def list_videos():
     files.sort()
     return jsonify({'success': True, 'videos': files})
 
+def generate_thumbnail_poster(output_rel_path, title, album, tools=None):
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+        width, height = 1280, 720
+        im = Image.new('RGB', (width, height), color=(10, 15, 29))
+        draw = ImageDraw.Draw(im)
+
+        accents = {
+            'AI Commercials & Ads': (255, 42, 133),
+            'Gemini AI Workflows': (6, 182, 212),
+            'Creative Reels & Promos': (168, 85, 247)
+        }
+        accent = accents.get(album, (255, 42, 133))
+
+        for r in range(400, 0, -10):
+            draw.ellipse([width - 300 - r, height // 2 - r, width - 300 + r, height // 2 + r],
+                         fill=(accent[0] // 4, accent[1] // 4, accent[2] // 4))
+
+        for y in range(0, height, 80):
+            draw.line([(0, y), (width, y)], fill=(20, 28, 48), width=1)
+        for x in range(0, width, 80):
+            draw.line([(x, 0), (x, height)], fill=(20, 28, 48), width=1)
+
+        draw.rectangle([0, 0, width, height], outline=(255, 255, 255, 15), width=2)
+
+        font_bold = "C:\\Windows\\Fonts\\segoeuib.ttf"
+        font_reg = "C:\\Windows\\Fonts\\segoeui.ttf"
+        f_title = ImageFont.truetype(font_bold, 54) if os.path.exists(font_bold) else ImageFont.load_default()
+        f_badge = ImageFont.truetype(font_bold, 24) if os.path.exists(font_bold) else ImageFont.load_default()
+        f_tools = ImageFont.truetype(font_reg, 22) if os.path.exists(font_reg) else ImageFont.load_default()
+        f_logo = ImageFont.truetype(font_bold, 28) if os.path.exists(font_bold) else ImageFont.load_default()
+
+        draw.text((70, 60), "LYRCH DEV  •  AI CINEMATIC SHOWCASE", fill=(148, 163, 184), font=f_logo)
+
+        badge_text = (album or 'AI VIDEO').upper()
+        b_box = draw.textbbox((0, 0), badge_text, font=f_badge)
+        bw = b_box[2] - b_box[0] + 36
+        bh = b_box[3] - b_box[1] + 18
+        bx, by = 70, 130
+        draw.rounded_rectangle([bx, by, bx + bw, by + bh], radius=12, fill=(accent[0]//3, accent[1]//3, accent[2]//3), outline=accent, width=2)
+        draw.text((bx + 18, by + 8), badge_text, fill=(255, 255, 255), font=f_badge)
+
+        import textwrap
+        wrapped = textwrap.wrap(title or 'AI Video Showcase', width=24)
+        ty = 230
+        for line in wrapped[:2]:
+            draw.text((70, ty), line, fill=(255, 255, 255), font=f_title)
+            ty += 70
+
+        if tools:
+            tx = 70
+            tools_y = height - 120
+            for t in tools[:4]:
+                t_box = draw.textbbox((0, 0), t, font=f_tools)
+                tw = t_box[2] - t_box[0] + 30
+                th = t_box[3] - t_box[1] + 16
+                draw.rounded_rectangle([tx, tools_y, tx + tw, tools_y + th], radius=8, fill=(22, 33, 56), outline=(51, 65, 85), width=1)
+                draw.text((tx + 15, tools_y + 7), t, fill=(203, 213, 225), font=f_tools)
+                tx += tw + 14
+
+        cx, cy = width - 260, height // 2
+        draw.ellipse([cx - 70, cy - 70, cx + 70, cy + 70], fill=(24, 32, 54), outline=accent, width=4)
+        draw.polygon([(cx - 16, cy - 30), (cx - 16, cy + 30), (cx + 30, cy)], fill=accent)
+        draw.text((width - 240, height - 70), "4K UHD • AI MEDIA", fill=(100, 116, 139), font=f_tools)
+
+        abs_out = os.path.join(os.path.dirname(__file__), output_rel_path)
+        os.makedirs(os.path.dirname(abs_out), exist_ok=True)
+        im.save(abs_out, 'JPEG', quality=90)
+        return output_rel_path
+    except Exception as e:
+        print(f"Error generating thumbnail poster: {e}")
+        return output_rel_path
+
 @app.route('/api/upload-video', methods=['POST'])
 def handle_video_upload():
     if 'video' not in request.files:
@@ -208,6 +281,14 @@ def handle_video_upload():
     tools_str = request.form.get('tools', 'Google Gemini, Google Flow')
     tools = [t.strip() for t in tools_str.split(',') if t.strip()]
     description = request.form.get('description', '')
+    stem = safe_name.rsplit('.', 1)[0]
+    default_thumb = f"images/thumbnails/thumb_{stem}.jpg"
+    thumbnail = request.form.get('thumbnail') or default_thumb
+
+    # Auto-generate branded thumbnail if not present on disk
+    abs_thumb = os.path.join(os.path.dirname(__file__), thumbnail)
+    if not os.path.exists(abs_thumb):
+        generate_thumbnail_poster(thumbnail, title, album, tools)
 
     # Check if video already exists in list
     existing = False
@@ -216,6 +297,7 @@ def handle_video_upload():
             v['title'] = title
             v['album'] = album
             v['videoUrl'] = video_url
+            v['thumbnail'] = thumbnail
             v['tools'] = tools
             v['description'] = description
             existing = True
@@ -227,6 +309,7 @@ def handle_video_upload():
             'title': title,
             'album': album,
             'videoUrl': video_url,
+            'thumbnail': thumbnail,
             'tools': tools,
             'description': description
         }
@@ -250,6 +333,7 @@ def handle_video_upload():
             'title': title,
             'album': album,
             'videoUrl': video_url,
+            'thumbnail': thumbnail,
             'tools': tools,
             'description': description
         },
@@ -265,10 +349,11 @@ def handle_image_upload():
         return jsonify({'success': False, 'message': 'No file selected'}), 400
 
     target_type = request.form.get('type', 'profile')
-    os.makedirs(os.path.join(os.path.dirname(__file__), 'images'), exist_ok=True)
+    images_dir = os.path.join(os.path.dirname(__file__), 'images')
+    os.makedirs(images_dir, exist_ok=True)
     
     if target_type == 'profile':
-        target_path = os.path.join(os.path.dirname(__file__), 'images', 'profile.png')
+        target_path = os.path.join(images_dir, 'profile.png')
         file.save(target_path)
         img_url = 'images/profile.png'
         content = load_content()
@@ -281,12 +366,54 @@ def handle_image_upload():
         content['profile']['avatar'] = img_url
         save_content(content)
         return jsonify({'success': True, 'imageUrl': img_url})
+    elif target_type == 'thumbnail':
+        import re
+        safe_name = re.sub(r'[^a-zA-Z0-9_.-]', '_', file.filename)
+        if not safe_name.startswith('thumb_'):
+            safe_name = 'thumb_' + safe_name
+        thumbs_dir = os.path.join(images_dir, 'thumbnails')
+        os.makedirs(thumbs_dir, exist_ok=True)
+        dest_path = os.path.join(thumbs_dir, safe_name)
+        file.save(dest_path)
+        return jsonify({'success': True, 'imageUrl': f'images/thumbnails/{safe_name}'})
     else:
         import re
         safe_name = re.sub(r'[^a-zA-Z0-9_.-]', '_', file.filename)
-        dest_path = os.path.join(os.path.dirname(__file__), 'images', safe_name)
+        dest_path = os.path.join(images_dir, safe_name)
         file.save(dest_path)
         return jsonify({'success': True, 'imageUrl': f'images/{safe_name}'})
+
+@app.route('/api/upload-thumbnail-base64', methods=['POST'])
+def handle_thumbnail_base64():
+    import base64
+    import re
+    data = request.get_json(silent=True) or request.form or {}
+    b64_str = data.get('image', '')
+    if not b64_str:
+        return jsonify({'success': False, 'message': 'No image data provided'}), 400
+    
+    filename = data.get('filename') or f'thumb_{int(time.time() * 1000)}.jpg'
+    safe_name = re.sub(r'[^a-zA-Z0-9_.-]', '_', filename)
+    if not safe_name.endswith(('.jpg', '.jpeg', '.png', '.webp')):
+        safe_name += '.jpg'
+    if not safe_name.startswith('thumb_'):
+        safe_name = 'thumb_' + safe_name
+        
+    thumbs_dir = os.path.join(os.path.dirname(__file__), 'images', 'thumbnails')
+    os.makedirs(thumbs_dir, exist_ok=True)
+    dest_path = os.path.join(thumbs_dir, safe_name)
+    
+    if ',' in b64_str:
+        b64_str = b64_str.split(',', 1)[1]
+        
+    try:
+        raw_bytes = base64.b64decode(b64_str)
+        with open(dest_path, 'wb') as f:
+            f.write(raw_bytes)
+        img_url = f'images/thumbnails/{safe_name}'
+        return jsonify({'success': True, 'imageUrl': img_url})
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
 
 @app.route('/video/<path:filename>')
 def serve_video(filename):
