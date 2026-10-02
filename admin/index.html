@@ -247,7 +247,7 @@
                 <button type="button" onclick="document.getElementById('file_profile').click()" class="text-xs px-3 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition flex items-center gap-1.5">
                   <i class="fa fa-camera"></i> Change Photo
                 </button>
-                <p class="text-[11px] text-slate-400">Automatically optimized for web.</p>
+                <p id="profile_photo_status" class="text-[11px] text-slate-400">Automatically optimized for web.</p>
               </div>
             </div>
           </div>
@@ -287,6 +287,26 @@
             <div class="space-y-1.5 md:col-span-2">
               <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300">Hero Tagline</label>
               <input type="text" id="profile_tagline" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-red-500 transition" placeholder="Turning ideas into useful, beautiful, and reliable solutions...">
+            </div>
+          </div>
+
+          <!-- Admin Login Password (Quick Access) -->
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-700/80 space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                <i class="fa fa-key text-red-500"></i> Admin Login Password
+              </label>
+              <span class="text-[11px] text-slate-400">Controls access to this dashboard</span>
+            </div>
+            <div class="relative">
+              <input type="password" id="admin_password" class="w-full bg-slate-800 border border-slate-700 rounded-xl pl-3.5 pr-10 py-2.5 text-sm text-white focus:outline-none focus:border-red-500 font-mono transition" placeholder="admin">
+              <button type="button" id="toggleAdminPwBtn" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-white transition">
+                <i class="fa fa-eye"></i>
+              </button>
+            </div>
+            <div class="flex items-center justify-between text-[11px] text-slate-400 pt-0.5">
+              <span>Current saved password: <code id="activePwDisplay" class="text-amber-300 font-mono bg-slate-800 px-1.5 py-0.5 rounded">admin</code></span>
+              <span class="text-slate-500">Click 'Save &amp; Publish' to apply</span>
             </div>
           </div>
 
@@ -436,10 +456,13 @@
 
           <!-- Admin Password Setting -->
           <div class="space-y-2 md:col-span-2 p-4 bg-slate-900/80 border border-slate-700/80 rounded-xl">
-            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-              <i class="fa fa-lock text-red-500"></i> Admin Login Password
-            </label>
-            <input type="text" id="admin_password" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-red-500 font-mono" placeholder="admin">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                <i class="fa fa-lock text-red-500"></i> Admin Login Password
+              </label>
+              <span class="text-[11px] text-slate-400">Also editable in "About &amp; Photos" tab</span>
+            </div>
+            <input type="text" id="admin_password_alt" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-red-500 font-mono" placeholder="admin">
             <p class="text-xs text-slate-400">Change the password required to log in from the portfolio viewer. (Default: <code>admin</code>).</p>
           </div>
         </div>
@@ -630,9 +653,7 @@
       // --- Authentication & Login Gate ---
       function checkAuth() {
         const isSessionAuth = sessionStorage.getItem('portfolio_admin_logged_in') === 'true';
-        const hasToken = !!localStorage.getItem('portfolio_gh_token');
-
-        if (isSessionAuth || hasToken) {
+        if (isSessionAuth) {
           showDashboard();
         } else {
           showLoginGate();
@@ -661,13 +682,33 @@
         togglePasswordBtn.innerHTML = type === 'password' ? '<i class="fa fa-eye"></i>' : '<i class="fa fa-eye-slash"></i>';
       });
 
+      // Sync Tab 2 and Tab 7 password inputs
+      const pwField = document.getElementById('admin_password');
+      const pwAltField = document.getElementById('admin_password_alt');
+      if (pwField && pwAltField) {
+        pwField.addEventListener('input', () => { pwAltField.value = pwField.value; });
+        pwAltField.addEventListener('input', () => { pwField.value = pwAltField.value; });
+      }
+
+      // Toggle for Tab 2 Admin Password
+      const toggleAdminPwBtn = document.getElementById('toggleAdminPwBtn');
+      if (toggleAdminPwBtn && pwField) {
+        toggleAdminPwBtn.addEventListener('click', () => {
+          const type = pwField.getAttribute('type') === 'password' ? 'text' : 'password';
+          pwField.setAttribute('type', type);
+          toggleAdminPwBtn.innerHTML = type === 'password' ? '<i class="fa fa-eye"></i>' : '<i class="fa fa-eye-slash"></i>';
+        });
+      }
+
       loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const inputVal = loginPassword.value.trim();
-        const configuredPassword = (currentData && currentData.admin && currentData.admin.password) ? currentData.admin.password : 'admin';
+        const configuredPassword = localStorage.getItem('portfolio_admin_pw') ||
+          (currentData && currentData.admin && currentData.admin.password) ||
+          'admin';
 
-        // Check if input matches admin password OR a valid GitHub Token
-        if (inputVal === configuredPassword || inputVal === 'admin' || inputVal === 'admin123' || inputVal.startsWith('ghp_')) {
+        // Check if input matches configured password OR a valid GitHub Token
+        if (inputVal === configuredPassword || inputVal.startsWith('ghp_')) {
           sessionStorage.setItem('portfolio_admin_logged_in', 'true');
           if (inputVal.startsWith('ghp_')) {
             localStorage.setItem('portfolio_gh_token', inputVal);
@@ -678,13 +719,16 @@
           showAlert('success', 'Logged in as Admin successfully!');
         } else {
           loginError.classList.remove('hidden');
+          loginError.innerHTML = '<i class="fa fa-circle-exclamation mr-1"></i> Incorrect password. Please try again (or use your GitHub Token).';
         }
       });
 
       logoutBtn.addEventListener('click', () => {
         sessionStorage.removeItem('portfolio_admin_logged_in');
         showLoginGate();
-        showAlert('info', 'Logged out successfully.');
+        loginPassword.value = '';
+        loginError.classList.add('hidden');
+        showAlert('info', 'Logged out successfully. Enter your password to log in.');
       });
 
       // --- Tab Switching ---
@@ -850,6 +894,8 @@
       }
 
       // --- Setup Image Upload Inputs ---
+      let hasNewProfilePhoto = false;
+
       function setupImageUpload(fileInputId, previewImgId, targetPath) {
         const fileInput = document.getElementById(fileInputId);
         const previewImg = document.getElementById(previewImgId);
@@ -862,6 +908,14 @@
             const { dataUrl, base64 } = await compressImage(file, 1280, 1280, 0.85);
             previewImg.src = dataUrl;
             uploadedFiles[targetPath] = base64;
+            if (targetPath === 'images/profile.png') {
+              hasNewProfilePhoto = true;
+              const statusEl = document.getElementById('profile_photo_status');
+              if (statusEl) {
+                statusEl.className = 'text-[11px] text-emerald-400 font-semibold';
+                statusEl.innerHTML = `<i class="fa fa-check-circle"></i> Ready: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(0)} KB). Remember to click 'Save & Publish'!`;
+              }
+            }
             showAlert('info', `Photo prepared: <strong>${file.name}</strong> (optimized). Click 'Save & Publish' when ready.`);
           } catch (err) {
             showAlert('error', 'Error optimizing image: ' + err.message);
@@ -979,13 +1033,17 @@
           document.getElementById('about_bio').value = data.about.bio || '';
           document.getElementById('about_heading').value = data.about.heading || '';
           document.getElementById('about_subText').value = data.about.subText || '';
-          if (data.about.profileImage) document.getElementById('preview_profile').src = '../' + data.about.profileImage;
-          if (data.about.techSkillsImage) document.getElementById('preview_tech').src = '../' + data.about.techSkillsImage;
+          if (data.about.profileImage) {
+            document.getElementById('preview_profile').src = '../' + data.about.profileImage + '?v=' + Date.now();
+          }
+          if (data.about.techSkillsImage) {
+            document.getElementById('preview_tech').src = '../' + data.about.techSkillsImage + '?v=' + Date.now();
+          }
         }
 
         // Profile Identity (Hero Name & Role)
         if (data.profile) {
-          document.getElementById('profile_first_name').value = data.profile.firstName || 'Lyrch';
+          document.getElementById('profile_first_name').value = data.profile.firstName || 'Richard';
           document.getElementById('profile_last_name').value = data.profile.lastName || 'Ong';
           document.getElementById('profile_role').value = data.profile.role || '';
           document.getElementById('profile_tagline').value = data.profile.tagline || '';
@@ -1019,9 +1077,13 @@
         if (data.footer) {
           document.getElementById('footer_copyright').value = data.footer.copyright || '';
         }
-        if (data.admin) {
-          document.getElementById('admin_password').value = data.admin.password || 'admin';
-        }
+        const activePw = localStorage.getItem('portfolio_admin_pw') || (data.admin && data.admin.password) || 'admin';
+        const pwFieldEl = document.getElementById('admin_password');
+        if (pwFieldEl) pwFieldEl.value = activePw;
+        const pwAltFieldEl = document.getElementById('admin_password_alt');
+        if (pwAltFieldEl) pwAltFieldEl.value = activePw;
+        const activePwEl = document.getElementById('activePwDisplay');
+        if (activePwEl) activePwEl.textContent = activePw;
 
         // 9. AI & Video Reel
         if (data.aiVideo) {
@@ -1293,6 +1355,10 @@
 
       // --- Collect Current Form Data ---
       function collectFormData() {
+        const hasCustomPhoto = hasNewProfilePhoto || !!uploadedFiles['images/profile.png'] || (currentData && currentData.about && currentData.about.profileImage === 'images/profile.png');
+        const activeProfileImg = hasCustomPhoto ? 'images/profile.png' : ((currentData && currentData.about && currentData.about.profileImage) ? currentData.about.profileImage : 'images/profile.png');
+        const activeAdminPw = (document.getElementById('admin_password') ? document.getElementById('admin_password').value.trim() : (document.getElementById('admin_password_alt') ? document.getElementById('admin_password_alt').value.trim() : '')) || localStorage.getItem('portfolio_admin_pw') || 'admin';
+
         const data = {
           ...(currentData || {}),
           sidebar: {
@@ -1310,14 +1376,16 @@
             heading: document.getElementById('about_heading').value.trim(),
             bio: document.getElementById('about_bio').value.trim(),
             subText: document.getElementById('about_subText').value.trim(),
-            profileImage: currentData && currentData.about && currentData.about.profileImage ? currentData.about.profileImage : 'images/profile.png',
+            profileImage: activeProfileImg,
+            avatarImage: activeProfileImg,
             techSkillsImage: currentData && currentData.about && currentData.about.techSkillsImage ? currentData.about.techSkillsImage : 'images/tech-skills.png'
           },
           profile: {
             ...(currentData && currentData.profile ? currentData.profile : {}),
-            firstName: document.getElementById('profile_first_name').value.trim() || 'Lyrch',
+            avatar: activeProfileImg,
+            firstName: document.getElementById('profile_first_name').value.trim() || 'Richard',
             lastName: document.getElementById('profile_last_name').value.trim() || 'Ong',
-            name: `${document.getElementById('profile_first_name').value.trim() || 'Lyrch'} ${document.getElementById('profile_last_name').value.trim() || 'Ong'}`.trim(),
+            name: `${document.getElementById('profile_first_name').value.trim() || 'Richard'} ${document.getElementById('profile_last_name').value.trim() || 'Ong'}`.trim(),
             role: document.getElementById('profile_role').value.trim() || 'Web Designer & Technical Support Specialist',
             tagline: document.getElementById('profile_tagline').value.trim() || ''
           },
@@ -1337,7 +1405,7 @@
             copyright: document.getElementById('footer_copyright').value.trim()
           },
           admin: {
-            password: document.getElementById('admin_password').value.trim() || 'admin'
+            password: activeAdminPw
           },
           aiVideo: {
             enabled: true,
@@ -1401,6 +1469,9 @@
           showAlert('error', 'Please configure your GitHub Token first to publish online.');
           return;
         }
+
+        const newPassword = (document.getElementById('admin_password') ? document.getElementById('admin_password').value.trim() : (document.getElementById('admin_password_alt') ? document.getElementById('admin_password_alt').value.trim() : '')) || 'admin';
+        localStorage.setItem('portfolio_admin_pw', newPassword);
 
         const dataToSave = collectFormData();
         loadingOverlay.classList.remove('hidden');
@@ -1493,8 +1564,17 @@
           // Clear uploaded images queue
           for (const key in uploadedFiles) delete uploadedFiles[key];
 
+          const activePwEl = document.getElementById('activePwDisplay');
+          if (activePwEl) activePwEl.textContent = newPassword;
+          hasNewProfilePhoto = false;
+          const photoStatus = document.getElementById('profile_photo_status');
+          if (photoStatus) {
+            photoStatus.className = 'text-[11px] text-emerald-400 font-semibold';
+            photoStatus.innerHTML = '<i class="fa fa-check-circle"></i> Profile photo saved & published to GitHub!';
+          }
+
           loadingOverlay.classList.add('hidden');
-          showAlert('success', '🎉 <strong>Successfully saved and published!</strong> GitHub Pages is deploying your updates. Your changes will be live in 1–2 minutes.');
+          showAlert('success', `🎉 <strong>Successfully saved and published!</strong><br>Admin password is updated to: <strong class="text-amber-300 font-mono">${newPassword}</strong>.<br>Profile photo and all updates are deploying to GitHub Pages.`);
         } catch (err) {
           loadingOverlay.classList.add('hidden');
           console.error(err);

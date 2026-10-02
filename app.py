@@ -193,6 +193,38 @@ def handle_video_upload():
         'videoUrl': video_url
     })
 
+@app.route('/api/upload-image', methods=['POST'])
+def handle_image_upload():
+    if 'image' not in request.files:
+        return jsonify({'success': False, 'message': 'No image file provided'}), 400
+    file = request.files['image']
+    if file.filename == '':
+        return jsonify({'success': False, 'message': 'No file selected'}), 400
+
+    target_type = request.form.get('type', 'profile')
+    os.makedirs(os.path.join(os.path.dirname(__file__), 'images'), exist_ok=True)
+    
+    if target_type == 'profile':
+        target_path = os.path.join(os.path.dirname(__file__), 'images', 'profile.png')
+        file.save(target_path)
+        img_url = 'images/profile.png'
+        content = load_content()
+        if 'about' not in content:
+            content['about'] = {}
+        content['about']['profileImage'] = img_url
+        content['about']['avatarImage'] = img_url
+        if 'profile' not in content:
+            content['profile'] = {}
+        content['profile']['avatar'] = img_url
+        save_content(content)
+        return jsonify({'success': True, 'imageUrl': img_url})
+    else:
+        import re
+        safe_name = re.sub(r'[^a-zA-Z0-9_.-]', '_', file.filename)
+        dest_path = os.path.join(os.path.dirname(__file__), 'images', safe_name)
+        file.save(dest_path)
+        return jsonify({'success': True, 'imageUrl': f'images/{safe_name}'})
+
 @app.route('/video/<path:filename>')
 def serve_video(filename):
     return send_from_directory('video', filename)

@@ -461,11 +461,11 @@
               <h3 class="text-xl sm:text-2xl font-bold text-white">
                 About <span class="text-brand-pink">Me</span>
               </h3>
-              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <p id="aboutBioText" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 I am an IT professional with 18 years of experience in technical support, hardware, networking, and system management. I also create web applications and explore new technologies to solve real-world problems.
               </p>
               <div class="pt-1">
-                <a href="https://drive.google.com/file/d/1BCkH1FjPcFGmACDWLTnBT_PfrE7hdY1E/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn-pink-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold shadow">
+                <a id="aboutCvLink" href="https://drive.google.com/file/d/1BCkH1FjPcFGmACDWLTnBT_PfrE7hdY1E/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn-pink-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold shadow">
                   <i class="fa fa-download text-xs"></i>
                   <span>Download Resume</span>
                 </a>
@@ -475,10 +475,10 @@
             <!-- Right Avatar & Handwritten Quote -->
             <div class="flex flex-col items-center shrink-0">
               <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border border-brand-pink/40 shadow-xl group">
-                <img src="images/theme/avatar_card.png" alt="Lyrch Ong Avatar" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                <img id="profileAvatarImg" src="images/theme/avatar_card.png" alt="Richard Ong Avatar" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
               </div>
               <div class="cursive-glow text-center text-sm font-bold mt-1.5 leading-tight select-none">
-                Think Clearly<br>Create Confidently<br><span class="text-white text-xs">LYRCH</span>
+                Think Clearly<br>Create Confidently<br><span id="avatarAuthorName" class="text-white text-xs">RICHARD</span>
               </div>
             </div>
           </div>
@@ -1031,7 +1031,7 @@
         
         // Update Hero Name & Details
         if (data.profile) {
-          const fName = data.profile.firstName || 'Lyrch';
+          const fName = data.profile.firstName || 'Richard';
           const lName = data.profile.lastName || 'Ong';
           const heroEl = document.getElementById('heroName');
           if (heroEl) {
@@ -1045,6 +1045,31 @@
             const tagEl = document.getElementById('heroTagline');
             if (tagEl) tagEl.textContent = data.profile.tagline;
           }
+        }
+
+        // Update Profile Avatar & Quote Author
+        const avatarImg = document.getElementById('profileAvatarImg');
+        const avatarSrc = (data.about && (data.about.profileImage || data.about.avatarImage)) || (data.profile && data.profile.avatar);
+        if (avatarImg && avatarSrc) {
+          avatarImg.src = avatarSrc + (avatarSrc.includes('?') ? '&' : '?') + 'v=' + Date.now();
+        }
+
+        const quoteAuthor = document.getElementById('avatarAuthorName');
+        if (quoteAuthor && data.profile && (data.profile.firstName || data.profile.name)) {
+          const authorFirst = data.profile.firstName || data.profile.name.split(' ')[0];
+          quoteAuthor.textContent = authorFirst.toUpperCase();
+        }
+
+        // Update About Bio Description
+        if (data.about && data.about.bio) {
+          const bioEl = document.getElementById('aboutBioText');
+          if (bioEl) bioEl.textContent = data.about.bio;
+        }
+
+        // Update CV Link
+        if (data.hireMe && data.hireMe.cvLink) {
+          const cvEl = document.getElementById('aboutCvLink');
+          if (cvEl) cvEl.href = data.hireMe.cvLink;
         }
 
         // Update Video Modal Details
