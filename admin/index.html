@@ -742,6 +742,23 @@
         };
       }
 
+      async function getGitHubFileSha(path, token) {
+        try {
+          const encodedPath = path.split('/').map(encodeURIComponent).join('/');
+          const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${encodedPath}?ref=${BRANCH}&cb=${Date.now()}`, {
+            headers: getAuthHeaders(token)
+          });
+          if (resp.ok) {
+            const data = await resp.json();
+            return data.sha || null;
+          }
+          return null;
+        } catch (e) {
+          console.warn('Error fetching SHA for ' + path, e);
+          return null;
+        }
+      }
+
       function updateConnBadge() {
         const token = getToken();
         const repoEl = document.getElementById('connRepo');
@@ -1246,11 +1263,8 @@
 
         try {
           if (token) {
-            const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json?ref=${BRANCH}&t=${Date.now()}`, {
-              headers: {
-                ...getAuthHeaders(token),
-                'Cache-Control': 'no-cache, no-store'
-              }
+            const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json?ref=${BRANCH}&cb=${Date.now()}`, {
+              headers: getAuthHeaders(token)
             });
 
             if (resp.ok) {
@@ -1795,27 +1809,18 @@
               ? `Uploading video "${filePath}" (${sizeMB} MB) to GitHub... Please wait...`
               : `Uploading ${filePath}...`;
 
-            // Check if file exists to get SHA
-            let fileSha = null;
-            try {
-              const checkResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}?ref=${BRANCH}`, {
-                headers: getAuthHeaders(token)
-              });
-              if (checkResp.ok) {
-                const info = await checkResp.json();
-                fileSha = info.sha;
-              }
-            } catch (e) {}
+            // Look up existing SHA if the file already exists on GitHub
+            const existingSha = await getGitHubFileSha(filePath, token);
 
-            // Put file
             const putBody = {
-              message: isVideo ? `Upload video: ${filePath}` : `Update image: ${filePath}`,
+              message: isVideo ? `Upload video: ${filePath}` : `Update file: ${filePath}`,
               content: base64Content,
               branch: BRANCH
             };
-            if (fileSha) putBody.sha = fileSha;
+            if (existingSha) putBody.sha = existingSha;
 
-            const putResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`, {
+            const encodedFilePath = filePath.split('/').map(encodeURIComponent).join('/');
+            let putResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${encodedFilePath}`, {
               method: 'PUT',
               headers: {
                 ...getAuthHeaders(token),
@@ -1824,10 +1829,26 @@
               body: JSON.stringify(putBody)
             });
 
+            // If 409 Conflict OR 422 Missing SHA, fetch SHA and retry once
+            if (putResp.status === 409 || putResp.status === 422) {
+              const retrySha = await getGitHubFileSha(filePath, token);
+              if (retrySha) {
+                putBody.sha = retrySha;
+                putResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${encodedFilePath}`, {
+                  method: 'PUT',
+                  headers: {
+                    ...getAuthHeaders(token),
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(putBody)
+                });
+              }
+            }
+
             if (!putResp.ok) {
               const errData = await putResp.json().catch(() => ({}));
               if (putResp.status === 404) {
-                throw new Error(`GitHub returned 'Not Found' (404) for ${filePath}.<br>This means your GitHub Token lacks <strong>WRITE/PUSH</strong> permissions to repository <code>${REPO_OWNER}/${REPO_NAME}</code>.<br><br>Please click <strong>'Configure Cloud Login'</strong> and generate a token with the <strong>repo</strong> checkbox checked.`);
+                throw new Error(`GitHub returned 'Not Found' (404) for ${filePath}. Check repository permissions.`);
               }
               throw new Error(`Failed to upload ${filePath}: ${errData.message || putResp.statusText}`);
             }
@@ -1836,25 +1857,13 @@
             delete uploadedFiles[filePath];
           }
 
-          // Step 2: Fetch latest content.json SHA fresh from GitHub (cache-proof)
-          loadingText.textContent = 'Fetching latest version from GitHub...';
-          try {
-            const jsonResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json?ref=${BRANCH}&t=${Date.now()}`, {
-              headers: {
-                ...getAuthHeaders(token),
-                'Cache-Control': 'no-cache, no-store'
-              }
-            });
-            if (jsonResp.ok) {
-              const currentFileData = await jsonResp.json();
-              contentSha = currentFileData.sha;
-            }
-          } catch (e) {
-            console.warn('Could not refresh SHA ahead of commit', e);
+          // Step 2 & 3: Save content.json to GitHub with guaranteed SHA
+          loadingText.textContent = 'Saving content.json to GitHub...';
+          let latestContentSha = await getGitHubFileSha('content.json', token);
+          if (!latestContentSha && contentSha) {
+            latestContentSha = contentSha;
           }
 
-          // Step 3: Commit content.json to GitHub
-          loadingText.textContent = 'Saving changes to GitHub...';
           const jsonString = JSON.stringify(dataToSave, null, 2);
           const encodedContent = btoa(unescape(encodeURIComponent(jsonString)));
 
@@ -1863,7 +1872,9 @@
             content: encodedContent,
             branch: BRANCH
           };
-          if (contentSha) commitBody.sha = contentSha;
+          if (latestContentSha) {
+            commitBody.sha = latestContentSha;
+          }
 
           let commitResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json`, {
             method: 'PUT',
@@ -1874,18 +1885,12 @@
             body: JSON.stringify(commitBody)
           });
 
-          // Handle 409 Conflict (outdated SHA) automatically:
-          if (commitResp.status === 409) {
+          // Handle 409 Conflict OR 422 Missing SHA automatically
+          if (commitResp.status === 409 || commitResp.status === 422) {
             loadingText.textContent = 'Resolving version conflict and retrying...';
-            const freshResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json?ref=${BRANCH}&retry=${Date.now()}`, {
-              headers: {
-                ...getAuthHeaders(token),
-                'Cache-Control': 'no-cache, no-store'
-              }
-            });
-            if (freshResp.ok) {
-              const freshData = await freshResp.json();
-              commitBody.sha = freshData.sha;
+            const freshSha = await getGitHubFileSha('content.json', token);
+            if (freshSha) {
+              commitBody.sha = freshSha;
               commitResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json`, {
                 method: 'PUT',
                 headers: {
@@ -1900,7 +1905,7 @@
           if (!commitResp.ok) {
             const errData = await commitResp.json().catch(() => ({}));
             if (commitResp.status === 404) {
-              throw new Error(`GitHub returned 'Not Found' (404). Your token does not have write permissions to ${REPO_OWNER}/${REPO_NAME}. Click 'Configure Cloud Login' to create a token with the 'repo' scope.`);
+              throw new Error(`GitHub returned 'Not Found' (404). Check token repository permissions.`);
             }
             throw new Error(errData.message || 'Failed to save content.json to GitHub');
           }
