@@ -302,28 +302,6 @@
     ],
     "videos": [
       {
-        "id": "vid_1790932072667",
-        "title": "New AI Video Creation",
-        "album": "Gemini AI Workflows",
-        "videoUrl": "video/new-video-hero-hor.mp4",
-        "tools": [
-          "Google Gemini",
-          "Google Flow"
-        ],
-        "description": "Created with AI prompting and video workflow automation."
-      },
-      {
-        "id": "vid_1790932051209",
-        "title": "New AI Video Creation",
-        "album": "Gemini AI Workflows",
-        "videoUrl": "video/Initial_Scene_-_2026-07-11_202607120521.mp4",
-        "tools": [
-          "Google Gemini",
-          "Google Flow"
-        ],
-        "description": "Created with AI prompting and video workflow automation."
-      },
-      {
         "id": "vid-1",
         "title": "AI Cinematic Reel & Scene Synthesis",
         "album": "Gemini AI Workflows",
@@ -360,11 +338,12 @@
         "description": "Paced creative media reel tailored for high audience retention, dynamic pacing, and commercial presentation."
       }
     ],
-    "videoUrl": "video/new-video-hero-hor.mp4",
+    "videoUrl": "video/donating.mp4",
     "tools": [
       "Google Gemini",
-      "Google Flow"
+      "ChatGPT / GPT-4o",
+      "Premiere Pro"
     ],
-    "description": "Created with AI prompting and video workflow automation."
+    "description": "Cinematic visual synthesis reel leveraging Google Gemini prompt crafting, ChatGPT generative narrative, and multi-layered editing."
   }
 }
