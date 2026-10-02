@@ -15,6 +15,7 @@
     "name": "Richard Ong",
     "firstName": "Richard",
     "lastName": "Ong",
+    "avatar": "images/profile.png",
     "role": "Web Designer & Technical Support Specialist",
     "tagline": "Turning ideas into useful, beautiful, and reliable solutions — from web applications to IT support in real world environments.",
     "heroQuote": "Build Support Create Improve",
@@ -46,7 +47,8 @@
     "heading": "About Me",
     "bio": "I am an IT professional with 18 years of experience in technical support, hardware, networking, and system management. I also create web applications and explore new technologies to solve real-world problems.",
     "subText": "After a website or custom IT system? I specialize in Python, Flask, responsive modern web design, server setup, and 24/7 technical support infrastructure.",
-    "profileImage": "images/theme/avatar_card.png",
+    "profileImage": "images/profile.png",
+    "avatarImage": "images/profile.png",
     "techSkillsImage": "images/tech-skills.png"
   },
   "skills": [
