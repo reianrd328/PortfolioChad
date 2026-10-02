@@ -207,9 +207,13 @@
                   <i class="fa fa-sparkles text-xs"></i>
                   <span>View My Projects</span>
                 </a>
+                <button onclick="openVideoModal()" class="bg-gradient-to-r from-purple-600/30 to-pink-600/30 hover:from-purple-600/50 hover:to-pink-600/50 text-white border border-pink-500/40 hover:border-pink-400 px-4 py-2 sm:px-4 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2 transition shadow">
+                  <i class="fa fa-play text-pink-400 text-xs"></i>
+                  <span>AI Video Reel</span>
+                </button>
                 <a href="https://github.com/reianrd328" target="_blank" rel="noopener noreferrer" class="bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-white/10 hover:border-white/20 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2 transition">
                   <i class="fab fa-github"></i>
-                  <span>GitHub Profile</span>
+                  <span>GitHub</span>
                 </a>
               </div>
             </div>
@@ -495,6 +499,7 @@
               <button onclick="filterSkills('all')" class="skill-tab active px-3 py-1 rounded-full text-white bg-brand-pink font-semibold transition" data-cat="all">All</button>
               <button onclick="filterSkills('web')" class="skill-tab px-3 py-1 rounded-full text-slate-400 hover:text-white transition" data-cat="web">Web Development</button>
               <button onclick="filterSkills('support')" class="skill-tab px-3 py-1 rounded-full text-slate-400 hover:text-white transition" data-cat="support">Technical Support</button>
+              <button onclick="filterSkills('ai')" class="skill-tab px-3 py-1 rounded-full text-slate-400 hover:text-white transition" data-cat="ai">AI &amp; Video</button>
             </div>
           </div>
 
@@ -571,6 +576,27 @@
             <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="support">
               <i class="fa fa-display text-2xl text-[#3b82f6]"></i>
               <span class="text-[11px] font-semibold text-slate-200">UltraViewer</span>
+            </div>
+
+            <!-- AI & Video Badges -->
+            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="ai">
+              <i class="fa fa-wand-magic-sparkles text-2xl text-cyan-400"></i>
+              <span class="text-[11px] font-semibold text-slate-200">Google Gemini</span>
+            </div>
+
+            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="ai">
+              <i class="fa fa-robot text-2xl text-emerald-400"></i>
+              <span class="text-[11px] font-semibold text-slate-200">ChatGPT / GPT</span>
+            </div>
+
+            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="ai">
+              <i class="fa fa-diagram-project text-2xl text-amber-400"></i>
+              <span class="text-[11px] font-semibold text-slate-200">Google Flow</span>
+            </div>
+
+            <div class="skill-badge rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5" data-category="ai">
+              <i class="fa fa-film text-2xl text-pink-400"></i>
+              <span class="text-[11px] font-semibold text-slate-200">AI Video Editing</span>
             </div>
 
           </div>
@@ -676,6 +702,56 @@
       </div>
     </footer>
 
+  </div>
+
+  <!-- ================= AI VIDEO REEL MODAL ================= -->
+  <div id="videoModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 transition-opacity">
+    <div class="bg-[#0d1322] border border-white/10 rounded-2xl max-w-3xl w-full shadow-2xl overflow-hidden flex flex-col">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-4 border-b border-white/10 bg-slate-900/70">
+        <div class="flex items-center gap-2.5">
+          <span class="w-8 h-8 rounded-lg bg-pink-500/20 text-brand-pink flex items-center justify-center text-sm shadow">
+            <i class="fa fa-film"></i>
+          </span>
+          <div>
+            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+              <span id="modalVideoTitle">AI Video Production &amp; Editing Showcase</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-pink-500/20 text-brand-pink font-semibold border border-pink-500/30">Generative AI</span>
+            </h3>
+            <p id="modalVideoSubtitle" class="text-[11px] text-slate-400">Generative Video Workflows with Gemini, ChatGPT &amp; Google Flow</p>
+          </div>
+        </div>
+        <button onclick="closeVideoModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Video Player -->
+      <div class="bg-black relative aspect-video flex items-center justify-center">
+        <video id="portfolioMainVideo" controls class="w-full h-full object-contain">
+          <source src="video/new-video-hero-hor.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- Video Details & AI Tools -->
+      <div class="p-4 sm:p-5 space-y-3 bg-[#0a0e1c]">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+            <i class="fa fa-wand-magic-sparkles text-brand-pink"></i> Tools &amp; Pipelines Used:
+          </span>
+          <div class="flex flex-wrap gap-1.5" id="modalVideoTools">
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-medium">Google Gemini</span>
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-medium">ChatGPT / GPT-4o</span>
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-medium">Google Flow</span>
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 font-medium">AI Video Synthesis</span>
+          </div>
+        </div>
+        <p id="modalVideoDesc" class="text-xs text-slate-300 leading-relaxed">
+          Designing and producing engaging video media by integrating Google Gemini for prompt engineering &amp; storyboards, ChatGPT for generative scripts, and Google Flow / AI generation pipelines for high-retention video content.
+        </p>
+      </div>
+    </div>
   </div>
 
   <!-- ================= ALL PROJECTS MODAL / DRAWER ================= -->
@@ -820,6 +896,19 @@
     }
     function closeAllProjectsModal() {
       document.getElementById('allProjectsModal').classList.add('hidden');
+    }
+
+    function openVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const video = document.getElementById('portfolioMainVideo');
+      modal.classList.remove('hidden');
+      if (video) video.play().catch(() => {});
+    }
+    function closeVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const video = document.getElementById('portfolioMainVideo');
+      if (video) video.pause();
+      modal.classList.add('hidden');
     }
 
     function openContactModal() {

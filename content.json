@@ -150,6 +150,34 @@
       "category": "support",
       "icon": "fa fa-display",
       "color": "#3b82f6"
+    },
+    {
+      "name": "Google Gemini",
+      "percent": 94,
+      "category": "ai",
+      "icon": "fa fa-wand-magic-sparkles",
+      "color": "#38bdf8"
+    },
+    {
+      "name": "ChatGPT / GPT-4o",
+      "percent": 92,
+      "category": "ai",
+      "icon": "fa fa-robot",
+      "color": "#10a37f"
+    },
+    {
+      "name": "Google Flow",
+      "percent": 88,
+      "category": "ai",
+      "icon": "fa fa-diagram-project",
+      "color": "#ea4335"
+    },
+    {
+      "name": "AI Video Editing",
+      "percent": 90,
+      "category": "ai",
+      "icon": "fa fa-film",
+      "color": "#ec4899"
     }
   ],
   "featuredProjects": [
@@ -158,7 +186,11 @@
       "title": "PAWSHOP IT Command Center",
       "description": "Ticketing system for IT department with branch management, user roles, and equipment monitoring.",
       "image": "images/theme/pawshop_thumb.png",
-      "tags": ["Flask", "MySQL", "Bootstrap"],
+      "tags": [
+        "Flask",
+        "MySQL",
+        "Bootstrap"
+      ],
       "github": "https://github.com/reianrd328",
       "url": "https://technical-preventive-hub.onrender.com/"
     },
@@ -167,7 +199,11 @@
       "title": "Warehouse Inventory System",
       "description": "Monitor inventory across 100+ branches with approvals, tracking, and live reports.",
       "image": "images/theme/warehouse_thumb.png",
-      "tags": ["Python", "Flask", "MySQL"],
+      "tags": [
+        "Python",
+        "Flask",
+        "MySQL"
+      ],
       "github": "https://github.com/reianrd328/hardware-inventory-system",
       "url": "https://technical-preventive-hub.onrender.com/"
     },
@@ -176,7 +212,11 @@
       "title": "FoodCartManager",
       "description": "Rental and vendor management system with admin panel and mobile support (Sunmi V2 Pro).",
       "image": "images/theme/foodcart_thumb.png",
-      "tags": ["Flask", "TiDB", "Android"],
+      "tags": [
+        "Flask",
+        "TiDB",
+        "Android"
+      ],
       "github": "https://github.com/reianrd328/FoodCartManager",
       "url": "https://github.com/reianrd328/FoodCartManager"
     }
@@ -305,5 +345,20 @@
   },
   "admin": {
     "password": "admin"
+  },
+  "aiVideo": {
+    "enabled": true,
+    "badge": "AI Video & Creative Media",
+    "title": "AI Video Production & Editing Showcase",
+    "subtitle": "Generative Video Workflows with Gemini, ChatGPT & Google Flow",
+    "description": "Designing and producing engaging video media by integrating Google Gemini for prompt engineering & storyboards, ChatGPT for generative scripts, and Google Flow / AI generation pipelines for high-retention video content.",
+    "videoUrl": "video/new-video-hero-hor.mp4",
+    "tools": [
+      "Google Gemini",
+      "ChatGPT / GPT-4o",
+      "Google Flow",
+      "AI Video Synthesis",
+      "Premiere & CapCut"
+    ]
   }
 }

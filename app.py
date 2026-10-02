@@ -162,6 +162,41 @@ def handle_contact():
         
     return jsonify({'success': True, 'message': 'Thank you! Your message has been received.'})
 
+UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'video')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB
+
+@app.route('/api/upload-video', methods=['POST'])
+def handle_video_upload():
+    if 'video' not in request.files:
+        return jsonify({'success': False, 'message': 'No video file provided'}), 400
+    file = request.files['video']
+    if file.filename == '':
+        return jsonify({'success': False, 'message': 'No file selected'}), 400
+    
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    import re
+    safe_name = re.sub(r'[^a-zA-Z0-9_.-]', '_', file.filename)
+    dest_path = os.path.join(UPLOAD_FOLDER, safe_name)
+    file.save(dest_path)
+    
+    video_url = f"video/{safe_name}"
+    content = load_content()
+    if 'aiVideo' not in content:
+        content['aiVideo'] = {}
+    content['aiVideo']['videoUrl'] = video_url
+    save_content(content)
+    
+    return jsonify({
+        'success': True,
+        'message': f'Video {safe_name} uploaded successfully!',
+        'videoUrl': video_url
+    })
+
+@app.route('/video/<path:filename>')
+def serve_video(filename):
+    return send_from_directory('video', filename)
+
 @app.route('/admin/')
 @app.route('/admin/index.html')
 def admin_page():
