@@ -967,6 +967,13 @@
       currentActiveVideoId = videoId;
       const videoEl = document.getElementById('portfolioMainVideo');
       if (videoEl) {
+        videoEl.onerror = function() {
+          if (videoEl.src && !videoEl.src.includes('new-video-hero-hor.mp4')) {
+            videoEl.src = 'video/new-video-hero-hor.mp4';
+            videoEl.load();
+            videoEl.play().catch(() => {});
+          }
+        };
         videoEl.src = item.videoUrl;
         videoEl.load();
         videoEl.play().catch(() => {});
