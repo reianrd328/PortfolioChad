@@ -270,6 +270,26 @@
 
         <!-- About Text Info -->
         <div class="space-y-4">
+          <!-- Name & Hero Identity Settings -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-xl bg-slate-900/80 border border-slate-700/80">
+            <div class="space-y-1.5">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300">First Name (e.g. Lyrch or Chad)</label>
+              <input type="text" id="profile_first_name" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-red-500 transition" placeholder="Lyrch">
+            </div>
+            <div class="space-y-1.5">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300">Last Name / Pink Accent (e.g. Ong)</label>
+              <input type="text" id="profile_last_name" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-pink-400 font-bold focus:outline-none focus:border-red-500 transition" placeholder="Ong">
+            </div>
+            <div class="space-y-1.5 md:col-span-2">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300">Professional Role / Job Title</label>
+              <input type="text" id="profile_role" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-red-500 transition" placeholder="Web Designer & Technical Support Specialist">
+            </div>
+            <div class="space-y-1.5 md:col-span-2">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300">Hero Tagline</label>
+              <input type="text" id="profile_tagline" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-red-500 transition" placeholder="Turning ideas into useful, beautiful, and reliable solutions...">
+            </div>
+          </div>
+
           <div class="space-y-2">
             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300">Short Bio (Introduction)</label>
             <textarea id="about_bio" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-red-500 transition" placeholder="Hello! I'm Richard..."></textarea>
@@ -963,6 +983,14 @@
           if (data.about.techSkillsImage) document.getElementById('preview_tech').src = '../' + data.about.techSkillsImage;
         }
 
+        // Profile Identity (Hero Name & Role)
+        if (data.profile) {
+          document.getElementById('profile_first_name').value = data.profile.firstName || 'Lyrch';
+          document.getElementById('profile_last_name').value = data.profile.lastName || 'Ong';
+          document.getElementById('profile_role').value = data.profile.role || '';
+          document.getElementById('profile_tagline').value = data.profile.tagline || '';
+        }
+
         // 3. Hire Me
         if (data.hireMe) {
           document.getElementById('hire_email').value = data.hireMe.email || '';
@@ -1284,6 +1312,14 @@
             subText: document.getElementById('about_subText').value.trim(),
             profileImage: currentData && currentData.about && currentData.about.profileImage ? currentData.about.profileImage : 'images/profile.png',
             techSkillsImage: currentData && currentData.about && currentData.about.techSkillsImage ? currentData.about.techSkillsImage : 'images/tech-skills.png'
+          },
+          profile: {
+            ...(currentData && currentData.profile ? currentData.profile : {}),
+            firstName: document.getElementById('profile_first_name').value.trim() || 'Lyrch',
+            lastName: document.getElementById('profile_last_name').value.trim() || 'Ong',
+            name: `${document.getElementById('profile_first_name').value.trim() || 'Lyrch'} ${document.getElementById('profile_last_name').value.trim() || 'Ong'}`.trim(),
+            role: document.getElementById('profile_role').value.trim() || 'Web Designer & Technical Support Specialist',
+            tagline: document.getElementById('profile_tagline').value.trim() || ''
           },
           skills: [],
           portfolio: [],
