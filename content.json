@@ -12,8 +12,8 @@
     "cvLink": "https://drive.google.com/file/d/1BCkH1FjPcFGmACDWLTnBT_PfrE7hdY1E/view?usp=drive_link"
   },
   "profile": {
-    "name": "Lyrch Ong",
-    "firstName": "Lyrch",
+    "name": "Richard Ong",
+    "firstName": "Richard",
     "lastName": "Ong",
     "role": "Web Designer & Technical Support Specialist",
     "tagline": "Turning ideas into useful, beautiful, and reliable solutions — from web applications to IT support in real world environments.",
@@ -46,138 +46,81 @@
     "heading": "About Me",
     "bio": "I am an IT professional with 18 years of experience in technical support, hardware, networking, and system management. I also create web applications and explore new technologies to solve real-world problems.",
     "subText": "After a website or custom IT system? I specialize in Python, Flask, responsive modern web design, server setup, and 24/7 technical support infrastructure.",
-    "quote": "Think Clearly Create Confidently LYRCH",
-    "resumeLink": "https://drive.google.com/file/d/1BCkH1FjPcFGmACDWLTnBT_PfrE7hdY1E/view?usp=drive_link",
     "profileImage": "images/theme/avatar_card.png",
-    "avatarImage": "images/theme/avatar_card.png",
     "techSkillsImage": "images/tech-skills.png"
   },
   "skills": [
     {
       "name": "Python",
-      "percent": 95,
-      "category": "web",
-      "icon": "fab fa-python",
-      "color": "#3776ab"
+      "percent": 95
     },
     {
       "name": "HTML5",
-      "percent": 92,
-      "category": "web",
-      "icon": "fab fa-html5",
-      "color": "#e34f26"
+      "percent": 92
     },
     {
       "name": "CSS3",
-      "percent": 90,
-      "category": "web",
-      "icon": "fab fa-css3-alt",
-      "color": "#1572b6"
+      "percent": 90
     },
     {
       "name": "JavaScript",
-      "percent": 88,
-      "category": "web",
-      "icon": "fab fa-js-square",
-      "color": "#f7df1e"
+      "percent": 88
     },
     {
       "name": "Flask",
-      "percent": 92,
-      "category": "web",
-      "icon": "fa fa-pepper-hot",
-      "color": "#ff2a85"
+      "percent": 92
     },
     {
       "name": "MySQL",
-      "percent": 88,
-      "category": "web",
-      "icon": "fa fa-database",
-      "color": "#00758f"
+      "percent": 88
     },
     {
       "name": "Git / GitHub",
-      "percent": 90,
-      "category": "web",
-      "icon": "fab fa-github",
-      "color": "#ffffff"
+      "percent": 90
     },
     {
       "name": "WordPress",
-      "percent": 85,
-      "category": "web",
-      "icon": "fab fa-wordpress",
-      "color": "#21759b"
+      "percent": 85
     },
     {
       "name": "Networking",
-      "percent": 94,
-      "category": "support",
-      "icon": "fa fa-network-wired",
-      "color": "#38bdf8"
+      "percent": 94
     },
     {
       "name": "Windows",
-      "percent": 96,
-      "category": "support",
-      "icon": "fab fa-windows",
-      "color": "#0078d4"
+      "percent": 96
     },
     {
       "name": "Hardware",
-      "percent": 95,
-      "category": "support",
-      "icon": "fa fa-screwdriver-wrench",
-      "color": "#94a3b8"
+      "percent": 95
     },
     {
       "name": "TeamViewer",
-      "percent": 92,
-      "category": "support",
-      "icon": "fa fa-arrows-spin",
-      "color": "#0e80e5"
+      "percent": 92
     },
     {
       "name": "AnyDesk",
-      "percent": 90,
-      "category": "support",
-      "icon": "fa fa-gem",
-      "color": "#ef4444"
+      "percent": 90
     },
     {
       "name": "UltraViewer",
-      "percent": 88,
-      "category": "support",
-      "icon": "fa fa-display",
-      "color": "#3b82f6"
+      "percent": 88
     },
     {
       "name": "Google Gemini",
-      "percent": 94,
-      "category": "ai",
-      "icon": "fa fa-wand-magic-sparkles",
-      "color": "#38bdf8"
+      "percent": 94
     },
     {
       "name": "ChatGPT / GPT-4o",
-      "percent": 92,
-      "category": "ai",
-      "icon": "fa fa-robot",
-      "color": "#10a37f"
+      "percent": 92
     },
     {
       "name": "Google Flow",
-      "percent": 88,
-      "category": "ai",
-      "icon": "fa fa-diagram-project",
-      "color": "#ea4335"
+      "percent": 88
     },
     {
       "name": "AI Video Editing",
-      "percent": 90,
-      "category": "ai",
-      "icon": "fa fa-film",
-      "color": "#ec4899"
+      "percent": 90
     }
   ],
   "featuredProjects": [
@@ -267,24 +210,24 @@
   ],
   "services": [
     {
+      "icon": "fa-laptop-code",
       "title": "Web Design & Development",
-      "description": "Modern and responsive web applications.",
-      "icon": "fa-laptop-code"
+      "description": "Modern and responsive web applications."
     },
     {
+      "icon": "fa-headset",
       "title": "Technical Support",
-      "description": "Hardware, software, networking, and remote support.",
-      "icon": "fa-headset"
+      "description": "Hardware, software, networking, and remote support."
     },
     {
+      "icon": "fa-server",
       "title": "System Setup",
-      "description": "Server, database, and application deployment.",
-      "icon": "fa-server"
+      "description": "Server, database, and application deployment."
     },
     {
+      "icon": "fa-gears",
       "title": "IT Consultation",
-      "description": "Process improvement and custom system solutions.",
-      "icon": "fa-gears"
+      "description": "Process improvement and custom system solutions."
     }
   ],
   "experience": [
@@ -330,7 +273,6 @@
     "phone": "+63 915 193 4601",
     "location": "Philippines",
     "facebook": "https://www.facebook.com/richard.ong.969/",
-    "github": "https://github.com/reianrd328",
     "linkedin": "#"
   },
   "social": {
