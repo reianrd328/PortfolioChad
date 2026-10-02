@@ -1246,8 +1246,11 @@
 
         try {
           if (token) {
-            const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json?ref=${BRANCH}`, {
-              headers: getAuthHeaders(token)
+            const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json?ref=${BRANCH}&t=${Date.now()}`, {
+              headers: {
+                ...getAuthHeaders(token),
+                'Cache-Control': 'no-cache, no-store'
+              }
             });
 
             if (resp.ok) {
@@ -1833,17 +1836,25 @@
             delete uploadedFiles[filePath];
           }
 
-          // Step 2: Fetch latest content.json SHA if not known
-          loadingText.textContent = 'Updating content.json on GitHub...';
-          const jsonResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json?ref=${BRANCH}`, {
-            headers: getAuthHeaders(token)
-          });
-          if (jsonResp.ok) {
-            const currentFileData = await jsonResp.json();
-            contentSha = currentFileData.sha;
+          // Step 2: Fetch latest content.json SHA fresh from GitHub (cache-proof)
+          loadingText.textContent = 'Fetching latest version from GitHub...';
+          try {
+            const jsonResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json?ref=${BRANCH}&t=${Date.now()}`, {
+              headers: {
+                ...getAuthHeaders(token),
+                'Cache-Control': 'no-cache, no-store'
+              }
+            });
+            if (jsonResp.ok) {
+              const currentFileData = await jsonResp.json();
+              contentSha = currentFileData.sha;
+            }
+          } catch (e) {
+            console.warn('Could not refresh SHA ahead of commit', e);
           }
 
           // Step 3: Commit content.json to GitHub
+          loadingText.textContent = 'Saving changes to GitHub...';
           const jsonString = JSON.stringify(dataToSave, null, 2);
           const encodedContent = btoa(unescape(encodeURIComponent(jsonString)));
 
@@ -1854,7 +1865,7 @@
           };
           if (contentSha) commitBody.sha = contentSha;
 
-          const commitResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json`, {
+          let commitResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json`, {
             method: 'PUT',
             headers: {
               ...getAuthHeaders(token),
@@ -1862,6 +1873,29 @@
             },
             body: JSON.stringify(commitBody)
           });
+
+          // Handle 409 Conflict (outdated SHA) automatically:
+          if (commitResp.status === 409) {
+            loadingText.textContent = 'Resolving version conflict and retrying...';
+            const freshResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json?ref=${BRANCH}&retry=${Date.now()}`, {
+              headers: {
+                ...getAuthHeaders(token),
+                'Cache-Control': 'no-cache, no-store'
+              }
+            });
+            if (freshResp.ok) {
+              const freshData = await freshResp.json();
+              commitBody.sha = freshData.sha;
+              commitResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content.json`, {
+                method: 'PUT',
+                headers: {
+                  ...getAuthHeaders(token),
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(commitBody)
+              });
+            }
+          }
 
           if (!commitResp.ok) {
             const errData = await commitResp.json().catch(() => ({}));
