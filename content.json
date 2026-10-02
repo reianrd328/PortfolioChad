@@ -16,24 +16,170 @@
     "title": "AI Video Production & Media Albums",
     "subtitle": "Generative Video Workflows with Gemini, ChatGPT & Google Flow",
     "albums": [
-      "Gemini AI Workflows"
+      "Gemini AI Workflows",
+      "AI Commercials & Ads",
+      "Creative Reels & Promos"
     ],
     "videos": [
       {
-        "id": "vid_1790950387154",
-        "title": "Man watching clock inside house 20260919130641",
+        "id": "vid-1",
+        "title": "New AI Video Creation",
         "album": "Gemini AI Workflows",
-        "videoUrl": "video/Man_watching_clock_inside_house_20260919130641.mp4",
-        "thumbnail": "images/thumbnails/thumb_Man_watching_clock_inside_house_20260919130641.jpg",
+        "videoUrl": "video/clip_1.mp4",
+        "thumbnail": "images/thumbnails/thumb_clip_1.jpg",
         "tools": [
           "Google Gemini",
           "Google Flow"
         ],
         "description": "Created with AI prompting and video workflow automation."
+      },
+      {
+        "id": "vid-2",
+        "title": "Filipino Street Food Commercial",
+        "album": "AI Commercials & Ads",
+        "videoUrl": "video/Creat_me_comercial_eating_fili.mp4",
+        "thumbnail": "images/thumbnails/thumb_Creat_me_comercial_eating_fili.jpg",
+        "tools": [
+          "Google Gemini",
+          "ChatGPT",
+          "Runway Gen-3",
+          "CapCut"
+        ],
+        "description": "Vibrant AI food commercial showcasing Filipino cuisine, dynamic camera zooms, and sound-synced appetizing visual flows."
+      },
+      {
+        "id": "vid-3",
+        "title": "Luxury Fragrance & Fashion Commercial",
+        "album": "AI Commercials & Ads",
+        "videoUrl": "video/Seductive_comercial_video_man.mp4",
+        "thumbnail": "images/thumbnails/thumb_Seductive_comercial_video_man.jpg",
+        "tools": [
+          "Google Flow",
+          "Gemini AI",
+          "Premiere Pro"
+        ],
+        "description": "High-end aesthetic commercial with dramatic studio lighting, slow-motion camera movement, and luxury brand pacing."
+      },
+      {
+        "id": "vid-4",
+        "title": "Next-Gen Smartphone Product Promo",
+        "album": "AI Commercials & Ads",
+        "videoUrl": "video/iphone.mp4",
+        "thumbnail": "images/thumbnails/thumb_iphone.jpg",
+        "tools": [
+          "Google Gemini",
+          "AI Motion",
+          "After Effects"
+        ],
+        "description": "Sleek 3D product showcase animation highlighting hardware curves, dynamic reflections, and tech commercial styling."
+      },
+      {
+        "id": "vid-5",
+        "title": "Filipino Cultural Heritage AI Story",
+        "album": "Gemini AI Workflows",
+        "videoUrl": "video/Create_me_prompt_ah_filipino_c.mp4",
+        "thumbnail": "images/thumbnails/thumb_Create_me_prompt_ah_filipino_c.jpg",
+        "tools": [
+          "Google Gemini",
+          "ChatGPT Prompting",
+          "Midjourney AI"
+        ],
+        "description": "Cultural visual narrative generated through iterative Gemini prompting, capturing traditional Filipino warmth and scenery."
+      },
+      {
+        "id": "vid-6",
+        "title": "Magical Fantasy World Clip",
+        "album": "Gemini AI Workflows",
+        "videoUrl": "video/Create_me_video_clip_magical_t.mp4",
+        "thumbnail": "images/thumbnails/thumb_Create_me_video_clip_magical_t.jpg",
+        "tools": [
+          "Google Gemini",
+          "Google Flow",
+          "AI Synthesis"
+        ],
+        "description": "Surreal magical landscape with mystical particle effects, glowing foliage, and atmospheric lighting crafted via generative prompt pipelines."
+      },
+      {
+        "id": "vid-7",
+        "title": "Community Giving & Empathy Reel",
+        "album": "Gemini AI Workflows",
+        "videoUrl": "video/donating.mp4",
+        "thumbnail": "images/thumbnails/thumb_donating.jpg",
+        "tools": [
+          "Google Gemini",
+          "ChatGPT / GPT-4o",
+          "Premiere Pro"
+        ],
+        "description": "Heartfelt social message visual reel emphasizing community sharing, empathy, and emotional storytelling."
+      },
+      {
+        "id": "vid-8",
+        "title": "Portfolio Brand Opener & Intro",
+        "album": "Creative Reels & Promos",
+        "videoUrl": "video/intro.mp4",
+        "thumbnail": "images/thumbnails/thumb_intro.jpg",
+        "tools": [
+          "Google Flow",
+          "Premiere Pro",
+          "CapCut"
+        ],
+        "description": "Punchy, fast-paced brand opener with cybernetic transitions, neon lighting, and high-impact sound design."
+      },
+      {
+        "id": "vid-9",
+        "title": "AI Dynamic Scene Generation",
+        "album": "Gemini AI Workflows",
+        "videoUrl": "video/clip_3.mp4",
+        "thumbnail": "images/thumbnails/thumb_clip_3.jpg",
+        "tools": [
+          "Google Gemini",
+          "Google Flow",
+          "AI Motion"
+        ],
+        "description": "Dynamic AI visual clip created with generative prompt pipelines and neural styling."
+      },
+      {
+        "id": "vid-10",
+        "title": "Generative AI Motion Clip",
+        "album": "Creative Reels & Promos",
+        "videoUrl": "video/6.mp4",
+        "thumbnail": "images/thumbnails/thumb_6.jpg",
+        "tools": [
+          "Google Gemini",
+          "CapCut AI",
+          "Google Flow"
+        ],
+        "description": "Creative generative AI motion clip showcasing multi-model transitions and high visual pacing."
+      },
+      {
+        "id": "vid-11",
+        "title": "AI Production Showcase Reel (Widescreen)",
+        "album": "Creative Reels & Promos",
+        "videoUrl": "video/new-video-hero-hor.mp4",
+        "thumbnail": "images/thumbnails/thumb_new-video-hero-hor.jpg",
+        "tools": [
+          "Google Gemini",
+          "Google Flow",
+          "Premiere Pro"
+        ],
+        "description": "Comprehensive 16:9 cinematic showcase reel combining multi-model generative visuals, color grading, and commercial editing."
+      },
+      {
+        "id": "vid-12",
+        "title": "Social Media Vertical Reel (TikTok/Shorts)",
+        "album": "Creative Reels & Promos",
+        "videoUrl": "video/new-video-hero-ver.mp4",
+        "thumbnail": "images/thumbnails/thumb_new-video-hero-ver.jpg",
+        "tools": [
+          "CapCut AI",
+          "Google Gemini",
+          "Mobile Motion"
+        ],
+        "description": "9:16 vertical motion reel engineered for high engagement on mobile platforms, social shorts, and Instagram Reels."
       }
     ],
-    "videoUrl": "video/Man_watching_clock_inside_house_20260919130641.mp4",
-    "thumbnail": "images/thumbnails/thumb_Man_watching_clock_inside_house_20260919130641.jpg",
+    "videoUrl": "video/clip_1.mp4",
+    "thumbnail": "images/thumbnails/thumb_clip_1.jpg",
     "tools": [
       "Google Gemini",
       "Google Flow"
