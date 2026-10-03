@@ -296,12 +296,24 @@
     "subtitle": "Generative Video Workflows with Gemini, ChatGPT & Google Flow",
     "albums": [
       "Gemini AI Workflows",
-      "AI Commercials & Ads",
-      "Creative Reels & Promos"
+      "Creative Reels & Promos",
+      "AI Commercials & Ads"
     ],
     "videos": [
       {
-        "id": "vid_filipino_jeepney",
+        "id": "vid_1791027050857",
+        "title": "clip11",
+        "album": "Gemini AI Workflows",
+        "videoUrl": "video/clip11.mp4",
+        "thumbnail": "images/thumbnails/thumb_clip11.jpg",
+        "tools": [
+          "Google Gemini",
+          "Google Flow"
+        ],
+        "description": "Uploaded directly to gallery showcase."
+      },
+      {
+        "id": "vid-catalog-1",
         "title": "Filipino Jeepney Driver & Passengers",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/Filipino_jeepney_driver_passenge__202608012111.mp4",
@@ -313,7 +325,7 @@
         "description": "Atmospheric cinematic visual narrative of a traditional Manila jeepney passenger route."
       },
       {
-        "id": "vid_ghibli_superhero",
+        "id": "vid-catalog-2",
         "title": "Ghibli Style Superhero Skills",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/Video_Ghibli_style_superhero_skills_202608012043.mp4",
@@ -326,7 +338,7 @@
         "description": "Studio Ghibli aesthetic anime animation featuring heroic supernatural abilities."
       },
       {
-        "id": "vid_clip10",
+        "id": "vid-catalog-3",
         "title": "AI Cinematic Visual Synthesis (Clip 10)",
         "album": "Creative Reels & Promos",
         "videoUrl": "video/clip10.mp4",
@@ -338,7 +350,7 @@
         "description": "Dynamic multi-model generative visual reel with stylized camera movements."
       },
       {
-        "id": "vid_clip9",
+        "id": "vid-catalog-4",
         "title": "Generative AI Scene (Clip 9)",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/clip_9.mp4",
@@ -350,7 +362,7 @@
         "description": "Created with AI prompt workflows, realistic lighting, and motion synthesis."
       },
       {
-        "id": "vid_5_1",
+        "id": "vid-catalog-5",
         "title": "AI Motion Sequence 5.1",
         "album": "Creative Reels & Promos",
         "videoUrl": "video/5.1.mp4",
@@ -362,7 +374,7 @@
         "description": "High-paced generative visual reel engineered for engagement and modern social pacing."
       },
       {
-        "id": "vid_untitled_scene",
+        "id": "vid-catalog-6",
         "title": "Atmospheric Scene Synthesis",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/Untitled_Scene_09-20_12_20_11_20260920202216.mp4",
@@ -374,7 +386,7 @@
         "description": "Created with AI prompting and video workflow automation."
       },
       {
-        "id": "vid_food_commercial",
+        "id": "vid-catalog-7",
         "title": "Filipino Street Food Commercial",
         "album": "AI Commercials & Ads",
         "videoUrl": "video/Creat_me_comercial_eating_fili.mp4",
@@ -388,7 +400,7 @@
         "description": "Vibrant AI food commercial showcasing Filipino cuisine, dynamic camera zooms, and sound-synced appetizing visual flows."
       },
       {
-        "id": "vid_luxury_fragrance",
+        "id": "vid-catalog-8",
         "title": "Luxury Fragrance & Fashion Commercial",
         "album": "AI Commercials & Ads",
         "videoUrl": "video/Seductive_comercial_video_man.mp4",
@@ -401,7 +413,7 @@
         "description": "High-end aesthetic commercial with dramatic studio lighting, slow-motion camera movement, and luxury brand pacing."
       },
       {
-        "id": "vid_iphone",
+        "id": "vid-catalog-9",
         "title": "Next-Gen Smartphone Product Promo",
         "album": "AI Commercials & Ads",
         "videoUrl": "video/iphone.mp4",
@@ -414,7 +426,7 @@
         "description": "Sleek 3D product showcase animation highlighting hardware curves, dynamic reflections, and tech commercial styling."
       },
       {
-        "id": "vid_man_watching_clock",
+        "id": "vid-catalog-10",
         "title": "Cinematic Scene: Man Watching Clock Inside House",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/Man_watching_clock_inside_house_20260919130641.mp4",
@@ -427,7 +439,7 @@
         "description": "Pensive cinematic scene crafted with AI generative prompt workflows, exploring atmospheric lighting, tension, and realistic human pacing."
       },
       {
-        "id": "vid_filipino_culture",
+        "id": "vid-catalog-11",
         "title": "Filipino Cultural Heritage AI Story",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/Create_me_prompt_ah_filipino_c.mp4",
@@ -440,7 +452,7 @@
         "description": "Cultural visual narrative generated through iterative Gemini prompting, capturing traditional Filipino warmth and scenery."
       },
       {
-        "id": "vid_magical_fantasy",
+        "id": "vid-catalog-12",
         "title": "Magical Fantasy World Clip",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/Create_me_video_clip_magical_t.mp4",
@@ -453,7 +465,7 @@
         "description": "Surreal magical landscape with mystical particle effects, glowing foliage, and atmospheric lighting crafted via generative prompt pipelines."
       },
       {
-        "id": "vid_donating",
+        "id": "vid-catalog-13",
         "title": "Community Giving & Empathy Reel",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/donating.mp4",
@@ -466,7 +478,7 @@
         "description": "Heartfelt social message visual reel emphasizing community sharing, empathy, and emotional storytelling."
       },
       {
-        "id": "vid_clip1",
+        "id": "vid-catalog-14",
         "title": "AI Generative Scene Synthesis",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/clip_1.mp4",
@@ -478,7 +490,7 @@
         "description": "Created with AI prompting, realistic lighting, and video workflow automation."
       },
       {
-        "id": "vid_clip3",
+        "id": "vid-catalog-15",
         "title": "AI Dynamic Scene Generation",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/clip_3.mp4",
@@ -491,7 +503,7 @@
         "description": "Dynamic AI visual clip created with generative prompt pipelines and neural styling."
       },
       {
-        "id": "vid_intro",
+        "id": "vid-catalog-16",
         "title": "Portfolio Brand Opener & Intro",
         "album": "Creative Reels & Promos",
         "videoUrl": "video/intro.mp4",
@@ -504,20 +516,7 @@
         "description": "Punchy, fast-paced brand opener with cybernetic transitions, neon lighting, and high-impact sound design."
       },
       {
-        "id": "vid_6",
-        "title": "Generative AI Motion Clip",
-        "album": "Creative Reels & Promos",
-        "videoUrl": "video/6.mp4",
-        "thumbnail": "images/thumbnails/thumb_6.jpg",
-        "tools": [
-          "Google Gemini",
-          "CapCut AI",
-          "Google Flow"
-        ],
-        "description": "Creative generative AI motion clip showcasing multi-model transitions and high visual pacing."
-      },
-      {
-        "id": "vid_hero_hor",
+        "id": "vid-catalog-18",
         "title": "AI Production Showcase Reel (Widescreen)",
         "album": "Creative Reels & Promos",
         "videoUrl": "video/new-video-hero-hor.mp4",
@@ -530,7 +529,7 @@
         "description": "Comprehensive 16:9 cinematic showcase reel combining multi-model generative visuals, color grading, and commercial editing."
       },
       {
-        "id": "vid_hero_ver",
+        "id": "vid-catalog-19",
         "title": "Social Media Vertical Reel (TikTok/Shorts)",
         "album": "Creative Reels & Promos",
         "videoUrl": "video/new-video-hero-ver.mp4",
@@ -543,12 +542,12 @@
         "description": "9:16 vertical motion reel engineered for high engagement on mobile platforms, social shorts, and Instagram Reels."
       }
     ],
-    "videoUrl": "video/Filipino_jeepney_driver_passenge__202608012111.mp4",
-    "thumbnail": "images/thumbnails/thumb_Filipino_jeepney_driver_passenge__202608012111.jpg",
+    "videoUrl": "video/clip11.mp4",
+    "thumbnail": "images/thumbnails/thumb_clip11.jpg",
     "tools": [
       "Google Gemini",
       "Google Flow"
     ],
-    "description": "Atmospheric cinematic visual narrative of a traditional Manila jeepney passenger route."
+    "description": "Uploaded directly to gallery showcase."
   }
 }
