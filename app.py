@@ -428,6 +428,10 @@ def serve_video(filename):
     as_attachment = request.args.get('download') == '1'
     return send_from_directory('video', filename, as_attachment=as_attachment)
 
+@app.route('/content.json')
+def serve_content_json():
+    return send_from_directory(os.path.dirname(__file__), 'content.json')
+
 @app.route('/admin/')
 @app.route('/admin/index.html')
 def admin_page():

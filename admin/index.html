@@ -488,8 +488,8 @@
             <p class="text-sm text-slate-400 mt-1">Upload multiple videos and organize them into categorized albums (e.g. AI Commercials &amp; Ads, Gemini AI Workflows, Creative Reels &amp; Promos).</p>
           </div>
           <div class="flex flex-wrap items-center gap-2 self-start sm:self-auto">
-            <button id="importAllVideosBtn" type="button" title="Load all 12 video files available in repository" class="text-xs px-3.5 py-2.5 bg-slate-700/80 hover:bg-slate-700 text-pink-200 border border-pink-500/30 rounded-xl transition font-medium flex items-center gap-1.5 cursor-pointer">
-              <i class="fa fa-folder-open text-pink-400"></i> Import All 12 Videos
+            <button id="importAllVideosBtn" type="button" title="Load all 13 video files available in repository" class="text-xs px-3.5 py-2.5 bg-slate-700/80 hover:bg-slate-700 text-pink-200 border border-pink-500/30 rounded-xl transition font-medium flex items-center gap-1.5 cursor-pointer">
+              <i class="fa fa-folder-open text-pink-400"></i> Import All 13 Videos
             </button>
             <button id="addVideoBtn" type="button" class="text-xs px-4 py-2.5 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white rounded-xl transition font-semibold flex items-center gap-2 shadow-lg shadow-pink-600/20 cursor-pointer">
               <i class="fa fa-plus"></i> Add Video to Album
@@ -996,15 +996,16 @@
 
       // --- Setup Multi-Video Albums & Playlist Handlers ---
       const DEFAULT_SERVER_VIDEOS = [
-        { path: 'video/clip_1.mp4', thumbnail: 'images/thumbnails/thumb_clip_1.jpg', title: 'New AI Video Creation', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow'], desc: 'Created with AI prompting and video workflow automation.' },
         { path: 'video/Creat_me_comercial_eating_fili.mp4', thumbnail: 'images/thumbnails/thumb_Creat_me_comercial_eating_fili.jpg', title: 'Filipino Street Food Commercial', album: 'AI Commercials & Ads', tools: ['Google Gemini', 'ChatGPT', 'Runway Gen-3', 'CapCut'], desc: 'Vibrant AI food commercial showcasing Filipino cuisine, dynamic camera zooms, and sound-synced appetizing visual flows.' },
         { path: 'video/Seductive_comercial_video_man.mp4', thumbnail: 'images/thumbnails/thumb_Seductive_comercial_video_man.jpg', title: 'Luxury Fragrance & Fashion Commercial', album: 'AI Commercials & Ads', tools: ['Google Flow', 'Gemini AI', 'Premiere Pro'], desc: 'High-end aesthetic commercial with dramatic studio lighting, slow-motion camera movement, and luxury brand pacing.' },
         { path: 'video/iphone.mp4', thumbnail: 'images/thumbnails/thumb_iphone.jpg', title: 'Next-Gen Smartphone Product Promo', album: 'AI Commercials & Ads', tools: ['Google Gemini', 'AI Motion', 'After Effects'], desc: 'Sleek 3D product showcase animation highlighting hardware curves, dynamic reflections, and tech commercial styling.' },
+        { path: 'video/Man_watching_clock_inside_house_20260919130641.mp4', thumbnail: 'images/thumbnails/thumb_Man_watching_clock_inside_house_20260919130641.jpg', title: 'Cinematic Scene: Man Watching Clock Inside House', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow', 'Premiere Pro'], desc: 'Pensive cinematic scene crafted with AI generative prompt workflows, exploring atmospheric lighting, tension, and realistic human pacing.' },
         { path: 'video/Create_me_prompt_ah_filipino_c.mp4', thumbnail: 'images/thumbnails/thumb_Create_me_prompt_ah_filipino_c.jpg', title: 'Filipino Cultural Heritage AI Story', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'ChatGPT Prompting', 'Midjourney AI'], desc: 'Cultural visual narrative generated through iterative Gemini prompting, capturing traditional Filipino warmth and scenery.' },
         { path: 'video/Create_me_video_clip_magical_t.mp4', thumbnail: 'images/thumbnails/thumb_Create_me_video_clip_magical_t.jpg', title: 'Magical Fantasy World Clip', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow', 'AI Synthesis'], desc: 'Surreal magical landscape with mystical particle effects, glowing foliage, and atmospheric lighting crafted via generative prompt pipelines.' },
         { path: 'video/donating.mp4', thumbnail: 'images/thumbnails/thumb_donating.jpg', title: 'Community Giving & Empathy Reel', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'ChatGPT / GPT-4o', 'Premiere Pro'], desc: 'Heartfelt social message visual reel emphasizing community sharing, empathy, and emotional storytelling.' },
-        { path: 'video/intro.mp4', thumbnail: 'images/thumbnails/thumb_intro.jpg', title: 'Portfolio Brand Opener & Intro', album: 'Creative Reels & Promos', tools: ['Google Flow', 'Premiere Pro', 'CapCut'], desc: 'Punchy, fast-paced brand opener with cybernetic transitions, neon lighting, and high-impact sound design.' },
+        { path: 'video/clip_1.mp4', thumbnail: 'images/thumbnails/thumb_clip_1.jpg', title: 'AI Generative Scene Synthesis', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow'], desc: 'Created with AI prompting, realistic lighting, and video workflow automation.' },
         { path: 'video/clip_3.mp4', thumbnail: 'images/thumbnails/thumb_clip_3.jpg', title: 'AI Dynamic Scene Generation', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow', 'AI Motion'], desc: 'Dynamic AI visual clip created with generative prompt pipelines and neural styling.' },
+        { path: 'video/intro.mp4', thumbnail: 'images/thumbnails/thumb_intro.jpg', title: 'Portfolio Brand Opener & Intro', album: 'Creative Reels & Promos', tools: ['Google Flow', 'Premiere Pro', 'CapCut'], desc: 'Punchy, fast-paced brand opener with cybernetic transitions, neon lighting, and high-impact sound design.' },
         { path: 'video/6.mp4', thumbnail: 'images/thumbnails/thumb_6.jpg', title: 'Generative AI Motion Clip', album: 'Creative Reels & Promos', tools: ['Google Gemini', 'CapCut AI', 'Google Flow'], desc: 'Creative generative AI motion clip showcasing multi-model transitions and high visual pacing.' },
         { path: 'video/new-video-hero-hor.mp4', thumbnail: 'images/thumbnails/thumb_new-video-hero-hor.jpg', title: 'AI Production Showcase Reel (Widescreen)', album: 'Creative Reels & Promos', tools: ['Google Gemini', 'Google Flow', 'Premiere Pro'], desc: 'Comprehensive 16:9 cinematic showcase reel combining multi-model generative visuals, color grading, and commercial editing.' },
         { path: 'video/new-video-hero-ver.mp4', thumbnail: 'images/thumbnails/thumb_new-video-hero-ver.jpg', title: 'Social Media Vertical Reel (TikTok/Shorts)', album: 'Creative Reels & Promos', tools: ['CapCut AI', 'Google Gemini', 'Mobile Motion'], desc: '9:16 vertical motion reel engineered for high engagement on mobile platforms, social shorts, and Instagram Reels.' }
@@ -1108,6 +1109,9 @@
               </button>
               <button type="button" title="Duplicate Video Card" class="duplicate-video-btn text-xs text-cyan-400 hover:text-cyan-300 p-1.5 rounded hover:bg-cyan-500/10 cursor-pointer flex items-center gap-1">
                 <i class="fa fa-copy"></i>
+              </button>
+              <button type="button" title="Add Another Video Track Below" class="add-after-video-btn text-xs text-pink-400 hover:text-pink-300 p-1.5 rounded hover:bg-pink-500/10 cursor-pointer flex items-center gap-1">
+                <i class="fa fa-plus-circle"></i>
               </button>
               <button type="button" class="remove-video-btn text-xs text-rose-400 hover:text-rose-300 transition flex items-center gap-1.5 px-2.5 py-1 rounded hover:bg-rose-500/10 cursor-pointer">
                 <i class="fa fa-trash"></i> Remove
@@ -1602,6 +1606,27 @@
           });
         }
 
+        // Add After Button Handler
+        const addAfterBtn = card.querySelector('.add-after-video-btn');
+        if (addAfterBtn) {
+          addAfterBtn.addEventListener('click', () => {
+            const newVidData = {
+              id: 'vid_' + Date.now(),
+              title: 'New AI Video Creation',
+              album: albumInput.value || 'Gemini AI Workflows',
+              videoUrl: '',
+              thumbnail: 'images/thumbnails/thumb_new-video-hero-hor.jpg',
+              tools: ['Google Gemini', 'Google Flow'],
+              description: 'Created with AI prompting and video workflow automation.'
+            };
+            const newCard = createVideoCard(newVidData, 0);
+            card.parentNode.insertBefore(newCard, card.nextSibling);
+            updateVideoTrackNumbers();
+            newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            showAlert('info', 'New video slot added below! Upload your video file or choose an existing video.');
+          });
+        }
+
         // Remove listener
         card.querySelector('.remove-video-btn').addEventListener('click', () => {
           card.remove();
@@ -1662,7 +1687,7 @@
         });
       }
 
-      // Import All 12 Repository Videos Button
+      // Import All 13 Repository Videos Button
       const importAllVideosBtn = document.getElementById('importAllVideosBtn');
       if (importAllVideosBtn) {
         importAllVideosBtn.addEventListener('click', () => {
@@ -1856,21 +1881,34 @@
         // 9. AI Video Albums & Playlist
         if (data.aiVideo) {
           const vTitle = document.getElementById('video_title');
-          if (vTitle) vTitle.value = data.aiVideo.title || 'AI Video Production & Editing Showcase';
+          if (vTitle) vTitle.value = data.aiVideo.title || 'AI Video Production & Media Albums';
           const vSubtitle = document.getElementById('video_subtitle');
           if (vSubtitle) vSubtitle.value = data.aiVideo.subtitle || 'Generative Video Workflows with Gemini, ChatGPT & Google Flow';
 
-          const videoList = Array.isArray(data.aiVideo.videos) && data.aiVideo.videos.length > 0 
-            ? data.aiVideo.videos 
-            : (data.aiVideo.videoUrl ? [{
-                id: 'vid_1',
-                title: data.aiVideo.title || 'AI Video Production Showcase',
-                album: (data.aiVideo.albums && data.aiVideo.albums[0]) || 'Gemini AI Workflows',
-                videoUrl: data.aiVideo.videoUrl,
-                thumbnail: data.aiVideo.thumbnail || 'images/thumbnails/thumb_new-video-hero-hor.jpg',
-                tools: data.aiVideo.tools || ['Google Gemini', 'ChatGPT', 'Google Flow'],
-                description: data.aiVideo.description || ''
-              }] : []);
+          let videoList = Array.isArray(data.aiVideo.videos) && data.aiVideo.videos.length > 0 
+            ? [...data.aiVideo.videos] 
+            : [];
+
+          // Critical Safeguard: Ensure all repository videos are preserved in admin!
+          DEFAULT_SERVER_VIDEOS.forEach((item, i) => {
+            const normPath = item.path.toLowerCase().replace(/^\.\.\//, '').replace(/^\//, '');
+            const hasVideo = videoList.some(v => {
+              if (!v.videoUrl) return false;
+              const normV = v.videoUrl.toLowerCase().replace(/^\.\.\//, '').replace(/^\//, '');
+              return normV === normPath || normV.endsWith(normPath.replace('video/', ''));
+            });
+            if (!hasVideo) {
+              videoList.push({
+                id: 'vid-catalog-' + (i + 1),
+                title: item.title,
+                album: item.album,
+                videoUrl: item.path,
+                thumbnail: item.thumbnail,
+                tools: item.tools,
+                description: item.desc
+              });
+            }
+          });
 
           renderVideos(videoList);
         }
