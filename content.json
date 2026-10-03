@@ -13,7 +13,7 @@
   "about": {
     "heading": "About Me",
     "bio": "I am an IT professional with 18 years of experience in technical support, hardware, networking, and system management. I also create web applications and explore new technologies to solve real-world problems.",
-    "subText": "18 Years of Real-World IT Experience",
+    "subText": "After a website or custom IT system? I specialize in Python, Flask, responsive modern web design, server setup, and 24/7 technical support infrastructure.",
     "profileImage": "images/profile.png",
     "avatarImage": "images/profile.png",
     "techSkillsImage": "images/tech-skills.png"
@@ -221,7 +221,7 @@
     "copyright": "© 2026 LYRCH DEV (Richard Ong). All Rights Reserved."
   },
   "admin": {
-    "password": "admin"
+    "password": "112086"
   },
   "aiVideo": {
     "enabled": true,
@@ -234,6 +234,15 @@
       "Creative Reels & Promos"
     ],
     "videos": [
+      {
+        "id": "vid_1790997116742",
+        "title": "Untitled Scene 09 20 12 20 11 20260920202216",
+        "album": "Gemini AI Workflows",
+        "videoUrl": "video/Untitled_Scene_09-20_12_20_11_20260920202216.mp4",
+        "thumbnail": "images/thumbnails/thumb_Untitled_Scene_09-20_12_20_11_20260920202216.jpg",
+        "tools": ["Google Gemini", "Google Flow"],
+        "description": "Created with AI prompting and video workflow automation."
+      },
       {
         "id": "vid-1",
         "title": "Filipino Street Food Commercial",
@@ -352,14 +361,12 @@
         "description": "9:16 vertical motion reel engineered for high engagement on mobile platforms, social shorts, and Instagram Reels."
       }
     ],
-    "videoUrl": "video/Creat_me_comercial_eating_fili.mp4",
-    "thumbnail": "images/thumbnails/thumb_Creat_me_comercial_eating_fili.jpg",
+    "videoUrl": "video/Untitled_Scene_09-20_12_20_11_20260920202216.mp4",
+    "thumbnail": "images/thumbnails/thumb_Untitled_Scene_09-20_12_20_11_20260920202216.jpg",
     "tools": [
       "Google Gemini",
-      "ChatGPT",
-      "Runway Gen-3",
-      "CapCut"
+      "Google Flow"
     ],
-    "description": "Vibrant AI food commercial showcasing Filipino cuisine, dynamic camera zooms, and sound-synced appetizing visual flows."
+    "description": "Created with AI prompting and video workflow automation."
   }
 }

@@ -488,8 +488,8 @@
             <p class="text-sm text-slate-400 mt-1">Upload multiple videos and organize them into categorized albums (e.g. AI Commercials &amp; Ads, Gemini AI Workflows, Creative Reels &amp; Promos).</p>
           </div>
           <div class="flex flex-wrap items-center gap-2 self-start sm:self-auto">
-            <button id="importAllVideosBtn" type="button" title="Load all 13 video files available in repository" class="text-xs px-3.5 py-2.5 bg-slate-700/80 hover:bg-slate-700 text-pink-200 border border-pink-500/30 rounded-xl transition font-medium flex items-center gap-1.5 cursor-pointer">
-              <i class="fa fa-folder-open text-pink-400"></i> Import All 13 Videos
+            <button id="importAllVideosBtn" type="button" title="Load all 14 video files available in repository" class="text-xs px-3.5 py-2.5 bg-slate-700/80 hover:bg-slate-700 text-pink-200 border border-pink-500/30 rounded-xl transition font-medium flex items-center gap-1.5 cursor-pointer">
+              <i class="fa fa-folder-open text-pink-400"></i> Import All 14 Videos
             </button>
             <button id="addVideoBtn" type="button" class="text-xs px-4 py-2.5 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white rounded-xl transition font-semibold flex items-center gap-2 shadow-lg shadow-pink-600/20 cursor-pointer">
               <i class="fa fa-plus"></i> Add Video to Album
@@ -996,6 +996,7 @@
 
       // --- Setup Multi-Video Albums & Playlist Handlers ---
       const DEFAULT_SERVER_VIDEOS = [
+        { path: 'video/Untitled_Scene_09-20_12_20_11_20260920202216.mp4', thumbnail: 'images/thumbnails/thumb_Untitled_Scene_09-20_12_20_11_20260920202216.jpg', title: 'Untitled Scene 09 20 12 20 11 20260920202216', album: 'Gemini AI Workflows', tools: ['Google Gemini', 'Google Flow'], desc: 'Created with AI prompting and video workflow automation.' },
         { path: 'video/Creat_me_comercial_eating_fili.mp4', thumbnail: 'images/thumbnails/thumb_Creat_me_comercial_eating_fili.jpg', title: 'Filipino Street Food Commercial', album: 'AI Commercials & Ads', tools: ['Google Gemini', 'ChatGPT', 'Runway Gen-3', 'CapCut'], desc: 'Vibrant AI food commercial showcasing Filipino cuisine, dynamic camera zooms, and sound-synced appetizing visual flows.' },
         { path: 'video/Seductive_comercial_video_man.mp4', thumbnail: 'images/thumbnails/thumb_Seductive_comercial_video_man.jpg', title: 'Luxury Fragrance & Fashion Commercial', album: 'AI Commercials & Ads', tools: ['Google Flow', 'Gemini AI', 'Premiere Pro'], desc: 'High-end aesthetic commercial with dramatic studio lighting, slow-motion camera movement, and luxury brand pacing.' },
         { path: 'video/iphone.mp4', thumbnail: 'images/thumbnails/thumb_iphone.jpg', title: 'Next-Gen Smartphone Product Promo', album: 'AI Commercials & Ads', tools: ['Google Gemini', 'AI Motion', 'After Effects'], desc: 'Sleek 3D product showcase animation highlighting hardware curves, dynamic reflections, and tech commercial styling.' },
@@ -1687,7 +1688,7 @@
         });
       }
 
-      // Import All 13 Repository Videos Button
+      // Import All 14 Repository Videos Button
       const importAllVideosBtn = document.getElementById('importAllVideosBtn');
       if (importAllVideosBtn) {
         importAllVideosBtn.addEventListener('click', () => {
