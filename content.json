@@ -301,11 +301,11 @@
     ],
     "videos": [
       {
-        "id": "vid_1791018505455",
-        "title": "clip 9",
+        "id": "vid_1791018779542",
+        "title": "Video Ghibli style superhero skills 202608012043",
         "album": "Gemini AI Workflows",
-        "videoUrl": "video/clip_9.mp4",
-        "thumbnail": "images/thumbnails/thumb_clip_9.jpg",
+        "videoUrl": "video/Video_Ghibli_style_superhero_skills_202608012043.mp4",
+        "thumbnail": "images/thumbnails/thumb_Video_Ghibli_style_superhero_skills_202608012043.jpg",
         "tools": [
           "Google Gemini",
           "Google Flow"
@@ -481,8 +481,8 @@
         "description": "9:16 vertical motion reel engineered for high engagement on mobile platforms, social shorts, and Instagram Reels."
       }
     ],
-    "videoUrl": "video/clip_9.mp4",
-    "thumbnail": "images/thumbnails/thumb_clip_9.jpg",
+    "videoUrl": "video/Video_Ghibli_style_superhero_skills_202608012043.mp4",
+    "thumbnail": "images/thumbnails/thumb_Video_Ghibli_style_superhero_skills_202608012043.jpg",
     "tools": [
       "Google Gemini",
       "Google Flow"
