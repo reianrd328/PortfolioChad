@@ -1044,9 +1044,48 @@
     }
 
     // Video Theater & Album Playlist Logic
-    let currentVideoList = [];
-    let currentActiveVideoId = null;
+    const DEFAULT_PLAYLIST_VIDEOS = [
+      { id: 'vid_1790997116742', title: 'Untitled Scene 09 20 12 20 11 20260920202216', album: 'Gemini AI Workflows', videoUrl: 'video/Untitled_Scene_09-20_12_20_11_20260920202216.mp4', thumbnail: 'images/thumbnails/thumb_Untitled_Scene_09-20_12_20_11_20260920202216.jpg', tools: ['Google Gemini', 'Google Flow'], description: 'Created with AI prompting and video workflow automation.' },
+      { id: 'vid-1', title: 'Filipino Street Food Commercial', album: 'AI Commercials & Ads', videoUrl: 'video/Creat_me_comercial_eating_fili.mp4', thumbnail: 'images/thumbnails/thumb_Creat_me_comercial_eating_fili.jpg', tools: ['Google Gemini', 'ChatGPT', 'Runway Gen-3', 'CapCut'], description: 'Vibrant AI food commercial showcasing Filipino cuisine, dynamic camera zooms, and sound-synced appetizing visual flows.' },
+      { id: 'vid-2', title: 'Luxury Fragrance & Fashion Commercial', album: 'AI Commercials & Ads', videoUrl: 'video/Seductive_comercial_video_man.mp4', thumbnail: 'images/thumbnails/thumb_Seductive_comercial_video_man.jpg', tools: ['Google Flow', 'Gemini AI', 'Premiere Pro'], description: 'High-end aesthetic commercial with dramatic studio lighting, slow-motion camera movement, and luxury brand pacing.' },
+      { id: 'vid-3', title: 'Next-Gen Smartphone Product Promo', album: 'AI Commercials & Ads', videoUrl: 'video/iphone.mp4', thumbnail: 'images/thumbnails/thumb_iphone.jpg', tools: ['Google Gemini', 'AI Motion', 'After Effects'], description: 'Sleek 3D product showcase animation highlighting hardware curves, dynamic reflections, and tech commercial styling.' },
+      { id: 'vid-4', title: 'Cinematic Scene: Man Watching Clock Inside House', album: 'Gemini AI Workflows', videoUrl: 'video/Man_watching_clock_inside_house_20260919130641.mp4', thumbnail: 'images/thumbnails/thumb_Man_watching_clock_inside_house_20260919130641.jpg', tools: ['Google Gemini', 'Google Flow', 'Premiere Pro'], description: 'Pensive cinematic scene crafted with AI generative prompt workflows, exploring atmospheric lighting, tension, and realistic human pacing.' },
+      { id: 'vid-5', title: 'Filipino Cultural Heritage AI Story', album: 'Gemini AI Workflows', videoUrl: 'video/Create_me_prompt_ah_filipino_c.mp4', thumbnail: 'images/thumbnails/thumb_Create_me_prompt_ah_filipino_c.jpg', tools: ['Google Gemini', 'ChatGPT Prompting', 'Midjourney AI'], description: 'Cultural visual narrative generated through iterative Gemini prompting, capturing traditional Filipino warmth and scenery.' },
+      { id: 'vid-6', title: 'Magical Fantasy World Clip', album: 'Gemini AI Workflows', videoUrl: 'video/Create_me_video_clip_magical_t.mp4', thumbnail: 'images/thumbnails/thumb_Create_me_video_clip_magical_t.jpg', tools: ['Google Gemini', 'Google Flow', 'AI Synthesis'], description: 'Surreal magical landscape with mystical particle effects, glowing foliage, and atmospheric lighting crafted via generative prompt pipelines.' },
+      { id: 'vid-7', title: 'Community Giving & Empathy Reel', album: 'Gemini AI Workflows', videoUrl: 'video/donating.mp4', thumbnail: 'images/thumbnails/thumb_donating.jpg', tools: ['Google Gemini', 'ChatGPT / GPT-4o', 'Premiere Pro'], description: 'Heartfelt social message visual reel emphasizing community sharing, empathy, and emotional storytelling.' },
+      { id: 'vid-8', title: 'AI Generative Scene Synthesis', album: 'Gemini AI Workflows', videoUrl: 'video/clip_1.mp4', thumbnail: 'images/thumbnails/thumb_clip_1.jpg', tools: ['Google Gemini', 'Google Flow'], description: 'Created with AI prompting, realistic lighting, and video workflow automation.' },
+      { id: 'vid-9', title: 'AI Dynamic Scene Generation', album: 'Gemini AI Workflows', videoUrl: 'video/clip_3.mp4', thumbnail: 'images/thumbnails/thumb_clip_3.jpg', tools: ['Google Gemini', 'Google Flow', 'AI Motion'], description: 'Dynamic AI visual clip created with generative prompt pipelines and neural styling.' },
+      { id: 'vid-10', title: 'Portfolio Brand Opener & Intro', album: 'Creative Reels & Promos', videoUrl: 'video/intro.mp4', thumbnail: 'images/thumbnails/thumb_intro.jpg', tools: ['Google Flow', 'Premiere Pro', 'CapCut'], description: 'Punchy, fast-paced brand opener with cybernetic transitions, neon lighting, and high-impact sound design.' },
+      { id: 'vid-11', title: 'Generative AI Motion Clip', album: 'Creative Reels & Promos', videoUrl: 'video/6.mp4', thumbnail: 'images/thumbnails/thumb_6.jpg', tools: ['Google Gemini', 'CapCut AI', 'Google Flow'], description: 'Creative generative AI motion clip showcasing multi-model transitions and high visual pacing.' },
+      { id: 'vid-12', title: 'AI Production Showcase Reel (Widescreen)', album: 'Creative Reels & Promos', videoUrl: 'video/new-video-hero-hor.mp4', thumbnail: 'images/thumbnails/thumb_new-video-hero-hor.jpg', tools: ['Google Gemini', 'Google Flow', 'Premiere Pro'], description: 'Comprehensive 16:9 cinematic showcase reel combining multi-model generative visuals, color grading, and commercial editing.' },
+      { id: 'vid-13', title: 'Social Media Vertical Reel (TikTok/Shorts)', album: 'Creative Reels & Promos', videoUrl: 'video/new-video-hero-ver.mp4', thumbnail: 'images/thumbnails/thumb_new-video-hero-ver.jpg', tools: ['CapCut AI', 'Google Gemini', 'Mobile Motion'], description: '9:16 vertical motion reel engineered for high engagement on mobile platforms, social shorts, and Instagram Reels.' }
+    ];
+    let currentVideoList = [...DEFAULT_PLAYLIST_VIDEOS];
+    let currentActiveVideoId = currentVideoList[0].id;
     let currentSelectedAlbum = 'all';
+
+    function initVideoPlaylist() {
+      const albums = Array.from(new Set(currentVideoList.map(v => v.album).filter(Boolean)));
+      const albumTabsContainer = document.getElementById('videoAlbumTabs');
+      if (albumTabsContainer) {
+        let tabsHtml = `
+          <button onclick="filterVideoAlbum('all')" class="album-filter-btn ${currentSelectedAlbum === 'all' ? 'active bg-brand-pink text-white' : 'bg-slate-800 text-slate-300 hover:text-white'} text-xs font-semibold px-3 py-1.5 rounded-full transition shrink-0 whitespace-nowrap" data-album="all">
+            <i class="fa fa-layer-group mr-1.5 text-[10px]"></i> All Videos (${currentVideoList.length})
+          </button>
+        `;
+        albums.forEach(alb => {
+          const count = currentVideoList.filter(v => v.album === alb).length;
+          tabsHtml += `
+            <button onclick="filterVideoAlbum('${alb.replace(/'/g, "\\'")}')" class="album-filter-btn ${currentSelectedAlbum === alb ? 'active bg-brand-pink text-white' : 'bg-slate-800 text-slate-300 hover:text-white'} text-xs font-semibold px-3 py-1.5 rounded-full transition shrink-0 whitespace-nowrap" data-album="${alb.replace(/"/g, '&quot;')}">
+              ${alb} (${count})
+            </button>
+          `;
+        });
+        albumTabsContainer.innerHTML = tabsHtml;
+      }
+      playVideoItem(currentActiveVideoId);
+    }
+    initVideoPlaylist();
 
     function openVideoModal() {
       const modal = document.getElementById('videoModal');
@@ -1358,9 +1397,9 @@
           if (data.aiVideo.title) document.getElementById('modalVideoTitle').textContent = data.aiVideo.title;
           if (data.aiVideo.subtitle) document.getElementById('modalVideoSubtitle').textContent = data.aiVideo.subtitle;
 
-          let videos = data.aiVideo.videos || [];
-          if (videos.length === 0 && data.aiVideo.videoUrl) {
-            videos = [{
+          let fetchedVideos = data.aiVideo.videos || [];
+          if (fetchedVideos.length === 0 && data.aiVideo.videoUrl) {
+            fetchedVideos = [{
               id: 'vid-default',
               title: data.aiVideo.title || 'AI Video Showcase',
               album: 'Generative AI',
@@ -1369,23 +1408,31 @@
               description: data.aiVideo.description || ''
             }];
           }
-          currentVideoList = videos;
+
+          if (fetchedVideos.length > 0) {
+            // Merge with DEFAULT_PLAYLIST_VIDEOS so standard repository videos are never lost
+            const fetchedUrls = new Set(fetchedVideos.map(v => (v.videoUrl || '').trim().toLowerCase()));
+            const missingDefaults = DEFAULT_PLAYLIST_VIDEOS.filter(def => !fetchedUrls.has((def.videoUrl || '').trim().toLowerCase()));
+            currentVideoList = [...fetchedVideos, ...missingDefaults];
+          } else {
+            currentVideoList = [...DEFAULT_PLAYLIST_VIDEOS];
+          }
 
           // Build album list
           const albums = (data.aiVideo.albums && data.aiVideo.albums.length > 0)
             ? data.aiVideo.albums
-            : Array.from(new Set(videos.map(v => v.album).filter(Boolean)));
+            : Array.from(new Set(currentVideoList.map(v => v.album).filter(Boolean)));
 
           // Render Album Tabs
           const albumTabsContainer = document.getElementById('videoAlbumTabs');
           if (albumTabsContainer) {
             let tabsHtml = `
               <button onclick="filterVideoAlbum('all')" class="album-filter-btn ${currentSelectedAlbum === 'all' ? 'active bg-brand-pink text-white' : 'bg-slate-800 text-slate-300 hover:text-white'} text-xs font-semibold px-3 py-1.5 rounded-full transition shrink-0 whitespace-nowrap" data-album="all">
-                <i class="fa fa-layer-group mr-1.5 text-[10px]"></i> All Videos (${videos.length})
+                <i class="fa fa-layer-group mr-1.5 text-[10px]"></i> All Videos (${currentVideoList.length})
               </button>
             `;
             albums.forEach(alb => {
-              const count = videos.filter(v => v.album === alb).length;
+              const count = currentVideoList.filter(v => v.album === alb).length;
               tabsHtml += `
                 <button onclick="filterVideoAlbum('${alb.replace(/'/g, "\\'")}')" class="album-filter-btn ${currentSelectedAlbum === alb ? 'active bg-brand-pink text-white' : 'bg-slate-800 text-slate-300 hover:text-white'} text-xs font-semibold px-3 py-1.5 rounded-full transition shrink-0 whitespace-nowrap" data-album="${alb.replace(/"/g, '&quot;')}">
                   ${alb} (${count})
@@ -1395,9 +1442,9 @@
             albumTabsContainer.innerHTML = tabsHtml;
           }
 
-          if (videos.length > 0) {
-            if (!currentActiveVideoId || !videos.some(v => v.id === currentActiveVideoId)) {
-              currentActiveVideoId = videos[0].id;
+          if (currentVideoList.length > 0) {
+            if (!currentActiveVideoId || !currentVideoList.some(v => v.id === currentActiveVideoId)) {
+              currentActiveVideoId = currentVideoList[0].id;
             }
             playVideoItem(currentActiveVideoId);
           }
