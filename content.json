@@ -301,11 +301,11 @@
     ],
     "videos": [
       {
-        "id": "vid_1791018779542",
-        "title": "Video Ghibli style superhero skills 202608012043",
+        "id": "vid_1791020198697",
+        "title": "Filipino jeepney driver passenge… 202608012111",
         "album": "Gemini AI Workflows",
-        "videoUrl": "video/Video_Ghibli_style_superhero_skills_202608012043.mp4",
-        "thumbnail": "images/thumbnails/thumb_Video_Ghibli_style_superhero_skills_202608012043.jpg",
+        "videoUrl": "video/Filipino_jeepney_driver_passenge__202608012111.mp4",
+        "thumbnail": "images/thumbnails/thumb_Filipino_jeepney_driver_passenge__202608012111.jpg",
         "tools": [
           "Google Gemini",
           "Google Flow"
@@ -481,8 +481,8 @@
         "description": "9:16 vertical motion reel engineered for high engagement on mobile platforms, social shorts, and Instagram Reels."
       }
     ],
-    "videoUrl": "video/Video_Ghibli_style_superhero_skills_202608012043.mp4",
-    "thumbnail": "images/thumbnails/thumb_Video_Ghibli_style_superhero_skills_202608012043.jpg",
+    "videoUrl": "video/Filipino_jeepney_driver_passenge__202608012111.mp4",
+    "thumbnail": "images/thumbnails/thumb_Filipino_jeepney_driver_passenge__202608012111.jpg",
     "tools": [
       "Google Gemini",
       "Google Flow"
