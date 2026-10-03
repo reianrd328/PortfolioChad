@@ -292,7 +292,7 @@
   "aiVideo": {
     "enabled": true,
     "badge": "AI Video & Creative Media",
-    "title": "AI Video Production & Media Albums 1234",
+    "title": "AI Video Production & Media Albums",
     "subtitle": "Generative Video Workflows with Gemini, ChatGPT & Google Flow",
     "albums": [
       "Gemini AI Workflows",
@@ -301,11 +301,11 @@
     ],
     "videos": [
       {
-        "id": "vid_1791018253880",
-        "title": "clip10",
+        "id": "vid_1791018505455",
+        "title": "clip 9",
         "album": "Gemini AI Workflows",
-        "videoUrl": "video/clip10.mp4",
-        "thumbnail": "images/thumbnails/thumb_clip10.jpg",
+        "videoUrl": "video/clip_9.mp4",
+        "thumbnail": "images/thumbnails/thumb_clip_9.jpg",
         "tools": [
           "Google Gemini",
           "Google Flow"
@@ -481,8 +481,8 @@
         "description": "9:16 vertical motion reel engineered for high engagement on mobile platforms, social shorts, and Instagram Reels."
       }
     ],
-    "videoUrl": "video/clip10.mp4",
-    "thumbnail": "images/thumbnails/thumb_clip10.jpg",
+    "videoUrl": "video/clip_9.mp4",
+    "thumbnail": "images/thumbnails/thumb_clip_9.jpg",
     "tools": [
       "Google Gemini",
       "Google Flow"
