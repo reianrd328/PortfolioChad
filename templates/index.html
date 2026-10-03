@@ -364,7 +364,7 @@
           </div>
 
           <!-- Project Cards Grid: 1 col on mobile, 2 col on tablet (640px-768px), 3 col on md+ -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-3.5">
+          <div id="featuredProjectsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-3.5">
 
             <!-- Project 1: PAWSHOP -->
             <div class="bg-[#0a0f1d] border border-white/5 hover:border-brand-pink/40 rounded-xl p-3 flex flex-col justify-between group transition">
@@ -903,18 +903,48 @@
           <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5 sm:mb-3 flex items-center gap-2">
             <i class="fa fa-globe text-cyan-400"></i> Deployed Web Systems &amp; Client Projects
           </h4>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
-            <a href="https://www.paunoonoo.art/" target="_blank" rel="noopener noreferrer" class="bg-slate-900/80 border border-white/5 hover:border-brand-pink/40 p-3 rounded-xl block group transition">
-              <p class="text-xs font-bold text-white group-hover:text-brand-pink transition">paunoonoo.art</p>
-              <p class="text-[11px] text-slate-400 mt-1">Creative art & portfolio showcase website.</p>
-            </a>
+          <div id="deployedProjectsList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
             <a href="https://technical-preventive-hub.onrender.com/" target="_blank" rel="noopener noreferrer" class="bg-slate-900/80 border border-white/5 hover:border-brand-pink/40 p-3 rounded-xl block group transition">
-              <p class="text-xs font-bold text-white group-hover:text-brand-pink transition">Hardware Log Deployment</p>
-              <p class="text-[11px] text-slate-400 mt-1">Preventive maintenance & hardware ticketing cloud system.</p>
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-bold text-white group-hover:text-brand-pink transition truncate">PAWSHOP IT Command Center</p>
+                <i class="fa fa-arrow-up-right-from-square text-[10px] text-brand-pink opacity-80 group-hover:opacity-100 shrink-0 ml-1"></i>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">Ticketing system for IT department with branch management and monitoring.</p>
+            </a>
+            <a href="https://github.com/reianrd328/hardware-inventory-system" target="_blank" rel="noopener noreferrer" class="bg-slate-900/80 border border-white/5 hover:border-brand-pink/40 p-3 rounded-xl block group transition">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-bold text-white group-hover:text-brand-pink transition truncate">Warehouse Inventory System</p>
+                <i class="fa fa-arrow-up-right-from-square text-[10px] text-brand-pink opacity-80 group-hover:opacity-100 shrink-0 ml-1"></i>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">Python & Flask inventory system across 100+ branches.</p>
+            </a>
+            <a href="https://github.com/reianrd328/FoodCartManager" target="_blank" rel="noopener noreferrer" class="bg-slate-900/80 border border-white/5 hover:border-brand-pink/40 p-3 rounded-xl block group transition">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-bold text-white group-hover:text-brand-pink transition truncate">FoodCartManager</p>
+                <i class="fa fa-arrow-up-right-from-square text-[10px] text-brand-pink opacity-80 group-hover:opacity-100 shrink-0 ml-1"></i>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">Rental & vendor management with mobile Sunmi V2 Pro support.</p>
+            </a>
+            <a href="https://www.paunoonoo.art/" target="_blank" rel="noopener noreferrer" class="bg-slate-900/80 border border-white/5 hover:border-brand-pink/40 p-3 rounded-xl block group transition">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-bold text-white group-hover:text-brand-pink transition truncate">paunoonoo.art</p>
+                <i class="fa fa-arrow-up-right-from-square text-[10px] text-brand-pink opacity-80 group-hover:opacity-100 shrink-0 ml-1"></i>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">Creative art & portfolio showcase website.</p>
             </a>
             <a href="https://www.johnnolandercomedy.com/" target="_blank" rel="noopener noreferrer" class="bg-slate-900/80 border border-white/5 hover:border-brand-pink/40 p-3 rounded-xl block group transition">
-              <p class="text-xs font-bold text-white group-hover:text-brand-pink transition">johnnolandercomedy.com</p>
-              <p class="text-[11px] text-slate-400 mt-1">Standup comedian media and events website.</p>
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-bold text-white group-hover:text-brand-pink transition truncate">johnnolandercomedy.com</p>
+                <i class="fa fa-arrow-up-right-from-square text-[10px] text-brand-pink opacity-80 group-hover:opacity-100 shrink-0 ml-1"></i>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">Standup comedian media and events website.</p>
+            </a>
+            <a href="https://technical-preventive-hub.onrender.com/" target="_blank" rel="noopener noreferrer" class="bg-slate-900/80 border border-white/5 hover:border-brand-pink/40 p-3 rounded-xl block group transition">
+              <div class="flex items-center justify-between">
+                <p class="text-xs font-bold text-white group-hover:text-brand-pink transition truncate">Hardware Log Deployment</p>
+                <i class="fa fa-arrow-up-right-from-square text-[10px] text-brand-pink opacity-80 group-hover:opacity-100 shrink-0 ml-1"></i>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">Preventive maintenance & hardware ticketing cloud system.</p>
             </a>
           </div>
         </div>
@@ -1248,59 +1278,88 @@
     async function loadGitHubRepos() {
       if (reposLoaded) return;
       const listEl = document.getElementById('githubReposList');
+      if (!listEl) return;
+
+      const isLocal = window.location.protocol === 'http:' && (window.location.port === '5000' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
       try {
-        // Try Python API first, fallback to direct GitHub API
         let repos = [];
-        try {
-          const res = await fetch('/api/github/repos');
-          if (res.ok) {
-            const data = await res.json();
-            repos = data.repos || [];
-          }
-        } catch (e) {
-          // Fallback to direct GitHub public API
-          const res = await fetch('https://api.github.com/users/reianrd328/repos?sort=updated&per_page=12');
-          if (res.ok) {
-            const raw = await res.json();
-            repos = raw.map(r => ({
-              name: r.name,
-              description: r.description || 'Public repository',
-              language: r.language || 'Code',
-              stars: r.stargazers_count,
-              html_url: r.html_url
-            }));
+
+        // 1. Try local Flask backend if running locally
+        if (isLocal) {
+          try {
+            const res = await fetch('/api/github/repos');
+            if (res.ok) {
+              const data = await res.json();
+              if (data && data.repos && data.repos.length > 0) {
+                repos = data.repos;
+              }
+            }
+          } catch (e) {
+            console.warn('Local repos API failed, switching to public GitHub API:', e);
           }
         }
 
-        if (repos.length > 0) {
-          listEl.innerHTML = repos.map(r => `
-            <a href="${r.html_url}" target="_blank" rel="noopener noreferrer" class="bg-slate-900/90 border border-white/5 hover:border-brand-pink/50 p-3.5 rounded-xl block group transition">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-white group-hover:text-brand-pink transition flex items-center gap-1.5 truncate">
-                  <i class="fa fa-folder text-brand-pink text-xs"></i>
-                  ${r.name}
-                </span>
-                <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 shrink-0">
-                  ${r.language}
-                </span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1 line-clamp-2 leading-relaxed">
-                ${r.description}
-              </p>
-              <div class="flex items-center gap-3 mt-2 text-[10px] text-slate-500">
-                <span><i class="fa fa-star text-amber-400 mr-1"></i>${r.stars || 0}</span>
-                <span class="text-brand-pink group-hover:underline flex items-center gap-1">
-                  View Repository <i class="fa fa-arrow-right text-[8px]"></i>
-                </span>
-              </div>
-            </a>
-          `).join('');
-          reposLoaded = true;
-        } else {
-          listEl.innerHTML = '<p class="text-xs text-slate-400 col-span-2 text-center py-2">No repositories found.</p>';
+        // 2. Fetch directly from GitHub Public API (Works on GitHub Pages & live custom domains)
+        if (!repos || repos.length === 0) {
+          try {
+            const res = await fetch('https://api.github.com/users/reianrd328/repos?sort=updated&per_page=12');
+            if (res.ok) {
+              const raw = await res.json();
+              if (Array.isArray(raw) && raw.length > 0) {
+                repos = raw.map(r => ({
+                  name: r.name,
+                  description: r.description || 'Public repository & open-source project',
+                  language: r.language || 'Code',
+                  stars: r.stargazers_count || 0,
+                  html_url: r.html_url
+                }));
+              }
+            }
+          } catch (e) {
+            console.warn('Public GitHub API failed:', e);
+          }
         }
+
+        // 3. Fallback to @reianrd328 verified repository list if GitHub API is rate-limited
+        if (!repos || repos.length === 0) {
+          repos = [
+            { name: 'PortfolioChad', description: 'Personal portfolio, modern bento UI & Admin CMS.', language: 'Python / HTML', stars: 1, html_url: 'https://github.com/reianrd328/PortfolioChad' },
+            { name: 'FoodCartManager', description: 'Food cart rental and POS management system with Sunmi V2 Pro support.', language: 'Python / Flask', stars: 0, html_url: 'https://github.com/reianrd328/FoodCartManager' },
+            { name: 'hardware-inventory-system', description: 'Preventive maintenance & hardware ticketing cloud system.', language: 'Python', stars: 0, html_url: 'https://github.com/reianrd328/hardware-inventory-system' },
+            { name: 'personal-finance-system', description: 'Comprehensive personal budgeting and expense tracking dashboard.', language: 'JavaScript', stars: 0, html_url: 'https://github.com/reianrd328/personal-finance-system' },
+            { name: 'Jen-paminta', description: 'E-commerce and agricultural product storefront application.', language: 'HTML', stars: 0, html_url: 'https://github.com/reianrd328/Jen-paminta' },
+            { name: 'TobiasConnect', description: 'Community connection, communication, and directory platform.', language: 'TypeScript', stars: 0, html_url: 'https://github.com/reianrd328/TobiasConnect' },
+            { name: 'myprofile', description: 'Developer biography, showcase and interactive resume.', language: 'CSS', stars: 0, html_url: 'https://github.com/reianrd328/myprofile' },
+            { name: 'it-inventory-system', description: 'Full branch IT asset tracking and management system.', language: 'Python', stars: 0, html_url: 'https://github.com/reianrd328/it-inventory-system' }
+          ];
+        }
+
+        listEl.innerHTML = repos.map(r => `
+          <a href="${r.html_url}" target="_blank" rel="noopener noreferrer" class="bg-slate-900/90 border border-white/5 hover:border-brand-pink/50 p-3.5 rounded-xl block group transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-white group-hover:text-brand-pink transition flex items-center gap-1.5 truncate">
+                <i class="fa fa-folder text-brand-pink text-xs"></i>
+                ${r.name}
+              </span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 shrink-0">
+                ${r.language || 'Code'}
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+              ${r.description || 'Public repository & open-source project'}
+            </p>
+            <div class="flex items-center gap-3 mt-2 text-[10px] text-slate-500">
+              <span><i class="fa fa-star text-amber-400 mr-1"></i>${r.stars || 0}</span>
+              <span class="text-brand-pink group-hover:underline flex items-center gap-1">
+                View Repository <i class="fa fa-arrow-right text-[8px]"></i>
+              </span>
+            </div>
+          </a>
+        `).join('');
+        reposLoaded = true;
       } catch (err) {
-        listEl.innerHTML = '<p class="text-xs text-red-400 col-span-2 text-center py-2">Could not load GitHub repositories.</p>';
+        console.error('Error rendering repos:', err);
       }
     }
 
@@ -1452,6 +1511,70 @@
               currentActiveVideoId = currentVideoList[0].id;
             }
             playVideoItem(currentActiveVideoId);
+          }
+        }
+
+        // Synchronize Portfolio Projects from content.json (Home Page Grid & Modal List)
+        if (data.portfolio && Array.isArray(data.portfolio) && data.portfolio.length > 0) {
+          const featuredGrid = document.getElementById('featuredProjectsGrid');
+          const deployedGrid = document.getElementById('deployedProjectsList');
+          
+          const featProjectsMap = {};
+          if (data.featuredProjects && Array.isArray(data.featuredProjects)) {
+            data.featuredProjects.forEach(fp => {
+              if (fp.title) featProjectsMap[fp.title.toLowerCase().trim()] = fp;
+            });
+          }
+
+          if (featuredGrid) {
+            featuredGrid.innerHTML = data.portfolio.map((p, idx) => {
+              const matched = featProjectsMap[(p.title || '').toLowerCase().trim()];
+              const desc = (matched && matched.description) || p.categoryLabel || 'Live deployed web application & system.';
+              const tags = (matched && matched.tags) || [p.categoryLabel || 'Web App', 'Deployed'];
+              const imgSrc = p.image || 'images/profile.png';
+              const pUrl = p.url || '#';
+
+              return `
+                <div class="bg-[#0a0f1d] border border-white/5 hover:border-brand-pink/40 rounded-xl p-3 flex flex-col justify-between group transition">
+                  <div>
+                    <div class="relative overflow-hidden rounded-lg mb-2.5 aspect-video bg-slate-900 border border-white/5">
+                      <img src="${imgSrc}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='images/profile.png';">
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-brand-pink transition leading-snug">
+                      ${p.title}
+                    </h4>
+                    <p class="text-[11px] text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                      ${desc}
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-3 mt-2 border-t border-white/5">
+                    <div class="flex flex-wrap gap-1">
+                      ${tags.slice(0, 3).map(t => `<span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">${t}</span>`).join('')}
+                    </div>
+                    <a href="${pUrl}" target="_blank" rel="noopener noreferrer" title="Open ${p.title}" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full btn-pink-gradient flex items-center justify-center text-white text-[11px] shadow hover:scale-110 transition shrink-0">
+                      <i class="fa fa-arrow-up-right-from-square"></i>
+                    </a>
+                  </div>
+                </div>
+              `;
+            }).join('');
+          }
+
+          if (deployedGrid) {
+            deployedGrid.innerHTML = data.portfolio.map(p => {
+              const pUrl = p.url || '#';
+              const matched = featProjectsMap[(p.title || '').toLowerCase().trim()];
+              const desc = (matched && matched.description) || p.categoryLabel || 'Live deployed web application & system.';
+              return `
+                <a href="${pUrl}" target="_blank" rel="noopener noreferrer" class="bg-slate-900/80 border border-white/5 hover:border-brand-pink/40 p-3 rounded-xl block group transition">
+                  <div class="flex items-center justify-between">
+                    <p class="text-xs font-bold text-white group-hover:text-brand-pink transition truncate">${p.title}</p>
+                    <i class="fa fa-arrow-up-right-from-square text-[10px] text-brand-pink opacity-80 group-hover:opacity-100 shrink-0 ml-1"></i>
+                  </div>
+                  <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">${desc}</p>
+                </a>
+              `;
+            }).join('');
           }
         }
       } catch (e) {
