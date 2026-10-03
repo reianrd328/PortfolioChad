@@ -51,24 +51,78 @@
     ]
   },
   "skills": [
-    { "name": "Python", "percent": 95 },
-    { "name": "HTML5", "percent": 92 },
-    { "name": "CSS3", "percent": 90 },
-    { "name": "JavaScript", "percent": 88 },
-    { "name": "Flask", "percent": 92 },
-    { "name": "MySQL", "percent": 88 },
-    { "name": "Git / GitHub", "percent": 90 },
-    { "name": "WordPress", "percent": 85 },
-    { "name": "Networking", "percent": 94 },
-    { "name": "Windows", "percent": 96 },
-    { "name": "Hardware", "percent": 95 },
-    { "name": "TeamViewer", "percent": 92 },
-    { "name": "AnyDesk", "percent": 90 },
-    { "name": "UltraViewer", "percent": 88 },
-    { "name": "Google Gemini", "percent": 94 },
-    { "name": "ChatGPT / GPT-4o", "percent": 92 },
-    { "name": "Google Flow", "percent": 88 },
-    { "name": "AI Video Editing", "percent": 90 }
+    {
+      "name": "Python",
+      "percent": 95
+    },
+    {
+      "name": "HTML5",
+      "percent": 92
+    },
+    {
+      "name": "CSS3",
+      "percent": 90
+    },
+    {
+      "name": "JavaScript",
+      "percent": 88
+    },
+    {
+      "name": "Flask",
+      "percent": 92
+    },
+    {
+      "name": "MySQL",
+      "percent": 88
+    },
+    {
+      "name": "Git / GitHub",
+      "percent": 90
+    },
+    {
+      "name": "WordPress",
+      "percent": 85
+    },
+    {
+      "name": "Networking",
+      "percent": 94
+    },
+    {
+      "name": "Windows",
+      "percent": 96
+    },
+    {
+      "name": "Hardware",
+      "percent": 95
+    },
+    {
+      "name": "TeamViewer",
+      "percent": 92
+    },
+    {
+      "name": "AnyDesk",
+      "percent": 90
+    },
+    {
+      "name": "UltraViewer",
+      "percent": 88
+    },
+    {
+      "name": "Google Gemini",
+      "percent": 94
+    },
+    {
+      "name": "ChatGPT / GPT-4o",
+      "percent": 92
+    },
+    {
+      "name": "Google Flow",
+      "percent": 88
+    },
+    {
+      "name": "AI Video Editing",
+      "percent": 90
+    }
   ],
   "portfolio": [
     {
@@ -120,7 +174,11 @@
       "title": "PAWSHOP IT Command Center",
       "description": "Ticketing system for IT department with branch management, user roles, and equipment monitoring.",
       "image": "images/theme/pawshop_thumb.png",
-      "tags": ["Flask", "MySQL", "Bootstrap"],
+      "tags": [
+        "Flask",
+        "MySQL",
+        "Bootstrap"
+      ],
       "url": "https://technical-preventive-hub.onrender.com/",
       "github": "https://github.com/reianrd328"
     },
@@ -129,7 +187,11 @@
       "title": "Warehouse Inventory System",
       "description": "Monitor inventory across 100+ branches with approvals, tracking, and live reports.",
       "image": "images/theme/warehouse_thumb.png",
-      "tags": ["Python", "Flask", "MySQL"],
+      "tags": [
+        "Python",
+        "Flask",
+        "MySQL"
+      ],
       "url": "https://technical-preventive-hub.onrender.com/",
       "github": "https://github.com/reianrd328/hardware-inventory-system"
     },
@@ -138,7 +200,11 @@
       "title": "FoodCartManager",
       "description": "Rental and vendor management system with admin panel and mobile support (Sunmi V2 Pro).",
       "image": "images/theme/foodcart_thumb.png",
-      "tags": ["Flask", "TiDB", "Android"],
+      "tags": [
+        "Flask",
+        "TiDB",
+        "Android"
+      ],
       "url": "https://github.com/reianrd328/FoodCartManager",
       "github": "https://github.com/reianrd328/FoodCartManager"
     }
@@ -229,140 +295,194 @@
     "title": "AI Video Production & Media Albums",
     "subtitle": "Generative Video Workflows with Gemini, ChatGPT & Google Flow",
     "albums": [
-      "AI Commercials & Ads",
       "Gemini AI Workflows",
+      "AI Commercials & Ads",
       "Creative Reels & Promos"
     ],
     "videos": [
       {
-        "id": "vid_1790997116742",
+        "id": "vid_1791018024506",
+        "title": "5.1",
+        "album": "Gemini AI Workflows",
+        "videoUrl": "video/5.1.mp4",
+        "thumbnail": "images/thumbnails/thumb_5.1.jpg",
+        "tools": [
+          "Google Gemini",
+          "Google Flow"
+        ],
+        "description": "Created with AI prompting and video workflow automation."
+      },
+      {
+        "id": "vid-catalog-1",
         "title": "Untitled Scene 09 20 12 20 11 20260920202216",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/Untitled_Scene_09-20_12_20_11_20260920202216.mp4",
         "thumbnail": "images/thumbnails/thumb_Untitled_Scene_09-20_12_20_11_20260920202216.jpg",
-        "tools": ["Google Gemini", "Google Flow"],
+        "tools": [
+          "Google Gemini",
+          "Google Flow"
+        ],
         "description": "Created with AI prompting and video workflow automation."
       },
       {
-        "id": "vid-1",
+        "id": "vid-catalog-2",
         "title": "Filipino Street Food Commercial",
         "album": "AI Commercials & Ads",
         "videoUrl": "video/Creat_me_comercial_eating_fili.mp4",
         "thumbnail": "images/thumbnails/thumb_Creat_me_comercial_eating_fili.jpg",
-        "tools": ["Google Gemini", "ChatGPT", "Runway Gen-3", "CapCut"],
+        "tools": [
+          "Google Gemini",
+          "ChatGPT",
+          "Runway Gen-3",
+          "CapCut"
+        ],
         "description": "Vibrant AI food commercial showcasing Filipino cuisine, dynamic camera zooms, and sound-synced appetizing visual flows."
       },
       {
-        "id": "vid-2",
+        "id": "vid-catalog-3",
         "title": "Luxury Fragrance & Fashion Commercial",
         "album": "AI Commercials & Ads",
         "videoUrl": "video/Seductive_comercial_video_man.mp4",
         "thumbnail": "images/thumbnails/thumb_Seductive_comercial_video_man.jpg",
-        "tools": ["Google Flow", "Gemini AI", "Premiere Pro"],
+        "tools": [
+          "Google Flow",
+          "Gemini AI",
+          "Premiere Pro"
+        ],
         "description": "High-end aesthetic commercial with dramatic studio lighting, slow-motion camera movement, and luxury brand pacing."
       },
       {
-        "id": "vid-3",
+        "id": "vid-catalog-4",
         "title": "Next-Gen Smartphone Product Promo",
         "album": "AI Commercials & Ads",
         "videoUrl": "video/iphone.mp4",
         "thumbnail": "images/thumbnails/thumb_iphone.jpg",
-        "tools": ["Google Gemini", "AI Motion", "After Effects"],
+        "tools": [
+          "Google Gemini",
+          "AI Motion",
+          "After Effects"
+        ],
         "description": "Sleek 3D product showcase animation highlighting hardware curves, dynamic reflections, and tech commercial styling."
       },
       {
-        "id": "vid-4",
+        "id": "vid-catalog-5",
         "title": "Cinematic Scene: Man Watching Clock Inside House",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/Man_watching_clock_inside_house_20260919130641.mp4",
         "thumbnail": "images/thumbnails/thumb_Man_watching_clock_inside_house_20260919130641.jpg",
-        "tools": ["Google Gemini", "Google Flow", "Premiere Pro"],
+        "tools": [
+          "Google Gemini",
+          "Google Flow",
+          "Premiere Pro"
+        ],
         "description": "Pensive cinematic scene crafted with AI generative prompt workflows, exploring atmospheric lighting, tension, and realistic human pacing."
       },
       {
-        "id": "vid-5",
+        "id": "vid-catalog-6",
         "title": "Filipino Cultural Heritage AI Story",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/Create_me_prompt_ah_filipino_c.mp4",
         "thumbnail": "images/thumbnails/thumb_Create_me_prompt_ah_filipino_c.jpg",
-        "tools": ["Google Gemini", "ChatGPT Prompting", "Midjourney AI"],
+        "tools": [
+          "Google Gemini",
+          "ChatGPT Prompting",
+          "Midjourney AI"
+        ],
         "description": "Cultural visual narrative generated through iterative Gemini prompting, capturing traditional Filipino warmth and scenery."
       },
       {
-        "id": "vid-6",
+        "id": "vid-catalog-7",
         "title": "Magical Fantasy World Clip",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/Create_me_video_clip_magical_t.mp4",
         "thumbnail": "images/thumbnails/thumb_Create_me_video_clip_magical_t.jpg",
-        "tools": ["Google Gemini", "Google Flow", "AI Synthesis"],
+        "tools": [
+          "Google Gemini",
+          "Google Flow",
+          "AI Synthesis"
+        ],
         "description": "Surreal magical landscape with mystical particle effects, glowing foliage, and atmospheric lighting crafted via generative prompt pipelines."
       },
       {
-        "id": "vid-7",
+        "id": "vid-catalog-8",
         "title": "Community Giving & Empathy Reel",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/donating.mp4",
         "thumbnail": "images/thumbnails/thumb_donating.jpg",
-        "tools": ["Google Gemini", "ChatGPT / GPT-4o", "Premiere Pro"],
+        "tools": [
+          "Google Gemini",
+          "ChatGPT / GPT-4o",
+          "Premiere Pro"
+        ],
         "description": "Heartfelt social message visual reel emphasizing community sharing, empathy, and emotional storytelling."
       },
       {
-        "id": "vid-8",
+        "id": "vid-catalog-9",
         "title": "AI Generative Scene Synthesis",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/clip_1.mp4",
         "thumbnail": "images/thumbnails/thumb_clip_1.jpg",
-        "tools": ["Google Gemini", "Google Flow"],
+        "tools": [
+          "Google Gemini",
+          "Google Flow"
+        ],
         "description": "Created with AI prompting, realistic lighting, and video workflow automation."
       },
       {
-        "id": "vid-9",
+        "id": "vid-catalog-10",
         "title": "AI Dynamic Scene Generation",
         "album": "Gemini AI Workflows",
         "videoUrl": "video/clip_3.mp4",
         "thumbnail": "images/thumbnails/thumb_clip_3.jpg",
-        "tools": ["Google Gemini", "Google Flow", "AI Motion"],
+        "tools": [
+          "Google Gemini",
+          "Google Flow",
+          "AI Motion"
+        ],
         "description": "Dynamic AI visual clip created with generative prompt pipelines and neural styling."
       },
       {
-        "id": "vid-10",
+        "id": "vid-catalog-11",
         "title": "Portfolio Brand Opener & Intro",
         "album": "Creative Reels & Promos",
         "videoUrl": "video/intro.mp4",
         "thumbnail": "images/thumbnails/thumb_intro.jpg",
-        "tools": ["Google Flow", "Premiere Pro", "CapCut"],
+        "tools": [
+          "Google Flow",
+          "Premiere Pro",
+          "CapCut"
+        ],
         "description": "Punchy, fast-paced brand opener with cybernetic transitions, neon lighting, and high-impact sound design."
       },
       {
-        "id": "vid-11",
-        "title": "Generative AI Motion Clip",
-        "album": "Creative Reels & Promos",
-        "videoUrl": "video/6.mp4",
-        "thumbnail": "images/thumbnails/thumb_6.jpg",
-        "tools": ["Google Gemini", "CapCut AI", "Google Flow"],
-        "description": "Creative generative AI motion clip showcasing multi-model transitions and high visual pacing."
-      },
-      {
-        "id": "vid-12",
+        "id": "vid-catalog-13",
         "title": "AI Production Showcase Reel (Widescreen)",
         "album": "Creative Reels & Promos",
         "videoUrl": "video/new-video-hero-hor.mp4",
         "thumbnail": "images/thumbnails/thumb_new-video-hero-hor.jpg",
-        "tools": ["Google Gemini", "Google Flow", "Premiere Pro"],
+        "tools": [
+          "Google Gemini",
+          "Google Flow",
+          "Premiere Pro"
+        ],
         "description": "Comprehensive 16:9 cinematic showcase reel combining multi-model generative visuals, color grading, and commercial editing."
       },
       {
-        "id": "vid-13",
+        "id": "vid-catalog-14",
         "title": "Social Media Vertical Reel (TikTok/Shorts)",
         "album": "Creative Reels & Promos",
         "videoUrl": "video/new-video-hero-ver.mp4",
         "thumbnail": "images/thumbnails/thumb_new-video-hero-ver.jpg",
-        "tools": ["CapCut AI", "Google Gemini", "Mobile Motion"],
+        "tools": [
+          "CapCut AI",
+          "Google Gemini",
+          "Mobile Motion"
+        ],
         "description": "9:16 vertical motion reel engineered for high engagement on mobile platforms, social shorts, and Instagram Reels."
       }
     ],
-    "videoUrl": "video/Untitled_Scene_09-20_12_20_11_20260920202216.mp4",
-    "thumbnail": "images/thumbnails/thumb_Untitled_Scene_09-20_12_20_11_20260920202216.jpg",
+    "videoUrl": "video/5.1.mp4",
+    "thumbnail": "images/thumbnails/thumb_5.1.jpg",
     "tools": [
       "Google Gemini",
       "Google Flow"
