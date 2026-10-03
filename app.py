@@ -111,6 +111,13 @@ def handle_content():
         if '_admin_password' in new_data:
             del new_data['_admin_password']
             
+        # Safety check: if payload has few keys, merge with current_content so nothing is wiped
+        if len(new_data.keys()) < 3 and current_content:
+            merged = {**current_content, **new_data}
+            if save_content(merged):
+                return jsonify({'success': True, 'message': 'Content saved successfully'})
+            return jsonify({'success': False, 'message': 'Failed to write content file'}), 500
+
         if save_content(new_data):
             return jsonify({'success': True, 'message': 'Content saved successfully'})
         return jsonify({'success': False, 'message': 'Failed to write content file'}), 500

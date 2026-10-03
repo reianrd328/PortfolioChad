@@ -1712,9 +1712,25 @@
         });
       }
 
-      // --- Save Locally to Python Flask Backend (/api/content) ---
+      // --- Save Locally to Python Flask Backend or Seamlessly Route to GitHub ---
       if (saveLocalBtn) {
         saveLocalBtn.addEventListener('click', async () => {
+          const isLocal = window.location.protocol === 'http:' && (window.location.port === '5000' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+          const token = getToken();
+
+          if (!isLocal) {
+            // Live Cloud hosting (GitHub Pages) has no Python server running
+            if (token) {
+              showAlert('info', '<i class="fa fa-cloud-arrow-up text-pink-400 mr-1.5"></i> You are on the live website (GitHub Pages). Routing save to <strong>Save &amp; Publish (GitHub)</strong> so your changes go live immediately...');
+              saveBtn.click();
+              return;
+            } else {
+              showAlert('warning', '<strong>You are on the live website (GitHub Pages).</strong><br>The Python local server only runs when testing on your computer (http://localhost:5000). To save changes on your live website, please connect your GitHub Token in "Configure Cloud Login" and click the red <strong>"Save &amp; Publish"</strong> button above, or click <strong>"Backup"</strong> to download a JSON file.');
+              authModal.classList.remove('hidden');
+              return;
+            }
+          }
+
           const activeAdminPw = (document.getElementById('admin_password') ? document.getElementById('admin_password').value.trim() : (document.getElementById('admin_password_alt') ? document.getElementById('admin_password_alt').value.trim() : '')) || localStorage.getItem('portfolio_admin_pw') || 'admin';
           localStorage.setItem('portfolio_admin_pw', activeAdminPw);
 
@@ -1734,6 +1750,25 @@
                 _admin_password: activeAdminPw
               })
             });
+
+            if (!resp.ok) {
+              const text = await resp.text();
+              loadingOverlay.classList.add('hidden');
+              if (text.trim().startsWith('<')) {
+                if (token) {
+                  showAlert('info', 'Local Python server is not responding at this address. Saving to GitHub Cloud instead...');
+                  saveBtn.click();
+                  return;
+                }
+                throw new Error('Local server API (/api/content) returned HTML instead of JSON. Ensure "python app.py" is running on port 5000 or use "Save & Publish" with GitHub.');
+              }
+              try {
+                const errJson = JSON.parse(text);
+                throw new Error(errJson.message || `Server error (${resp.status})`);
+              } catch (e) {
+                throw new Error(text || `Server error (${resp.status})`);
+              }
+            }
 
             const res = await resp.json();
             loadingOverlay.classList.add('hidden');
@@ -2253,6 +2288,28 @@
                 tools,
                 description
               });
+            });
+
+            // Safeguard: Ensure all 14 repository catalog videos are preserved so none are lost
+            DEFAULT_SERVER_VIDEOS.forEach((item, i) => {
+              const normItemPath = item.path.toLowerCase().replace(/^\.\.\//, '').replace(/^\//, '');
+              const alreadyIncluded = collectedVideos.some(v => {
+                if (!v.videoUrl) return false;
+                const normV = v.videoUrl.toLowerCase().replace(/^\.\.\//, '').replace(/^\//, '');
+                return normV === normItemPath || normV.endsWith(normItemPath.replace('video/', ''));
+              });
+              if (!alreadyIncluded) {
+                collectedVideos.push({
+                  id: 'vid-catalog-' + (i + 1),
+                  title: item.title,
+                  album: item.album,
+                  videoUrl: item.path,
+                  thumbnail: item.thumbnail,
+                  tools: item.tools,
+                  description: item.desc
+                });
+                if (item.album) collectedAlbums.add(item.album);
+              }
             });
 
             const albumList = collectedAlbums.size > 0 
